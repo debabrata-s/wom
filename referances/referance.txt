@@ -1,0 +1,8 @@
+angular material file input:
+https://github.com/shuyu/angular-material-fileinput.git
+
+mean stack:
+https://github.com/SinghDigamber/mean-stack-angular-7-crud-app-example
+
+angular material form:
+https://github.com/CodAffection/Angular-Material-CRUD-Design.git

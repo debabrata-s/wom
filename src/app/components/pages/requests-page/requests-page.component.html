@@ -1,0 +1,96 @@
+<div class="content-wrapper">
+  <!-- title for the page -->
+  <div class="page-header">
+    <app-page-title [pageTitle]="pageTitle"></app-page-title>
+  </div>
+  <div class="card card-secondary">
+    <div class="toolbar">
+
+      <div class="align-right">
+        <button type="button" class="btn btn-sm btn-link btn-fw"
+          [routerLink]="['../form-templates/request-form-template']">Edit request form</button>
+        <button type="button" class="btn btn-sm btn-danger btn-rounded btn-fw" [routerLink]="['request-form']">Request
+        </button>
+      </div>
+
+    </div>
+  </div>
+  <div class="card card-secondary">
+    <div class="filterbar">
+      <button type="button" class="btn btn-outline-secondary btn-rounded btn-sm"><i class="icon-magic-wand"></i>
+        Filter</button>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle btn-sm" data-toggle="dropdown"
+          aria-expanded="false">Sort by:</button>
+        <div class="dropdown-menu" x-placement="top-start"
+          style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, -110px, 0px);">
+          <a class="dropdown-item">Due Date</a>
+          <a class="dropdown-item">Date Created</a>
+          <a class="dropdown-item">Last Updated</a>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle btn-sm" data-toggle="dropdown"
+          aria-expanded="false">Show:</button>
+        <div class="dropdown-menu" x-placement="top-start"
+          style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, -110px, 0px);">
+          <a class="dropdown-item">All</a>
+          <a class="dropdown-item">Reactive</a>
+          <a class="dropdown-item">Repeating</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Hoverable Table</h4>
+      <p class="card-description"> Add class <code>.table-hover</code>
+      </p>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Product</th>
+            <th>Sale</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Jacob</td>
+            <td>Photoshop</td>
+            <td class="text-danger"> 28.76% <i class="icon-arrow-down-circle"></i></td>
+            <td><label class="badge badge-danger">Pending</label></td>
+          </tr>
+          <tr>
+            <td>Messsy</td>
+            <td>Flash</td>
+            <td class="text-danger"> 21.06% <i class="icon-arrow-down-circle"></i></td>
+            <td><label class="badge badge-warning">In progress</label></td>
+          </tr>
+          <tr>
+            <td>John</td>
+            <td>Premier</td>
+            <td class="text-danger"> 35.00% <i class="icon-arrow-down-circle"></i></td>
+            <td><label class="badge badge-info">Fixed</label></td>
+          </tr>
+          <tr>
+            <td>Peter</td>
+            <td>After effects</td>
+            <td class="text-success"> 82.00% <i class="icon-arrow-up-circle"></i></td>
+            <td><label class="badge badge-success">Completed</label></td>
+          </tr>
+          <tr>
+            <td>Dave</td>
+            <td>53275535</td>
+            <td class="text-success"> 98.05% <i class="icon-arrow-up-circle"></i></td>
+            <td><label class="badge badge-warning">In progress</label></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

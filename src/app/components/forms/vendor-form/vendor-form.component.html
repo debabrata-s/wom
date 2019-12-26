@@ -1,0 +1,47 @@
+<div class="content-wrapper">
+  <!-- title for the page -->
+  <div class="page-header">
+    <app-page-title [pageTitle]="pageTitle"></app-page-title>
+  </div>
+
+  <form [formGroup]="vendorForm" (ngSubmit)="onSubmit()">
+    <div class="card p-5 w-50">
+      <h4>Add Vendor</h4>
+      <br>
+      <mat-form-field>
+        <input matInput placeholder="Company Name" formControlName="companyName" required>
+        <mat-error>This field is mandatory.</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Address" formControlName="address" required>
+        <mat-error>This field is mandatory.</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Phone" formControlName="phone" required>
+        <mat-error>This field is mandatory.</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Website" formControlName="website">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Name" formControlName="name" required>
+        <mat-error>This field is mandatory.</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email" required>
+        <mat-error></mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Vendor Type" formControlName="vendorType">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="desc"></textarea>
+        <mat-hint align="end">Max length 500</mat-hint>
+      </mat-form-field>
+
+      <button class="btn btn-primary mr-2" type="submit">Submit</button>
+      <button class="btn btn-light">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,19 @@
+<div class="content-wrapper">
+    <!-- title for the page -->
+    <div class="page-header">
+        <app-page-title [pageTitle]="pageTitle"></app-page-title>
+    </div>
+    <div class="card card-secondary">
+        <div class="toolbar">
+            <div class="align-right">
+                <button type="button" class="btn btn-sm btn-link btn-fw">Export</button>
+                <button type="button" class="btn btn-sm btn-danger btn-rounded btn-fw"
+                    [routerLink]="['purchase-order-form']">Purchase Order</button>
+            </div>
+        </div>
+        <div class="filterbar">
+            <button type="button" class="btn btn-outline-secondary btn-rounded btn-sm"><i class="icon-magic-wand"></i>
+                Filter</button>
+        </div>
+    </div>
+</div>

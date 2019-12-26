@@ -1,0 +1,29 @@
+<div class="content-wrapper">
+    <!-- title for the page -->
+    <div class="page-header">
+        <app-page-title [pageTitle]="pageTitle"></app-page-title>
+    </div>
+    <div class="card card-secondary">
+        <div class="toolbar">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-sm btn-outline-secondary"><i class="icon-list"></i> Table
+                    View</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary"><i class="icon-grid"></i> Grid
+                    View</button>
+            </div>
+            <div class="align-right">
+                <button type="button" class="btn btn-outline-secondary btn-sm" [routerLink]="['maintenance']">Log & Planner</button>
+                <div class="dropdown" style="display: inline;">
+                    <button type="button" class="btn btn-icon" id="pageMenus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="icon-options-vertical"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="pageMenus">
+                        <a *ngFor="let pageMenu of pageMenus" class="dropdown-item" href="#!">{{pageMenu}}</a>
+                      </div>
+                </div>
+                <button type="button" class="btn btn-sm btn-danger btn-rounded btn-fw"
+                    [routerLink]="['asset-form']">Asset</button>
+            </div>
+        </div>
+    </div>
+</div>

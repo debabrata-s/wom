@@ -1,0 +1,163 @@
+<div class="content-wrapper">
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="partsInventoryForm" (ngSubmit)="onSubmit()">
+
+        <h3>Add Parts Inventory</h3>
+        <div class="form-group">
+          <label>
+            Title:
+          </label>
+          <input type="text" class="form-control" formControlName="title">
+        </div>
+
+        <div class="form-group">
+          <label>
+            Description:
+          </label>
+          <input type="text" class="form-control" formControlName="desc">
+        </div>
+
+        <div class="form-group">
+          <label>
+            Category:
+          </label>
+          <input type="text" class="form-control" formControlName="category">
+        </div>
+
+        <div class="form-group">
+          <label>
+            Cost:
+          </label>
+          <input type="text" class="form-control" formControlName="cost">
+        </div>
+
+        <div class="form-group">
+          <label>
+            Quantity:
+          </label>
+          <input type="text" class="form-control" formControlName="quantity">
+        </div>
+
+        <div class="form-group">
+          <label>
+            Minimum Quantity:
+          </label>
+          <input type="text" class="form-control" formControlName="minQuantity">
+        </div>
+
+        <div class="form-check form-check-flat form-check-primary">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" formControlName="nonStock">Non-Stock<i
+              class="input-helper"></i></label>
+        </div>
+
+        <div class="form-group">
+          <label>
+            Barcode:
+          </label>
+          <input type="text" class="form-control" formControlName="barcode">
+        </div>
+
+        <div class="form-group">
+          <label>
+            Area:
+          </label>
+          <input type="text" class="form-control" formControlName="area">
+        </div>
+
+        <div class="form-group">
+          <label>
+            Additional Part Details:
+          </label>
+          <textarea class="form-control" id="exampleTextarea1" rows="4" formControlName="addPartDetails"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>
+            Workers:
+          </label>
+          <input type="text" class="form-control" formControlName="workers">
+        </div>
+
+        <div class="form-group">
+          <label>
+            Teams:
+          </label>
+          <input type="text" class="form-control" formControlName="teams">
+        </div>
+
+        <div class="form-group">
+          <label>
+            Vendors:
+          </label>
+          <input type="text" class="form-control" formControlName="vendors">
+        </div>
+
+        <div class="form-group">
+          <label>
+            Customer:
+          </label>
+          <input type="text" class="form-control" formControlName="customer">
+        </div>
+        
+        <!-- Custom Data array -->
+        <!-- start -->
+        <div formArrayName="customDataArray"
+          *ngFor="let customData of partsInventoryForm.get('customDataArray').controls; let i = index">
+          <div [formGroupName]="i" class="row">
+            <div class="form-group col">
+              <label>
+                Name:
+              </label>
+              <input type="text" class="form-control" formControlName="name">
+            </div>
+            <div class="form-group col">
+              <label>
+                Value:
+              </label>
+              <input type="text" class="form-control" formControlName="value">
+            </div>
+            <div class="form-group col">
+              <label>
+                Unit:
+              </label>
+              <input type="text" class="form-control" formControlName="unit">
+            </div>
+          </div>
+        </div>
+        <!-- end -->
+
+        <button class="btn btn-sm btn-link btn-fw" (click)="addCustomData()">+ Custom data</button>
+
+        <div class="form-group">
+          <label>
+            Location:
+          </label>
+          <input type="text" class="form-control" formControlName="location">
+        </div>
+
+        <div class="form-group">
+          <label>
+            Add a file:
+          </label>
+          <input type="text" class="form-control" formControlName="addAFile">
+        </div>
+
+
+        <button class="btn btn-sm btn-link btn-fw">+ Add File(unfinished)</button>
+
+        <div class="form-group">
+          <label>
+            Add Image:
+          </label>
+          <input type="text" class="form-control" formControlName="addImage">
+        </div>
+
+
+        <button class="btn btn-primary mr-2" type="submit">Submit</button>
+
+      </form>
+    </div>
+  </div>
+</div>

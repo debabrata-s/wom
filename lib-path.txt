@@ -1,0 +1,25 @@
+Styles
+
+assets/vendors/simple-line-icons/css/simple-line-icons.css
+assets/vendors/flag-icon-css/css/flag-icon.min.css
+assets/vendors/css/vendor.bundle.base.css
+
+assets/vendors/daterangepicker/daterangepicker.css
+assets/vendors/chartist/chartist.min.css
+assets/css/style.css
+
+Scripts
+
+assets/vendors/js/vendor.bundle.base.js
+
+assets/vendors/chart.js/Chart.min.js
+assets/vendors/moment/moment.min.js
+assets/vendors/daterangepicker/daterangepicker.js
+assets/vendors/chartist/chartist.min.js
+
+assets/js/off-canvas.js
+assets/js/misc.js
+assets/js/dashboard.js
+
+
+SELECT id,headerid,item_id,created_date FROM `customerdeliverdetail` where created_date >="2019-12-03 00:00:00" ORDER BY `customerdeliverdetail`.`id` DESC

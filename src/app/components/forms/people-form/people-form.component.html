@@ -1,0 +1,36 @@
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="peopleForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary active">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Administrator
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> Technician
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> Limited Technician
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> View Only
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> Requester
+                    </label>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label>
+                    Enter email address:
+                </label>
+                <input type="text" class="form-control" formControlName="emailId">
+            </div>
+
+            <button class="btn btn-primary mr-2" type="submit">Submit</button>
+            <button class="btn btn-light">Cancel</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+<div class="content-wrapper">
+    <!-- title for the page -->
+    <div class="page-header">
+        <app-page-title [pageTitle]="pageTitle"></app-page-title>
+    </div>
+    <div class="card card-secondary">
+        <div class="toolbar">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-outline-secondary btn-sm" [class.active]="viewMode == 'tab1'"
+                    rel="tab1" (click)="viewMode ='tab1'">
+                    Leaderboard
+                </button>
+                <button type="button" class="btn btn-outline-secondary btn-sm" [class.active]="viewMode == 'tab2'"
+                    rel="tab2" (click)="viewMode ='tab2'">
+                    Dashboard
+                </button>
+                <button type="button" class="btn btn-outline-secondary btn-sm" [class.active]="viewMode == 'tab3'"
+                    rel="tab3" (click)="viewMode ='tab3'">
+                    Ratings
+                </button>
+            </div>
+
+            <div class="align-right">
+                <button class="btn btn-sm btn-link btn-fw" type="button" data-toggle="modal" data-target="#myModal">
+                    + Add Custom Report
+                </button>
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form [formGroup]="customReportForm" (ngSubmit)="onSubmit()">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Add Customizable Reporting</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div class="form-group">
+                                        <label>
+                                            Dashboard Name:
+                                        </label>
+                                        <input type="text" class="form-control" formControlName="dashboardName">
+                                    </div>
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-primary mr-2" type="submit">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card card-secondary">
+        <div class="fliterbar">
+            <button class="btn btn-light" (click)="start.open()">
+                <i class="icon-star d-block mb-1"></i> Start
+            </button>
+            <button class="btn btn-light" (click)="end.open()">
+                <i class="icon-star d-block mb-1"></i> End
+            </button>
+            <button type="button" class="btn btn-light">
+                <i class="icon-user d-block mb-1"></i> Work Order Type
+            </button>
+
+        </div>
+        <div style="visibility: hidden;">
+            <mat-form-field class="example-full-width">
+                <input matInput [matDatepicker]="start" style="visibility: hidden;">
+                <mat-datepicker #start></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <input matInput [matDatepicker]="end" style="visibility: hidden;">
+                <mat-datepicker #end></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+    </div>
+
+
+    <div class="main-content">
+        <!-- demo content -->
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="tab-slider--container" [ngSwitch]="viewMode">
+                        <div id="tab1" class="tab-slider--body" *ngSwitchCase="'tab1'">
+                            <h2>Leaderboard</h2>
+                            <p>Toggle switch style tab navigation. Currently only works with two tabs.</p>
+                            <p>Donec ullamcorper nulla non metus auctor fringilla. Donec ullamcorper nulla non metus
+                                auctor
+                                fringilla. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis
+                                vestibulum. Nullam
+                                id
+                                dolor id nibh ultricies vehicula ut id elit. Nulla
+                                vitae elit libero, a pharetra augue.</p>
+                        </div>
+                        <div id="tab2" class="tab-slider--body" *ngSwitchCase="'tab2'">
+                            <h2>Dashboard</h2>
+                            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                                Cras mattis
+                                consectetur purus sit amet fermentum. Nulla vitae elit libero, a pharetra augue. Cras
+                                mattis
+                                consectetur purus sit amet fermentum. Aenean eu leo
+                                quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+                        </div>
+                        <div id="tab3" class="tab-slider--body" *ngSwitchCase="'tab3'">
+                            <h2>Ratings</h2>
+                            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                                Cras mattis
+                                consectetur purus sit amet fermentum. Nulla vitae elit libero, a pharetra augue. Cras
+                                mattis
+                                consectetur purus sit amet fermentum. Aenean eu leo
+                                quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

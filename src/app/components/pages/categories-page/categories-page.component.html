@@ -1,0 +1,92 @@
+<div class="content-wrapper">
+    <!-- title for the page -->
+    <div class="page-header">
+        <app-page-title [pageTitle]="pageTitle"></app-page-title>
+    </div>
+    <div class="card card-secondary">
+        <div class="toolbar">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-outline-secondary btn-sm" [class.active]="viewMode == 'tab1'"
+                    rel="tab1" (click)="viewMode ='tab1'">Work orders</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm" [class.active]="viewMode == 'tab2'"
+                    rel="tab2" (click)="viewMode ='tab2'">Asset Status</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm" [class.active]="viewMode == 'tab3'"
+                    rel="tab3" (click)="viewMode ='tab3'">Purchase Orders</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm" [class.active]="viewMode == 'tab4'"
+                    rel="tab4" (click)="viewMode ='tab4'">Meter</button>
+            </div>
+
+            <!-- <div class="align-right">
+                <button type="button" class="btn btn-sm btn-danger btn-rounded btn-fw"
+                    [routerLink]="['category-form']">Category</button>
+            </div> -->
+
+            <div class="align-right">
+                <button class="btn btn-sm btn-danger btn-rounded btn-fw" type="button" data-toggle="modal"
+                    data-target="#myModal">
+                    Category
+                </button>
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h4 class="modal-title">Add a new Category</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>
+                                            Category Name:
+                                        </label>
+                                        <input type="text" class="form-control" formControlName="categoryName">
+                                    </div>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-primary mr-2" type="submit">Submit</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <!-- demo content -->
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="tab-slider--container" [ngSwitch]="viewMode">
+                        <div id="tab1" class="tab-slider--body" *ngSwitchCase="'tab1'">
+                            <ul>
+                                <li *ngFor=" let workOrderCategory of workOrderCategories">{{workOrderCategory}}</li>
+                            </ul>
+                        </div>
+                        <div id="tab2" class="tab-slider--body" *ngSwitchCase="'tab2'">
+                            <ul>
+                                <li *ngFor=" let assetStatus of assetStatus">{{assetStatus}}</li>
+                            </ul>
+                        </div>
+                        <div id="tab3" class="tab-slider--body" *ngSwitchCase="'tab3'">
+                            <ul>
+                                <li *ngFor=" let purchaseOrder of purchaseOrders">{{purchaseOrder}}</li>
+                            </ul>
+                        </div>
+                        <div id="tab4" class="tab-slider--body" *ngSwitchCase="'tab4'">
+                            <ul>
+                                <li *ngFor=" let meter of meters">{{meter}}</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

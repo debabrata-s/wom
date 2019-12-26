@@ -1,0 +1,82 @@
+<div class="content-wrapper">
+  <div class="card">
+    <div class="card-body">
+      <h3>Create work order:</h3>
+      <form [formGroup]="workOrderRequestForm" (ngSubmit)="onSubmit()">
+        <div formGroupName="requesterInfoGroup">
+          <h4 class="card-title">Requester Information</h4>
+
+          <div class="form-group">
+            <label>
+              Full name:
+            </label>
+            <input type="text" class="form-control" formControlName="fullName">
+          </div>
+          <div class="form-group">
+            <label>
+              Phone number:
+            </label>
+            <input type="text" class="form-control" formControlName="phone">
+          </div>
+
+          <div class="form-group">
+            <label>
+              Email:
+            </label>
+            <input type="text" class="form-control" formControlName="email">
+          </div>
+        </div>
+        <div formGroupName="requestDetailsGroup">
+          <h4 class="card-title">Requester Details</h4>
+          <div class="form-group">
+            <label>
+              Title:
+            </label>
+            <input type="text" class="form-control" formControlName="title">
+          </div>
+          <div class="form-group">
+            <label>
+              Description:
+            </label>
+            <textarea class="form-control" id="exampleTextarea1" rows="4" formControlName="desc"></textarea>
+          </div>
+          <div class="form-group">
+            <label>
+              Due Date:
+            </label>
+            <div class="input-group date">
+              <div class="input-group">
+                <input [matDatepicker]="picker" type="text" class="form-control" formControlName="dueDate">
+                <!-- <input matInput [matDatepicker]="picker" placeholder="Due Date" formControlName="dueDate"> -->
+              
+              <div class="input-group-append">
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div formGroupName="filesGroup">
+          <h4 class="card-title">Files</h4>
+          <div class="form-group">
+            <label>
+              Image:
+            </label>
+            <input type="text" class="form-control" formControlName="image">
+          </div>
+          <div class="form-group">
+            <label>
+              File:
+            </label>
+            <input type="text" class="form-control" formControlName="file">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+        <button class="btn btn-light">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>

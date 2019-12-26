@@ -1,0 +1,193 @@
+<div class="content-wrapper">
+    <div class="card">
+        <div class="card-body">
+            <form [formGroup]="assetForm" (ngSubmit)="onSubmit()">
+
+                <div class="form-group">
+                    <label>
+                        Add an Image:
+                    </label>
+                    <input type="text" class="form-control" formControlName="image">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Title:
+                    </label>
+                    <input type="text" class="form-control" formControlName="title">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Description:
+                    </label>
+                    <input type="text" class="form-control" formControlName="desc">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Track Check-in/Check-out:
+                    </label>
+                    <input type="text" class="form-control" formControlName="track">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Model:
+                    </label>
+                    <input type="text" class="form-control" formControlName="model">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Barcode:
+                    </label>
+                    <input type="text" class="form-control" formControlName="barcode">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Category:
+                    </label>
+                    <input type="text" class="form-control" formControlName="category">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Location:
+                    </label>
+                    <input type="text" class="form-control" formControlName="location">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Area:
+                    </label>
+                    <input type="text" class="form-control" formControlName="area">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Parent Asset:
+                    </label>
+                    <input type="text" class="form-control" formControlName="parentAsset">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Worker:
+                    </label>
+                    <input type="text" class="form-control" formControlName="worker">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Additional Worker:
+                    </label>
+                    <input type="text" class="form-control" formControlName="additionalWorker">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Team:
+                    </label>
+                    <input type="text" class="form-control" formControlName="team">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Vendors:
+                    </label>
+                    <input type="text" class="form-control" formControlName="vendors">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Customers:
+                    </label>
+                    <input type="text" class="form-control" formControlName="customer">
+                </div>
+
+                <!-- <div class="form-group">
+                    
+                    <mat-form-field class="example-full-width">
+                        <input matInput [matDatepicker]="picker" placeholder="Purchase Date" formControlName="purchaseDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker">
+                          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                      
+                </div> -->
+                <div class="form-group">
+                        <label>
+                          Purchase Date:
+                        </label>
+                        <div class="input-group date">
+                          <div class="d-inline">
+                            <input [matDatepicker]="picker" type="text" class="form-control" formControlName="purchaseDate">
+                          </div>
+                          <div class="d-inline">
+                            <mat-datepicker-toggle matSuffix [for]="picker">
+                              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </div>
+                        </div>
+                      </div>
+
+                <div class="form-group">
+                    <label>
+                        Placed in Service:
+                    </label>
+                    <input type="text" class="form-control" formControlName="placedInService">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Purchase Price:
+                    </label>
+                    <input type="text" class="form-control" formControlName="purchasePrice">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Warranty Expiration:
+                    </label>
+                    <input type="text" class="form-control" formControlName="warrantyExpiration">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Residual Price:
+                    </label>
+                    <input type="text" class="form-control" formControlName="residualPrice">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Useful Life:
+                    </label>
+                    <input type="text" class="form-control" formControlName="usefulLife">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Additional Information:
+                    </label>
+                    <input type="text" class="form-control" formControlName="additionalInformation">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Add a file:
+                    </label>
+                    <input type="text" class="form-control" formControlName="file">
+                </div>
+
+
+                <button class="btn btn-primary mr-2" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

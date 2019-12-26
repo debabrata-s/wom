@@ -1,0 +1,27 @@
+<div class="content-wrapper" style="margin-top:0px; height: 100%;">
+    <div class="row flex-grow">
+        <div class="col-lg-4 mx-auto">
+            <div *ngIf="invalid" class="alert alert-danger" role="alert">
+                invalid credential!
+            </div>
+            <div class="card" style="border-radius: 5px;">
+                <div class="auth-form-light text-left p-5">
+                    <div class="brand-logo">
+                        <img src="" alt="" srcset="">
+                    </div>
+                    <h3>Login</h3>
+                    <br>
+                    <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+                        <input type="text" class="form-control" formControlName="userId" placeholder="email" />
+                        <input type="password" class="form-control" formControlName="password" placeholder="password" />
+                        <br>
+                        <button class="btn btn-success btn-sm m-0 w-100" type="submit">Login</button>
+                    </form>
+                    <br>
+                    <p>Don't have an account?<a [routerLink]="['../register']">Sign up</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

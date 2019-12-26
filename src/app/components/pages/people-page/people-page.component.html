@@ -1,0 +1,61 @@
+<div class="content-wrapper">
+    <!-- title for the page -->
+    <div class="page-header">
+        <app-page-title [pageTitle]="pageTitle"></app-page-title>
+    </div>
+    <div class="card card-secondary">
+        <div class="toolbar">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-outline-secondary btn-sm" [class.active]="viewMode == 'tab1'"
+                    rel="tab1" (click)="viewMode ='tab1'">People</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm" [class.active]="viewMode == 'tab2'"
+                    rel="tab2" (click)="viewMode ='tab2'">Teams</button>
+            </div>
+
+            <div class="align-right">
+                <button type="button" class="btn btn-sm btn-link btn-fw">Import</button>
+                <span [ngSwitch]="viewMode">
+                    <button type="button" class="btn btn-sm btn-danger btn-rounded btn-fw"
+                        [routerLink]="['people-form']" *ngSwitchCase="'tab1'">Person
+                    </button>
+                    <button type="button" class="btn btn-sm btn-danger btn-rounded btn-fw"
+                        [routerLink]="['team-form']" *ngSwitchCase="'tab2'">Team
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <!-- demo content -->
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="tab-slider--container" [ngSwitch]="viewMode">
+                        <div id="tab1" class="tab-slider--body" *ngSwitchCase="'tab1'">
+                            <h2>People Tab</h2>
+                            <p>Toggle switch style tab navigation. Currently only works with two tabs.</p>
+                            <p>Donec ullamcorper nulla non metus auctor fringilla. Donec ullamcorper nulla non metus
+                                auctor
+                                fringilla. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis
+                                vestibulum. Nullam
+                                id
+                                dolor id nibh ultricies vehicula ut id elit. Nulla
+                                vitae elit libero, a pharetra augue.</p>
+                        </div>
+                        <div id="tab2" class="tab-slider--body" *ngSwitchCase="'tab2'">
+                            <h2>Teams Tab</h2>
+                            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                                Cras mattis
+                                consectetur purus sit amet fermentum. Nulla vitae elit libero, a pharetra augue. Cras
+                                mattis
+                                consectetur purus sit amet fermentum. Aenean eu leo
+                                quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

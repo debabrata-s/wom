@@ -1,0 +1,24 @@
+ng switch: https://medium.com/@_BooToo_/easy-way-to-create-tabs-using-ngswitch-in-angular-2-c1258d6a9ca5
+
+change title with router outlet: http://wa3.backbase.com/foundation/latest/howto/custom-route-data
+
+
+https://github.com/bbachi/angular_title_example.git
+
+for file upload:
+npm i angular-material-fileupload
+
+implementing login and user registration
+https://jasonwatmore.com/post/2018/10/29/angular-7-user-registration-and-login-example-tutorial
+https://github.com/cornflourblue/angular-7-registration-login-example.git
+
+BehaviourSubject to share data across components using service.
+
+login: using authguard to block all the route without authentication
+https://www.c-sharpcorner.com/article/angular-7-login-with-session-authentication-using-the-reactive-form/
+
+local storage value changes using subject from rxjs
+https://stackoverflow.com/questions/46078714/watch-for-changes-in-localstorage-angular2
+
+role based authorization
+https://jasonwatmore.com/post/2018/11/22/angular-7-role-based-authorization-tutorial-with-example

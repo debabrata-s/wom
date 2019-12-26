@@ -1,0 +1,5 @@
+// http://localhost/upkeep/user/api/v1/register?firstname=Vishal2&lastname=Dubey&email=vishal2.xyz@xyz.com&password=vishal@1&phone=9827012345&business_type=Facility Managment&role=1
+
+// http://localhost/upkeep/user/api/v1/login?email=vishal2.xyz@xyz.com&password=vishal@1
+
+// http://localhost/upkeep/user/api/v1/user?api_token=123 
