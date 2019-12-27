@@ -11,7 +11,7 @@
 
                 <div formGroupName="tasks">
                     <div formArrayName="taskItems"
-                        *ngFor="let task of requestFormTemplateForm.get('tasks.taskItems').controls; let i = index">
+                        *ngFor="let task of requestFormTemplateForm.get('tasks.taskItems')['controls']; let i = index">
                         <div [formGroupName]="i" class="row">
                             <div class="col-2">
                                 <h1 class="display-2">{{i+1}}</h1>

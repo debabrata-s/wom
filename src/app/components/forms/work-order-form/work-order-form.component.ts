@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./work-order-form.component.scss']
 })
 export class WorkOrderFormComponent implements OnInit {
-  
+  pageTitle = "Create Work Order";
   workOrderForm : FormGroup;
   workers = [];
   assets = [];

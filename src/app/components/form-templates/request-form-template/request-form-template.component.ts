@@ -44,7 +44,7 @@ export class RequestFormTemplateComponent implements OnInit {
     });
   }
   addTask() {
-    this.taskItems = <FormArray>this.requestFormTemplateForm.get('tasks.taskItems');
+    this.taskItems = <FormArray>this.requestFormTemplateForm.get('tasks.taskItems')['controls'];
     this.taskItems.push(this.createTask());
   }
   onSubmit() {

@@ -44,7 +44,7 @@ export class PartFormComponent implements OnInit {
   }
 
   addCustomData(){
-    this.customDataArray = <FormArray>this.partsInventoryForm.get('customDataArray');
+    this.customDataArray = <FormArray>this.partsInventoryForm.get('customDataArray')['controls'];
     this.customDataArray.push(this.createCustomData());
   }
   

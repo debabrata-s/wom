@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-custom-report-form',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./custom-report-form.component.scss']
 })
 export class CustomReportFormComponent implements OnInit {
-
-  constructor() { }
+  customReportForm: FormGroup;
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.customReportForm = this.fb.group({
+      dashboardName: ['']
+    });
+  }
+  onSubmit(){
+    console.log(this.customReportForm.value);
   }
 
 }

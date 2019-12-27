@@ -104,7 +104,7 @@
         <!-- Custom Data array -->
         <!-- start -->
         <div formArrayName="customDataArray"
-          *ngFor="let customData of partsInventoryForm.get('customDataArray').controls; let i = index">
+          *ngFor="let customData of partsInventoryForm.get('customDataArray')['controls']; let i = index">
           <div [formGroupName]="i" class="row">
             <div class="form-group col">
               <label>

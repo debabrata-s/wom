@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./vendor-form.component.scss']
 })
 export class VendorFormComponent implements OnInit {
+  pageTitle = "Add Vendor";
   vendorForm: FormGroup;
   constructor(private fb: FormBuilder) { }
 

@@ -3,7 +3,7 @@
         <div class="card-body">
             <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
                 <h4 class="card-title">Add Customer</h4>
-                <div [formGroup]="customerDetails">
+                <div formGroupName="customerDetails">
                     <div class="form-group">
                         <label>
                             Customer Name:
@@ -55,7 +55,7 @@
                 </div>
 
                 <h4 class="card-title">Billing Information</h4>
-                <div [formGroup]="billingInformation">
+                <div formGroupName="billingInformation">
                     <div class="form-group">
                         <label>
                             Name:
