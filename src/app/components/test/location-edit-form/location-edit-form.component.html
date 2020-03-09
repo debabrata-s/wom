@@ -1,0 +1,88 @@
+<div class="card rounded">
+    <div class="card-header">
+      <h4>Locations</h4>
+    </div>
+    <form [formGroup]="locationForm" (ngSubmit)="onSubmit()">
+      <div class="card-body">
+  
+        <mat-form-field>
+          <input matInput placeholder="Title" formControlName="Title">
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput placeholder="Address" formControlName="Address">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select formControlName="ParentLocationId" placeholder="Parent Location">
+            <mat-option *ngFor="let location of locations" [value]="location.id">{{location.Title}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select formControlName="WorkerId" placeholder="Worker">
+            <mat-option *ngFor="let worker of workers" [value]="worker.Name">{{worker.Name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-select formControlName="TeamId" placeholder="Team">
+            <mat-option *ngFor="let team of teams" [value]="team.id">{{team.Name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-select formControlName="VendorId" placeholder="Vendor">
+            <mat-option *ngFor="let vendor of vendors" [value]="vendor.id">{{vendor.Name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select formControlName="CustomerId" placeholder="Customer">
+            <mat-option *ngFor="let customer of customers" [value]="customer.id">{{customer.CustomerName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- Custom Data array -->
+        <!-- start -->
+  
+        <div class="container custom-fields p-2">
+          <div formArrayName="customDataArray"
+            *ngFor="let customData of locationForm.get('customDataArray')['controls']; let i = index">
+            <div [formGroupName]="i" class="row">
+              <div class="col-4">
+                <mat-form-field>
+                  <input matInput placeholder="Name" formControlName="name">
+                </mat-form-field>
+              </div>
+              <div class="col-4">
+                <mat-form-field>
+                  <input matInput placeholder="Value" formControlName="value">
+                </mat-form-field>
+              </div>
+              <div class="col-4">
+                <mat-form-field>
+                  <input matInput placeholder="Unit" formControlName="unit">
+                </mat-form-field>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+  
+        <!-- end -->
+        <br>
+        <a (click)="addCustomData()" style="cursor: pointer;color: rgb(52, 52, 196);"><small>+ Custom Data</small></a>
+        <br>
+        <br>
+        <mat-checkbox formControlName="showMapCoordinate" [(ngModel)]="showMap"><span class="text-muted"
+            style="font-size: 0.85em;">Include Map Coordinates</span></mat-checkbox>
+        <div *ngIf="showMap">
+          <app-map></app-map>
+        </div>
+      </div>
+  
+  
+      <div class="card-footer d-flex justify-content-end">
+        <button mat-button (click)="onCancel()">Cancel</button>
+        <button mat-button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>

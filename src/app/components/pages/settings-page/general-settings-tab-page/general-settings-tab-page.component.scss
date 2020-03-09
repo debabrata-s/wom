@@ -1,0 +1,17 @@
+mat-slide-toggle{
+    margin-bottom: 30px;
+}
+.count-field{
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    border-radius: 2px;
+    border: solid 1px gery;
+    
+}
+.count-field:focus{
+    border: solid 1px lightblue;
+}
+mat-from-field{
+    font-size: 0.85em;
+}

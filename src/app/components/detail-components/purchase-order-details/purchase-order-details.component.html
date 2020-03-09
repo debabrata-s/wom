@@ -1,0 +1,192 @@
+<a (click)="closeDialog();"><span class="close">&times;</span></a>
+<div class="d-inline">
+    <h5>Compressor m-102</h5>
+    <small class="text-muted">#123</small>
+    <a class="float-right" (click)="deletePurchaseOrder()"><small class="text-muted">Delete</small></a>
+    <span class="float-right p-2"></span>
+    <a class="float-right" (click)="editPurchaseOrder()"><small class="text-muted">Edit</small></a>
+</div>
+<br><br>
+<mat-tab-group>
+    <mat-tab label="Details">
+        <div [ngSwitch]="true">
+            <div class="p-2 mt-3">
+                <a (click)="generatePdf()" style="font-size: 0.87em;">Generate PDF</a>
+                <div class="d-inline float-right">
+                    <button type="button" *ngSwitchCase="status !== 'declined'" class="btn btn-outline-danger btn-sm mr-2" (click)="declineRequest()">Decline</button>
+                    <button type="button" *ngSwitchCase="status === 'requested'|| status === 'declined'" class="btn btn-success btn-sm" (click)="approveRequest()">Approve</button>
+                    <!-- <button type="button" *ngSwitchCase="'declined'" class="btn btn-success btn-sm" (click)="approveRequest()">Approve</button> -->
+                    <button type="button" *ngSwitchCase="status==='approved'" class="btn btn-primary btn-sm" (click)="fulfillRequest()">Fulfill</button>
+                </div>
+            </div>
+            <div *ngSwitchCase="status === 'requested'" class="alert alert-warning mt-3" role="alert">
+                <h5 class="text-center font-weight-bold text-warning">AWATING APPROVAL</h5>
+            </div>
+            <div *ngSwitchCase="status === 'approved'" class="alert alert-success mt-3" role="alert">
+                <h5 class="text-center font-weight-bold text-success">APPROVED</h5>
+            </div>
+            <div *ngSwitchCase="status === 'declined'" class="alert alert-danger mt-3" role="alert">
+                <h5 class="text-center font-weight-bold text-danger">DECLINED</h5>
+            </div>
+            <div *ngSwitchCase="status === 'fulfilled'" class="alert alert-primary mt-3" role="alert">
+                <h5 class="text-center font-weight-bold text-primary">FULFILLED</h5>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-3">
+                        <small class="text-muted">
+                            Vendor
+                        </small>
+                        <br>
+                        <a href=""><small>Vendor name</small></a>
+                    </div>
+                    <div class="col-2">
+                        <small class="text-muted">
+                            Due Date
+                        </small><br>
+                        <small>February 19th 2020</small>
+
+                    </div>
+                    <div class="col-3">
+                        <small class="text-muted">
+                            Added by
+                        </small><br>
+                        <a href=""><small>john.doe@gmail.com</small></a>
+
+                    </div>
+                    <div class="col-2">
+                        <small class="text-muted">
+                            Date Created
+                        </small>
+                        <br>
+                        <small>Feb 15 2020</small>
+                    </div>
+                    <div class="col-2">
+                        <small class="text-muted">
+                            Total Cost
+                        </small><br>
+                        <small>$ 520</small>
+                    </div>
+                </div>
+            </div>
+            <small class="text-muted">Description</small><br>
+            <small>some additional details about the order</small>
+            <br><br>
+            <table style="width:100%; font-size: small;">
+                <tr class="text-muted border-top border-bottom">
+                    <td>#</td>
+                    <td>Name</td>
+                    <td>Cost</td>
+                    <td>Quantity</td>
+                    <td>Description</td>
+                    <td>Price</td>
+                </tr>
+                <br>
+                <tr>
+                    <td>1</td>
+                    <td><a href="">Compressor</a></td>
+                    <td>$ 50</td>
+                    <td>2</td>
+                    <td>description about compressor</td>
+                    <td>$ 100.00</td>
+                </tr>
+            </table>
+            <div class="p-2">
+                <table class="mt-4" style="width:100%; font-size: small;">
+                    <tr>
+                        <th>REQUESTER INFORMATION</th>
+                        <th>SHIPPING INFORMATION</th>
+
+                    </tr>
+                    <br>
+                    <tr class="border">
+                        <td class="border pt-2">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="text-muted">Company Name</span><br>Godrej<br><br>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="text-muted">Street</span><br>51 Street<br><br>
+                                        <span class="text-muted">State</span><br>Arizona<br><br>
+                                        <span class="text-muted">Phone</span><br>+1298565487<br><br>
+
+                                    </div>
+                                    <div class="col">
+                                        <span class="text-muted">City</span><br>NY<br><br>
+                                        <span class="text-muted">Zip</span><br>89546<br><br>
+                                        <span class="text-muted">Fax</span><br>7894562523<br><br>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="border pt-2">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="text-muted">Ship To Name</span><br>Willams<br><br>
+                                        <span class="text-muted">Company Name</span><br>RM Trades<br><br>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="text-muted">Street</span><br>9th Avenue North<br><br>
+                                        <span class="text-muted">State</span><br>Texas<br><br>
+
+                                    </div>
+                                    <div class="col">
+                                        <span class="text-muted">City</span><br>Texas<br><br>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <br>
+            <strong style="font-size: small;">ADDITIONAL INFORMATION</strong>
+            <div class="container" style="font-size:small;">
+                <div class="row">
+                    <div class="col">
+                        <span class="text-muted">Requisitioner</span><br>
+                        N/A
+                    </div>
+                    <div class="col">
+                        <span class="text-muted">Shipping Method</span><br>
+                        N/A
+                    </div>
+                    <div class="col">
+                        <span class="text-muted">F.O.B. Point</span><br>
+                        N/A
+                    </div>
+                    <div class="col">
+                        <span class="text-muted">Notes</span><br>
+                        N/A
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </mat-tab>
+    <mat-tab label="Activity">
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-10">
+                    <mat-form-field>
+                        <mat-label>Write a message..</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-2">
+                    <button mat-button>Submit</button>
+                </div>
+            </div>
+        </div>
+
+    </mat-tab>
+</mat-tab-group>

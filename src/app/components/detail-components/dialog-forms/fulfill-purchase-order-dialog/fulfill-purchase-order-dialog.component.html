@@ -1,0 +1,28 @@
+<h4>Is this purchase order complete?</h4>
+<small><em>Note: We will increase each inventory item's quantity by the amount specified in this purchase order.</em></small>
+<hr>
+
+<table style="width:100%">
+    <tr>
+      <th>#</th>
+      <th>Item</th> 
+      <th>Ordered</th>
+      <th>Recieved</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Compressor</td>
+      <td>5</td>
+      <td>
+        <mat-form-field style="width: 100px;">
+            <mat-label></mat-label>
+            <input matInput type="number">
+          </mat-form-field>
+      </td>
+    </tr>
+   
+  </table>
+  <div class="d-flex justify-content-between">
+    <button type="button" class="btn btn-secondary btn-sm" (click)="closeDialog()">Cancel</button>
+    <button type="button" class="btn btn-primary btn-sm" (click)="closeDialog()">Fulfill</button>
+  </div>

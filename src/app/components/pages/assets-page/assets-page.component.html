@@ -5,24 +5,184 @@
     </div>
     <div class="card card-secondary">
         <div class="toolbar">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-sm btn-outline-secondary"><i class="icon-list"></i> Table
+            <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                <button type="button" class="btn  btn-outline-secondary btn-sm" [class.active]="viewMode == 'tab1'"
+                    rel="tab1" (click)="viewMode ='tab1'"><i class="icon-list"></i> Table
                     View</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary"><i class="icon-grid"></i> Grid
+                <button type="button" class="btn btn-outline-secondary btn-sm" [class.active]="viewMode == 'tab2'"
+                    rel="tab2" (click)="viewMode ='tab2'"><i class="icon-grid"></i> Grid
                     View</button>
             </div>
+            <div class="d-inline">
+                <i class="icon-magnifier" id="search-icon"></i>
+                <input (keyup)="applyFilter($event.target.value)" class="search-input" placeholder="Search">
+            </div>
             <div class="align-right">
-                <button type="button" class="btn btn-outline-secondary btn-sm" [routerLink]="['maintenance']">Log & Planner</button>
                 <div class="dropdown" style="display: inline;">
-                    <button type="button" class="btn btn-icon" id="pageMenus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="icon-options-vertical"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="pageMenus">
-                        <a *ngFor="let pageMenu of pageMenus" class="dropdown-item" href="#!">{{pageMenu}}</a>
-                      </div>
+                    <button type="button" class="btn btn-icon" id="pageMenus" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="icon-options-vertical"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="pageMenus">
+                        <a class="dropdown-item">Manage Template</a>
+                        <div role="separator" class="dropdown-divider"></div>
+                        <a *ngFor="let pageMenu of pageMenus" class="dropdown-item"
+                            (click)="openPageMenu(pageMenu)">{{pageMenu}}</a>
+                    </div>
                 </div>
                 <button type="button" class="btn btn-sm btn-danger btn-rounded btn-fw"
-                    [routerLink]="['asset-form']">Asset</button>
+                    (click)="openAssetForm()">Asset</button>
+            </div>
+        </div>
+    </div>
+    <div class="tab-slider--container" [ngSwitch]="viewMode">
+        <div id="tab1" class="tab-slider--body" *ngSwitchCase="'tab1'">
+            <div class="card card-secondary">
+                <div class="filterbar">
+                    <!-- <button type="button" class="btn btn-outline-secondary btn-rounded btn-sm"><i
+                            class="icon-magic-wand" (click)="drawer.toggle();"></i>
+                        Filter</button> -->
+                    <button mat-raised-button (click)="drawer.toggle();"><i
+                            class="icon-equalizer mr-1"></i>Filter</button>
+                    <div class="d-inline float-right input-group" style="width: 200px;">
+                        <select class="custom-select" style="width: 200px; font-size: 0.85em;">
+                            <option selected>Show Default View</option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <mat-drawer-container hasBackdrop="false" style="height: 100%;">
+                <mat-drawer #drawer mode="push" position="start" style="width: 350px;">
+                    <div class="card">
+                        <div class="card-header">
+                            <a id="close-btn" (click)="drawer.toggle()" style="color: #ff4d6b !important;"><mat-icon>cancel</mat-icon></a>
+                            <a (click)="drawer.toggle()" class="text-primary float-right"
+                                style="cursor: pointer;"><small>Save Filter</small></a>
+                        </div>
+                        <div class="card-body">
+                            <app-asset-filter></app-asset-filter>
+                        </div>
+                    </div>
+                </mat-drawer>
+                <div class="main-content">
+                    <!-- demo content -->
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="mb-4">
+                                <div class="dropdown mt-4 float-right">
+                                    <button type="button" class="btn btn-light btn-sm mr-2" style="padding:2px 10px;"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <small>Customize</small>
+                                    </button>
+                                    <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">
+                                        <div class="checkbox" *ngFor="let option of displayedColumns">
+                                            <label class="text-muted"><input type="checkbox" [(ngModel)]="option.show"
+                                                    (click)="$event.stopPropagation()"> {{option.title}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table mat-table [dataSource]="dataSource" matSort>
+
+                                    <!-- Checkbox Column -->
+                                    <ng-container matColumnDef="select">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            <mat-checkbox (change)="$event ? masterToggle() : null"
+                                                [checked]="selection.hasValue() && isAllSelected()"
+                                                [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                                [aria-label]="checkboxLabel()">
+                                            </mat-checkbox>
+                                        </th>
+                                        <td mat-cell *matCellDef="let row">
+                                            <mat-checkbox (click)="$event.stopPropagation()"
+                                                (change)="$event ? selection.toggle(row) : null"
+                                                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                                            </mat-checkbox>
+                                        </td>
+                                    </ng-container>
+
+
+                                    <ng-container matColumnDef="title">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                                    </ng-container>
+                                    <!-- <ng-container matColumnDef="position">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                          <td mat-cell *matCellDef="let element"> {{element.DueDate}} </td>
+                        </ng-container> -->
+                                    <ng-container matColumnDef="id">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="location">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="area">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Area</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.area}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="type">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="barcode">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Barcode</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.barcode}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="category">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="getDisplayedColumns();"></tr>
+                                    <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"> -->
+                                    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"
+                                        (click)="detailsDialog()">
+
+                                    </tr>
+                                </table>
+                                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-drawer-container>
+        </div>
+    </div>
+
+    <div class="tab-slider--container" [ngSwitch]="viewMode">
+
+        <div id="tab2" class="tab-slider--body" *ngSwitchCase="'tab2'">
+            <div class="card card-secondary">
+                <div class="filterbar brd_1">
+                    <button type="button" class="btn btn-outline-secondary btn-rounded btn-sm"><i
+                            class="icon-equalizer"></i>
+                        Filter</button>
+
+
+                    <div class="btn-group m_l_15">
+                        <button type="button" class="btn btn-outline-secondary dropdown-toggle btn-sm"
+                            data-toggle="dropdown" aria-expanded="false">Sort by: Name (A-Z)</button>
+                        <div class="dropdown-menu" x-placement="top-start"
+                            style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, -110px, 0px);">
+                            <a class="dropdown-item">Creation Date (Most Recent-Oldest)</a>
+                            <a class="dropdown-item">Creation Date (Oldest-Most Recent)</a>
+                            <a class="dropdown-item">Name (A-Z)</a>
+                            <a class="dropdown-item">Name (Z-A)</a>
+                        </div>
+                    </div>
+
+                    <div class="btn-group align-right ">
+                        <button type="button" class="btn btn-outline-secondary dropdown-toggle btn-sm"
+                            data-toggle="dropdown" aria-expanded="false">Show Default View</button>
+                        <div class="dropdown-menu" x-placement="top-start"
+                            style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, -110px, 0px);">
+                            <a class="dropdown-item">Show Default View</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

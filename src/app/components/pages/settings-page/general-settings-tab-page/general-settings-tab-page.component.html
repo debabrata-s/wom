@@ -1,2 +1,118 @@
 <app-settings-page></app-settings-page>
-<p>general-settings-tab-page works!</p>
+<div class="card">
+    <div class="card-body">
+        <p>Common user and business-wide settings.</p>
+        <div class="p-3" style="width: 400px;">
+            <mat-form-field>
+                <mat-label>Language</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let language of languages" [value]="language">
+                        {{language}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Date Format</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let dateFormat of dateFormats" [value]="dateFormat">
+                        {{dateFormat}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Currency</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let currency of currencies" [value]="currency">
+                        {{currency}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Business Type</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let businessType of businessTypes" [value]="businessType">
+                        {{businessType}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Time Zone</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let timezone of timezones" [value]="timezone.name">
+                        {{timezone.name}} <small class="text-muted"><em>{{timezone.offset}}</em></small>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <hr>
+        <p>Work Orders</p>
+        <div class="col-6 p-3">
+            <mat-slide-toggle>
+                Auto-assign Work Orders
+                <br>
+                <small class="text-muted"><em>
+                        Automatically assign new work orders to the person that creates them.
+                    </em></small>
+            </mat-slide-toggle>
+            <mat-slide-toggle>
+                Auto-assign Requests
+                <br>
+                <small class="text-muted"><em>
+                        Automatically assign work orders to the person who approves the request.
+                    </em></small>
+            </mat-slide-toggle>
+            <mat-slide-toggle>
+                Disable Closed Work Order Notifications
+                <br>
+                <small class="text-muted"><em>
+                        Disable notifications when closed work orders are updated.
+                    </em></small>
+            </mat-slide-toggle>
+            <mat-slide-toggle>
+                Ask for feedback when Work Order is Closed
+                <br>
+                <small class="text-muted"><em>
+                        Users are asked to give feedback on the job done
+                    </em></small>
+            </mat-slide-toggle>
+            <mat-slide-toggle>
+                Enable Work Order Updates for Requesters
+                <br>
+                <small class="text-muted"><em>
+                        Users get updates for the Work Orders they requested.
+                    </em></small>
+            </mat-slide-toggle>
+        </div>
+        <div class="col-6 p-3 form-inline">
+            <div class="form-group">
+                <div class="d-inline">
+                    <input type="text" maxlength="2" class="count-field">
+                </div>
+                <div class="d-inline ml-2">
+                    Work Order Start Count
+                    <br>
+                    <small class="text-muted"><em>
+                        Set the number you want your first work order to increment from.
+                        </em>
+                    </small>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-6 p-3 form-inline">
+            
+            <div class="form-group">
+                <div class="d-inline">
+                    <input type="text" maxlength="2" class="count-field">
+                </div>
+                <div class="d-inline ml-2">
+                    Purchase Order Start Count
+                    <br>
+                    <small class="text-muted"><em>
+                        Set the number you want your first purchase order to increment from.
+                        </em>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>

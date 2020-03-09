@@ -1,0 +1,186 @@
+<div class="pb-4">
+    <a (click)="closeDialog();"><span class="close">&times;</span></a>
+    <a class="float-right" (click)="deletePart()"><small class="text-muted">Delete</small></a>
+    <span class="float-right p-2"></span>
+    <a class="float-right" (click)="editPart()"><small class="text-muted">Edit</small></a>
+    <a class="float-right mr-2" (click)="openPurchaseOrderPdf()"><small class="text-muted">PDF Purchase
+            Order</small></a>
+</div>
+<div class="container p-4">
+    <div class="row">
+        <div class="col-1">
+            <i class="icon-book-open icon-md" style="color: rgb(175, 175, 175);"></i>
+        </div>
+        <div class="col">
+            <h3>{{partData.Title}}</h3>
+            <h5 class="text-muted">{{partData.Description}}</h5>
+        </div>
+    </div>
+
+</div>
+<mat-tab-group style="font-size: 0.85em;">
+    <mat-tab label="Details">
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col">
+                    <h6>Part Details</h6>
+                    <div class="text-muted">
+                        Title
+                    </div>
+                    {{partData.Title}}
+                    <p></p>
+                    <div class="text-muted">
+                        Description
+                    </div>
+                    {{partData.Description}}
+                    <p></p>
+                    <div class="text-muted">
+                        Quantity
+                    </div>
+                    {{partData.Quantity}}
+                    <p></p>
+                    <div class="text-muted">
+                        Barcode
+                    </div>
+                    <img src="assets/images/qr/asset_qr.png" alt="" style="width: 150px; height: 150px;">
+                    <br>
+                    {{partData.Barcode}}
+                    <p></p>
+                    <div *ngIf="customData.length>0" class="mb-2">
+                        <h6 class="text-muted">Custom data</h6>
+                        <table style="width: 400px">
+                            <tr>
+                                <th>Name</th>
+                                <th>Value</th>
+                                <th>Unit</th>
+                            </tr>
+                            <tr *ngFor="let data of customData">
+                                <td>{{data.CustomDataName}}</td>
+                                <td>{{data.CustomDataValue}}</td>
+                                <td>{{data.CustomDataUnit}}</td>
+                            </tr>
+                        </table>
+                        
+                    </div>
+                    <div class="text-muted">
+                        Area
+                    </div>
+                    {{partData.Area}}
+                    <p></p>
+                    <div class="text-muted">
+                        Additional Part Details
+                    </div>
+                    {{partData.AdditionalPartDetails}}
+                    <p></p>
+                    <h6>Assigned People</h6>
+                    <p></p>
+                    <div class="text-muted">
+                        Assigned Users
+                    </div>
+                    <span *ngIf="partData.WorkerTitle===undefined||partData.WorkerTitle.trim()==='';else worker"
+                        class="">N/A</span>
+                    <ng-template #worker>{{partData.WorkerTitle}}</ng-template>
+                    <p></p>
+                    <div class="text-muted">
+                        Assigned Vendors
+                    </div>
+                    <span *ngIf="partData.VendorName===undefined;else vendor" class="">N/A</span>
+                    <ng-template #vendor>{{partData.VendorName}}</ng-template>
+                </div>
+                <div class="col">
+                    <div class="text-muted">
+                        ID
+                    </div>
+                    {{partData.id}}
+                    <p></p>
+                    <div class="text-muted">
+                        Cost
+                    </div>
+                    {{partData.Cost}}
+                    <p></p>
+                    <div class="text-muted">
+                        Minimum Quantity
+                    </div>
+                    {{partData.MinimumQuantity}}
+                    <p></p>
+                    <button type="button" class="btn btn-dark btn-sm" (click)="createPurchaseOrder()">Create purchase
+                        order</button>
+                    <p></p>
+                    <div class="text-muted">
+                        Assigned Location
+                    </div>
+                    {{partData.LocationName}}
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-rounded btn-sm btn-danger float-right" (click)="openRestockDialog()">+
+            Restock</button>
+    </mat-tab>
+    <mat-tab label="Files">
+        <div class="card mt-4">
+            <div class="form-group">
+                <label>
+                    Add a File:
+                </label>
+                <div class="drop-zone">
+                </div>
+            </div>
+            <a (click)="openFileDialog()">Add Uploaded File</a>
+        </div>
+    </mat-tab>
+    <mat-tab label="Work Orders">
+        <p></p>
+        <div class="card-body">
+            <mat-card>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <h5>Work order 1</h5>
+                            <small class="text-muted">Last Updated 7 hours ago Feb 13, 2020</small>
+                        </div>
+                        <div class="col-2">
+                            <h5 style="color: red;"><i class="icon-lock-open"></i> Open</h5>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+    </mat-tab>
+    <mat-tab label="Assets">
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-1">
+                    <i class="icon-notebook icon-md"></i>
+                </div>
+                <div class="col">
+                    <div class="d-inline">
+                        <div class="card mt-4">
+                            <mat-card>
+                                <div class="row">
+                                    <div class="col">
+                                        <h5>Asset1</h5>
+                                        <small class="text-muted">Model: 5029 series</small>
+                                        <small class="text-muted ml-2">Barcode: 78954523</small>
+                                        <small class="text-muted ml-2">Category: Refridgrator</small>
+                                        <small class="text-muted ml-2">Description: this is some part of the
+                                            jaor</small>
+                                    </div>
+                                    <div class="col-2">
+                                        <h5 style="color: red;"><i class="icon-lock-open"></i> Open</h5>
+                                    </div>
+                                </div>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-danger btn-rounded btn-sm float-right mt-2" (click)="addAsset();">+
+            Asset</button>
+    </mat-tab>
+    <mat-tab label="Events">
+        <p></p>
+        <mat-card><span class="text-muted">Compressor Non-Operational by Sam Smith @ Monday</span></mat-card>
+    </mat-tab>
+</mat-tab-group>

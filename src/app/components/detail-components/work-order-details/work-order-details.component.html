@@ -1,0 +1,377 @@
+<div class="card rounded">
+    <div class="card-header">
+        <a (click)="showWorkOrderDetails()" *ngIf="showOtherBlock" class="text-muted mr-5"><small>
+
+                < go back</small> </a>
+        <h6 class="text-muted" style="display: inline;">{{drawerTitle}}</h6>
+        <!-- <div class="d-inline align-right"> -->
+        <div id="detail-menus">
+            <i class="icon-link ml-2 link-tag" matTooltip="Link Work Order"></i>
+            <i class="icon-tag ml-2 bookmark-tag" (click)="toggleBookmark()"
+                [ngClass]="status ? 'success' : 'danger'" matTooltip="Bookmark this Work Order"></i>
+            <div class="dropdown d-inline">
+                <i class="icon-options-vertical ml-2" data-toggle="dropdown"></i>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item menu-sm" href="#">Request Feedback</a>
+                    <a class="dropdown-item menu-sm" href="#">PDF with Update Notes</a>
+                    <a class="dropdown-item menu-sm" href="#">PDF without Update Notes</a>
+                    <a class="dropdown-item menu-sm" href="#">Invoice PDF</a>
+                    <a class="dropdown-item menu-sm" href="#">Duplicate</a>
+                    <a class="dropdown-item menu-sm" href="#">Archive</a>
+                    <a class="dropdown-item menu-sm" (click)="deleteWorkOrder()">Delete</a>
+                </div>
+            </div>
+            <a (click)="showWorkOrderEditForm()"><i class="icon-pencil ml-2"></i></a>
+            <!-- <a><i class="icon-close ml-2" (click)="drawer.toggle()"></i></a> -->
+        </div>
+    </div>
+
+
+
+    <div *ngIf="showOtherBlock ; else elseBlock" class="card-body p-2">
+        <!-- ADDITIONAL COST DETAILS -->
+        <div *ngIf="showCostDetails ; else WOEditBlock">
+            <p>
+                <small class="text-muted">View all costs logged or added by users. Admin’s can also edit logged
+                    costs.</small>
+            </p>
+            <button class="btn btn-sm btn-primary btn-rounded btn-fw" (click)="addAdditionalCost()">+ Add Additional
+                Cost</button>
+            <table style="width:100%; font-size: small; margin: 40px 0px">
+                <tr>
+                    <th class="text-muted">CATEGORIES</th>
+                    <th class="text-muted">MOSTLY SPENT ON</th>
+                    <th class="text-muted">TOTAL COST</th>
+                </tr>
+                <tr>
+                    <td>...</td>
+                    <td>N/A</td>
+                    <td><a href="">+ Add Total Cost</a></td>
+                </tr>
+            </table>
+            <div *ngIf="showLog; else hidelog">
+                <button mat-button class="full-width text-muted" (click)="toggleAddtionalCostLog()">Show Logs</button>
+            </div>
+            <ng-template #hidelog>
+                <button mat-button class="full-width text-muted" (click)="toggleAddtionalCostLog()">Hide Logs</button>
+                <button mat-button class="text-muted" [matMenuTriggerFor]="menu">All Categories</button>
+                <mat-menu #menu="matMenu" class="pl-2">
+                    <a class="text-muted"><small>Other</small></a><br>
+                    <a class="text-muted"><small>Parts Cost</small></a><br>
+                    <a class="text-muted"><small>Travel Cost</small></a><br>
+                    <a class="text-muted"><small>Labor Cost</small></a><br>
+                    <a class="text-muted"><small>Tax</small></a>
+                </mat-menu>
+                <button mat-button class="text-muted" [matMenuTriggerFor]="menu2">Everyone</button>
+                <mat-menu #menu2="matMenu" class="p-2">
+                    <input type="text" class="small-input" style="width: 150px;">
+                    <a class="text-muted"><small>Sam</small></a><br>
+                    <a class="text-muted"><small>Harry</small></a><br>
+                    <a class="text-muted"><small>John</small></a><br>
+                </mat-menu>
+                <br>
+                <table style="width:100%; font-size: small; margin-top: 20px;">
+                    <tr>
+                        <td>
+                            <small class="text-muted">
+                                TOTAL
+                            </small>
+                        </td>
+                        <td><small>$0</small></td>
+                    </tr>
+                </table>
+            </ng-template>
+        </div>
+        <ng-template #WOEditBlock>
+            <app-work-order-edit-form></app-work-order-edit-form>
+        </ng-template>
+    </div>
+    <!-- WORK ORDER EDIT FORM -->
+
+    <ng-template #elseBlock>
+        <div *ngIf="woDetails; else timerBlock" class="card">
+            <mat-tab-group>
+                <mat-tab label="Details">
+                    <div class="container">
+                        <div class="row mt-4 mb-2 p-2">
+                                <small class="text-primary p-2 rounded" style="background-color: #1bd9e03a;">Low Priority</small>
+                            <small class="text-muted font-italic p-2"><span style="font-size: x-small;">Updated:</span> {{date}} {{time}}</small>
+                            <small class="text-muted ml-auto pl-2">#{{woId}}</small>
+                        </div>
+                        <div class="row mb-2 p-2">
+                            <div class="col">
+                                <h4 class="font-weight-bold m-0">{{title}}</h4>
+                                <small class="text-muted">{{desc}}</small>
+                            </div>
+                        </div>
+                        <div class="row mb-4 p-3">
+                            <div class="dropdown d-inline">
+                                <button class="btn btn-sm btn-rounded btn-fw" id="dropdownMenuButton"
+                                    [ngClass]="selectedStatus.class"
+                                    data-toggle="dropdown">{{selectedStatus.name}}</button>
+                                <div class="dropdown-menu">
+                                    <a *ngFor="let option of orderStatus" class="dropdown-item"
+                                        (click)="selectedStatus=option">{{option.name}}</a>
+
+                                </div>
+                            </div>
+                            <div class="dropdown ml-auto">
+                                <button class="btn-timer " data-toggle="dropdown"><i class="icon-clock"></i> Time
+                                    0</button>
+                                <ul class="dropdown-menu ml-2">
+                                    <li class="dropdown-item text-small"><a (click)="woDetails=!woDetails"><i
+                                                class="icon-list"></i> Detailed View</a>
+                                    </li>
+                                    <li class="dropdown-item text-small"><a><i class="icon-control-play"></i> Start
+                                            Timer</a></li>
+                                    <li class="dropdown-item text-small"><a (click)="addTime()"><i
+                                                class="icon-plus"></i> Add Time</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <table>
+                                <tr>
+                                    <td class="text-right"><small class="text-muted">Due Date</small></td>
+                                    <td><small>January 2, 2020, 11:44 am</small></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right"><small class="text-muted">Schedule</small></td>
+                                    <td><small>Every 1 week(s) <a class="font-italic" href="#">View Schedule</a></small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right"><small class="text-muted">Category</small></td>
+                                    <td><small>Category 1</small></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right"><small class="text-muted">Assigned To</small></td>
+                                    <td><small><a href="#">worker 1</a></small></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right"><small class="text-muted">Team</small></td>
+                                    <td><small><a href="#">Team 1</a></small></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right"><small class="text-muted">Additional Workers</small></td>
+                                    <td><small><a href="#">john</a>, <a href="#">Happy</a></small></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right"><small class="text-muted">Location</small></td>
+                                    <td><small><a href="#">3218 Belt Line Rd #528, Farmers Branch, TX 75234,
+                                                USA</a></small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right"><small class="text-muted">Asset</small></td>
+                                    <td><small><a href="#">asset1</a></small></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right"><small class="text-muted">Created</small></td>
+                                    <td><small>January 31, 2020, 11:24 am <span class="text-muted">by</span> Sam
+                                            Smith</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right"><small class="text-muted">Time</small></td>
+                                    <td><button *ngIf="showTimeFields;else timeFieldBlock" type="button"
+                                            class="btn btn-link p-0 m-0"
+                                            (click)="showTimeFields=!showTimeFields"><small>+
+                                                Add Time</small></button></td>
+                                    <ng-template #timeFieldBlock>
+                                        <input type="number" class="form-control time-field">
+                                        <span class="text-xs">Hours</span>
+                                        <input type="number" class="form-control time-field">
+                                        <span class="text-xs mr-3">Minutes</span>
+                                        <a class="mr-2" (click)="showTimeFields=!showTimeFields"><i class="icon-close text-danger"></i></a>
+                                        <a (click)="showTimeFields=!showTimeFields"><i class="icon-check text-success"></i></a>
+                                    </ng-template>
+                                </tr>
+                                <tr>
+                                    <td class="text-right"><small class="text-muted">Additional Costs</small></td>
+                                    <td><small>$0</small></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <mat-card class="m-4">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="icon-wrench icon-md"></i>
+                                </div>
+                                <div class="col">
+                                    <small class="text-muted">Parts</small><br>
+                                    <span style="font-size: 0.85em;">0 Total Parts Costing $0.00</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <button type="button" class="btn btn-link p-0 m-0" (click)="addPart()"><small>+ Add
+                                        Part</small></button>
+                            </div>
+                        </mat-card>
+                        <mat-card class="m-4">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="icon-wallet icon-md"></i>
+                                </div>
+                                <div class="col">
+                                    <small class="text-muted">Addtional Costs</small><br>
+                                    <span style="font-size: 0.85em;">Additional Costs: 0Total Cost: $0</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <button type="button" class="btn btn-link p-0 m-0"
+                                    (click)="addAdditionalCost()"><small>+
+                                        Add
+                                        Additional Cost</small></button><br>
+                                <button type="button" class="btn btn-primary btn-rounded p-1 ml-auto"
+                                    (click)="detailViewCost()"><small>Detailed View</small></button>
+                            </div>
+                        </mat-card>
+                        <mat-card class="m-4">
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="icon-cloud-download icon-md"></i>
+                                </div>
+                                <div class="col">
+                                    <small class="text-muted">Files</small><br>
+                                    <span style="font-size: 0.85em;">0 Attached Files</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <button type="button" class="btn btn-link p-0 m-0" (click)="addFile()"><small>+ Attach
+                                        File</small></button>
+                            </div>
+                        </mat-card>
+                    </div>
+
+                </mat-tab>
+                <mat-tab label="Updates">
+                    <div class="m-2">
+                        <form>
+                            <mat-form-field appearance="outline">
+                                <textarea matInput placeholder="Write a message..."></textarea>
+                            </mat-form-field>
+                            <button type="button" class="btn btn-primary btn-sm">Send</button>
+                        </form>
+                    </div>
+                    <hr>
+                    <div class="row m-2">
+                        <div class="col-2">
+                            <i class="icon-settings icon-lg" style="color: #1bdbe0;"></i>
+                        </div>
+                        <div class="col">
+                            <small class="">Sam Smith <span class="text-muted font-italic">Thursday, January 30th
+                                    11:44:37
+                                    am</span></small>
+                            <p>Created Work Order: work order 1</p>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+        <ng-template #timerBlock>
+            <div class="card-body pt-2">
+                <a (click)="woDetails=!woDetails"><small class="text-muted"><i class="icon-arrow-left-circle"></i><em>
+                            back to details</em></small></a> <br>
+                <small class="text-muted">View all time manually logged or added by the user of a timer. Admins can also
+                    edit logged time.</small>
+                <div class="d-flex justify-content-between pt-4">
+                    <button type="button" class="btn btn-outline-primary btn-rounded btn-sm"><i class="icon-clock"></i>
+                        Start Timer</button>
+                    <button type="button" class="btn btn-primary btn-rounded btn-sm" (click)="addTime()">+ Add
+                        Time</button>
+                </div>
+                <br><br>
+                <small>ASSIGNED USERS</small>
+                <div class="profile-image p-4">
+                    <img class="img-xs rounded-circle" src="assets/images/faces/face8.jpg" alt="profile image">
+                </div>
+                <div class="container mb-3">
+                    <div class="row">
+                        <div class="col-4">
+                            <small>ESTIMATED TIME</small><br>
+                            <small><a href="">+ Add</a></small>
+                        </div>
+                        <div class="col-5">
+                            <small>TOTAL GROUP TIME</small><br>
+                            <small>1 week</small>
+                        </div>
+                        <div class="col-3">
+                            <small>MY TIME</small><br>
+                            <small>3 days</small>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-light btn-sm w-100" *ngIf="!timerLog"
+                    (click)="timerLog=!timerLog">Show
+                    Logs</button>
+                <button type="button" class="btn btn-light btn-sm w-100" *ngIf="timerLog"
+                    (click)="timerLog=!timerLog">Hide
+                    Logs</button>
+                <div *ngIf="timerLog" class="mt-4" #timerLog>
+                    <button type="button" class="btn btn-outline-secondary btn-sm"><i class="icon-people"></i>
+                        Everyone</button>
+                    <div class="d-flex justify-content-between mt-3 mb-3 p-2 bg-secondary rounded">
+                        <span class="text-muted text-small">TOTAL</span>
+                        <span class="text-small">3 days</span>
+                    </div>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <div class="d-flex">
+                                    <div class="mr-2 pt-2 text-primary">Me</div>
+                                    <div>
+                                        <small>Other Time</small><br>
+                                        <small class="text-muted">ADMIN <span class="text-success">+4s</span></small>
+                                    </div>
+                                </div>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                <div class="w-100">
+                                    <div class="float-right"></div>
+                                    <small class="float-right">10s</small><br>
+                                    <small class="float-right">17 hours ago</small>
+                                </div>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <ul>
+                            <li><small><em>Sam Smith <span class="text-success">started timer 6s</span></em></small>
+                                <span class="float-right text-small text-muted"><em>20 hours ago</em>
+                                    <div class="d-inline dropdown dropleft droptop">
+                                        <i class="icon-options-vertical" data-toggle="dropdown"></i>
+                                        <ul class="dropdown-menu ml-2">
+                                            <li class="dropdown-item"><a (click)="changeTimerCategory()">Change
+                                                    Category</a>
+                                            </li>
+
+                                            <li class="dropdown-item"><a>Delete</a></li>
+                                        </ul>
+                                    </div>
+
+                                </span>
+                            </li>
+                            <li><small><em>John Doe <span class="text-success">started timer 6s</span></em></small>
+                                <span class="float-right text-small text-muted"><em>18 hours ago</em>
+                                    <div class="d-inline dropdown dropleft">
+                                        <i class="icon-options-vertical" data-toggle="dropdown"></i>
+                                        <ul class="dropdown-menu ml-2">
+                                            <li class="dropdown-item"><a (click)="changeTimerCategory()">Change
+                                                    Category</a>
+                                            </li>
+
+                                            <li class="dropdown-item"><a>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                </span>
+                            </li>
+                        </ul>
+                        <br>
+                        <br>
+                    </mat-expansion-panel>
+                </div>
+            </div>
+
+        </ng-template>
+    </ng-template>
+
+</div>

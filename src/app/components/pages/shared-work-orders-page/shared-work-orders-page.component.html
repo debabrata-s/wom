@@ -5,44 +5,61 @@
     </div>
     <div class="main-content">
         <!-- demo content -->
-        <div class="col-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card card-secondary">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-outline-secondary" [class.active]="viewMode == 'tab1'"
-                                rel="tab1" (click)="viewMode ='tab1'">
-                                <i class="icon-star d-block mb-1"></i> Shared with me </button>
-                            <button type="button" class="btn btn-outline-secondary" [class.active]="viewMode == 'tab2'"
-                                rel="tab2" (click)="viewMode ='tab2'">
-                                <i class="icon-reload d-block mb-1"></i> Shared with others </button>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="tab-slider--container" [ngSwitch]="viewMode">
-                        <div id="tab1" class="tab-slider--body" *ngSwitchCase="'tab1'">
-                            <h2>Shared with me</h2>
-                            <p>Toggle switch style tab navigation. Currently only works with two tabs.</p>
-                            <p>Donec ullamcorper nulla non metus auctor fringilla. Donec ullamcorper nulla non metus
-                                auctor
-                                fringilla. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis
-                                vestibulum. Nullam
-                                id
-                                dolor id nibh ultricies vehicula ut id elit. Nulla
-                                vitae elit libero, a pharetra augue.</p>
-                        </div>
-                        <div id="tab2" class="tab-slider--body" *ngSwitchCase="'tab2'">
-                            <h2>Shared with others</h2>
-                            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                                Cras mattis
-                                consectetur purus sit amet fermentum. Nulla vitae elit libero, a pharetra augue. Cras
-                                mattis
-                                consectetur purus sit amet fermentum. Aenean eu leo
-                                quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
-                        </div>
+        <div class="col-12 grid-margin stretch-card" style="height: 800px;">
 
-                    </div>
-                </div>
+            <div class="card" style="background-color: #F5F5F5">
+                <mat-tab-group mat-align-tabs="center" style="width: 600px;">
+                    <mat-tab label="Shared with me">
+                        <div class="card mt-2 ml-2 p-4 rounded list-item" (click)="openOrderDetails()">
+                            <div class="row">
+                                <div class="col-11">
+                                    <h5>Work Order 1</h5>
+                                    <small class="text-muted">
+                                        Unpaid
+                                    </small>
+                                    <small class="text-muted ml-2">
+                                        Shared by sam.smith@gmail.com
+                                    </small>
+                                    <small class="text-muted ml-2">
+                                        Feb 16 2020
+                                    </small>
+                                    <small class="text-muted ml-2">
+                                        <i class="icon-speech"></i> 5
+                                    </small>
+                                </div>
+                                <div class="col-1">
+                                    <i class="icon-lock-open icon-md text-danger"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Shared with others">
+                        <div class="card mt-2 ml-2 p-4 rounded list-item" (click)="openOrderDetails()">
+                            <div class="row">
+                                <div class="col-11">
+                                    <h5>Work Order 2</h5>
+                                    <small class="text-muted">
+                                        Unpaid
+                                    </small>
+                                    <small class="text-muted ml-2">
+                                        Shared with john.doe@gmail.com
+                                    </small>
+                                    <small class="text-muted ml-2">
+                                        Feb 18 2020
+                                    </small>
+                                    <small class="text-muted ml-2">
+                                        <i class="icon-speech"></i> 5
+                                    </small>
+                                </div>
+                                <div class="col-1">
+                                    <i class="icon-lock-open icon-md text-danger"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+
+
             </div>
         </div>
 

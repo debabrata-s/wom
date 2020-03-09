@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-file-form',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./file-form.component.scss']
 })
 export class FileFormComponent implements OnInit {
-
-  constructor() { }
+  fileForm: FormGroup;
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.fileForm = this.fb.group({
+      file:['']
+    })
+  }
+  onSubmit(){
+    console.log(this.fileForm.value);
+    
   }
 
 }

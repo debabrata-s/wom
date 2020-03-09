@@ -1,13 +1,38 @@
-<app-navbar *ngIf="isLoggedIn === 'true'"></app-navbar>
-<!-- <app-navbar></app-navbar> -->
-<div class="container-fluid page-body-wrapper">
-  <app-sidenav *ngIf="isLoggedIn === 'true'"></app-sidenav>
-  <!-- <app-sidenav></app-sidenav> -->
-  <div class="full-width">
-    <!-- <app-settings-page></app-settings-page> -->
-    <router-outlet></router-outlet>
-  </div>
-</div>
+<div *ngIf="showLoadingIndicator;else mainpage">Loading...</div>
+<ng-template #mainpage>
+  <mat-sidenav-container>
+    <mat-sidenav [(opened)]="sideDrawerOpened" mode="over" position="end" (opened)="log('Opened')"
+      (closed)="log('Closed')" style="width: 450px;" #sidenav>
+      <div [ngSwitch]="drawer">
+        <app-work-order-form *ngSwitchCase="'workOrderForm'"></app-work-order-form>
+        <app-location-form *ngSwitchCase="'locationForm'"></app-location-form>
+        <app-location-edit-form *ngSwitchCase="'locationEditForm'"></app-location-edit-form>
+        <app-set-of-parts-form *ngSwitchCase="'setOfPartsForm'"></app-set-of-parts-form>
+        <app-set-of-part-details *ngSwitchCase="'setOfPartDetails'"></app-set-of-part-details>
+        <app-meter-details *ngSwitchCase="'meterDetails'"></app-meter-details>
+        <app-work-order-trigger-form *ngSwitchCase="'workOrderTriggerForm'"></app-work-order-trigger-form>
+        <app-meter-form *ngSwitchCase="'meterForm'"></app-meter-form>
+        <app-work-order-details *ngSwitchCase="'workOrderDetails'"></app-work-order-details>
+        <app-request-form *ngSwitchCase="'requestForm'"></app-request-form>
+        <app-asset-form *ngSwitchCase="'assetForm'"></app-asset-form>
+        <app-part-form *ngSwitchCase="'partForm'"></app-part-form>
+        <app-part-edit-form *ngSwitchCase="'partEditForm'"></app-part-edit-form>
+        <app-set-of-parts-edit-form *ngSwitchCase="'setOfPartsEditForm'"></app-set-of-parts-edit-form>
+      </div>
 
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <app-navbar *ngIf="isLoggedIn === 'true'"></app-navbar>
+      <!-- <app-navbar></app-navbar> -->
+      <div class="container-fluid page-body-wrapper">
+        <app-sidenav *ngIf="isLoggedIn === 'true'"></app-sidenav>
+        <!-- <app-sidenav></app-sidenav> -->
 
-
+        <div class="full-width">
+          <!-- <app-settings-page></app-settings-page> -->
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</ng-template>

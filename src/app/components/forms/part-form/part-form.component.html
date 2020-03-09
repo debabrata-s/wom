@@ -1,163 +1,168 @@
-<div class="content-wrapper">
-  <div class="card">
+<div class="card">
+  <div class="card-header">
+    <h4>Add Parts Inventory</h4>
+  </div>
+  <form [formGroup]="partsInventoryForm" (ngSubmit)="onSubmit()">
     <div class="card-body">
-      <form [formGroup]="partsInventoryForm" (ngSubmit)="onSubmit()">
 
-        <h3>Add Parts Inventory</h3>
-        <div class="form-group">
-          <label>
-            Title:
-          </label>
-          <input type="text" class="form-control" formControlName="title">
-        </div>
+      <mat-form-field>
+        <mat-label>
+          Title
+        </mat-label>
+        <input matInput formControlName="Title" autocomplete="off" required >
+        <mat-error>Title is requrired</mat-error>
+      </mat-form-field>
 
-        <div class="form-group">
-          <label>
-            Description:
-          </label>
-          <input type="text" class="form-control" formControlName="desc">
-        </div>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="Description" required></textarea>
+        <mat-hint align="end">Max length 500</mat-hint>
+        <mat-error>Description is requrired</mat-error>
+      </mat-form-field>
 
-        <div class="form-group">
-          <label>
-            Category:
-          </label>
-          <input type="text" class="form-control" formControlName="category">
-        </div>
+      <mat-form-field>
+        <mat-label>
+          Category
+        </mat-label>
+        <input matInput formControlName="Category" autocomplete="off" required>
+        <mat-error>Category is requrired</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>
+          Cost
+        </mat-label>
+        <input type="number" matInput formControlName="Cost" autocomplete="off" required>
+        <mat-error>Cost is requrired</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>
+          Quantity
+        </mat-label>
+        <input type="number" matInput formControlName="Quantity" autocomplete="off" required>
+        <mat-error>Quantity is requrired</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>
+          Minimum Quantity
+        </mat-label>
+        <input type="number" matInput formControlName="MinimumQuantity" autocomplete="off" required>
+        <mat-error>Minimum quantity is requrired</mat-error>
+      </mat-form-field>
+      <mat-checkbox formControlName="Nonstock"><span class="text-muted" style="font-size: 0.87em;">Non-Stock</span><i
+          class="input-helper"></i>
+      </mat-checkbox>
+      <mat-form-field>
+        <mat-label>
+          Barcode
+        </mat-label>
+        <input matInput formControlName="Barcode" autocomplete="off" required>
+        <mat-error>Barcode is requrired</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>
+          Area
+        </mat-label>
+        <input matInput formControlName="Area" autocomplete="off" required>
+        <mat-error>Area is requrired</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Additional Part Details</mat-label>
+        <textarea matInput formControlName="AdditionalPartDetails" required>
+          <mat-error>Additional part details is requrired</mat-error>
+        </textarea>
+        <mat-hint align="end">Max length 500</mat-hint>
+      </mat-form-field>
 
-        <div class="form-group">
-          <label>
-            Cost:
-          </label>
-          <input type="text" class="form-control" formControlName="cost">
-        </div>
+      <mat-form-field>
+        <mat-select formControlName="WorkerId" placeholder="Workers" required>
+          <mat-option *ngFor="let worker of workers" [value]="worker.id">{{worker.firstname}} {{worker.lastname}}</mat-option>
+        </mat-select>
+        <mat-error>Please select worker</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select formControlName="TeamId" placeholder="Team" required>
+          <mat-option *ngFor="let team of teams" [value]="team.id">{{team.Name}}</mat-option>
+        </mat-select>
+        <mat-error>Please select team</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select formControlName="VendorId" placeholder="Vendors" required>
+          <mat-option *ngFor="let vendor of vendors" [value]="vendor.id">{{vendor.CompanyName}}</mat-option>
+        </mat-select>
+        <mat-error>Please select vendor</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select formControlName="CustomerId" placeholder="Customer" required>
+          <mat-option *ngFor="let customer of customers" [value]="customer.id">{{customer.CustomerName}}</mat-option>
+        </mat-select>
+        <mat-error>Please select customer</mat-error>
+      </mat-form-field>
 
-        <div class="form-group">
-          <label>
-            Quantity:
-          </label>
-          <input type="text" class="form-control" formControlName="quantity">
-        </div>
-
-        <div class="form-group">
-          <label>
-            Minimum Quantity:
-          </label>
-          <input type="text" class="form-control" formControlName="minQuantity">
-        </div>
-
-        <div class="form-check form-check-flat form-check-primary">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" formControlName="nonStock">Non-Stock<i
-              class="input-helper"></i></label>
-        </div>
-
-        <div class="form-group">
-          <label>
-            Barcode:
-          </label>
-          <input type="text" class="form-control" formControlName="barcode">
-        </div>
-
-        <div class="form-group">
-          <label>
-            Area:
-          </label>
-          <input type="text" class="form-control" formControlName="area">
-        </div>
-
-        <div class="form-group">
-          <label>
-            Additional Part Details:
-          </label>
-          <textarea class="form-control" id="exampleTextarea1" rows="4" formControlName="addPartDetails"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>
-            Workers:
-          </label>
-          <input type="text" class="form-control" formControlName="workers">
-        </div>
-
-        <div class="form-group">
-          <label>
-            Teams:
-          </label>
-          <input type="text" class="form-control" formControlName="teams">
-        </div>
-
-        <div class="form-group">
-          <label>
-            Vendors:
-          </label>
-          <input type="text" class="form-control" formControlName="vendors">
-        </div>
-
-        <div class="form-group">
-          <label>
-            Customer:
-          </label>
-          <input type="text" class="form-control" formControlName="customer">
-        </div>
-        
-        <!-- Custom Data array -->
-        <!-- start -->
+      <!-- Custom Data array -->
+      <!-- start -->
+    
+      <div *ngIf=" customPartForm.get('customDataArray')['controls'].length>0" [formGroup]="customPartForm" class="p-2 rounded bg-secondary">
         <div formArrayName="customDataArray"
-          *ngFor="let customData of partsInventoryForm.get('customDataArray')['controls']; let i = index">
+          *ngFor="let customData of customPartForm.get('customDataArray')['controls']; let i = index">
           <div [formGroupName]="i" class="row">
-            <div class="form-group col">
-              <label>
-                Name:
-              </label>
-              <input type="text" class="form-control" formControlName="name">
+            <div class="col-4">
+              <mat-form-field>
+                <input matInput placeholder="Name" formControlName="CustomDataName">
+              </mat-form-field>
             </div>
-            <div class="form-group col">
-              <label>
-                Value:
-              </label>
-              <input type="text" class="form-control" formControlName="value">
+            <div class="col-4">
+              <mat-form-field>
+                <input matInput placeholder="Value" formControlName="CustomDataValue">
+              </mat-form-field>
             </div>
-            <div class="form-group col">
-              <label>
-                Unit:
-              </label>
-              <input type="text" class="form-control" formControlName="unit">
+            <div class="col-4">
+              <mat-form-field>
+                <input matInput placeholder="Unit" formControlName="CustomDataUnit">
+              </mat-form-field>
             </div>
+            <a class="ml-auto mr-2" (click)="removeCustomItem(i)" style="cursor: pointer;"><small
+                class="text-danger">remove</small></a>
           </div>
         </div>
-        <!-- end -->
+      </div>
 
-        <button class="btn btn-sm btn-link btn-fw" (click)="addCustomData()">+ Custom data</button>
 
-        <div class="form-group">
-          <label>
-            Location:
-          </label>
-          <input type="text" class="form-control" formControlName="location">
+      <!-- end -->
+      <a (click)="addCustomData()" style="cursor: pointer; color: #007bff;"><small>+ Custom data</small></a>
+      <br>
+      <br>
+      <mat-form-field>
+        <mat-select formControlName="LocationId" placeholder="Location">
+          <mat-option *ngFor="let location of locations" [value]="location.id">{{location.Title}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="form-group">
+        <label class="text-muted">
+          Add a file
+        </label>
+        <div class="drop-zone">
         </div>
+        <br>
+        <a (click)="selectFiles()" style="cursor: pointer; color: #007bff;"><small>+ Add File</small></a>
+      </div>
 
-        <div class="form-group">
-          <label>
-            Add a file:
-          </label>
-          <input type="text" class="form-control" formControlName="addAFile">
+
+
+      <br>
+      <div class="form-group">
+        <label class="text-muted">
+          Add an image
+        </label>
+        <div class="drop-zone">
+          <input type="file" formControlName="Images">
         </div>
+      </div>
 
-
-        <button class="btn btn-sm btn-link btn-fw">+ Add File(unfinished)</button>
-
-        <div class="form-group">
-          <label>
-            Add Image:
-          </label>
-          <input type="text" class="form-control" formControlName="addImage">
-        </div>
-
-
-        <button class="btn btn-primary mr-2" type="submit">Submit</button>
-
-      </form>
     </div>
-  </div>
+    <div class="card-footer d-flex justify-content-end">
+      <button mat-button (click)="closeDrawer()">Cancel</button>
+      <button mat-button type="submit" [disabled]="!partsInventoryForm.valid">Submit</button>
+    </div>
+  </form>
 </div>

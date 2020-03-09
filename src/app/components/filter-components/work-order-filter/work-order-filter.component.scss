@@ -1,0 +1,15 @@
+
+.btn-group{
+    font-size: 0.8em;
+}
+mat-form-field{
+    font-size: 0.85em;
+}
+.text-muted{
+    font-size: 0.85em;
+}
+.btn-group > .active{
+    transition: all 100ms ease 0s;
+    background: linear-gradient(251deg, rgb(0, 174, 255), rgb(0, 118, 255)) rgb(0, 123, 255);
+    color: white;
+}

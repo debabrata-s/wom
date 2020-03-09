@@ -1,0 +1,161 @@
+<mat-form-field>
+    <mat-label>Work order name/number</mat-label>
+    <input matInput>
+    <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+<hr>
+<span class="text-muted text-sm">Status</span>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <mat-checkbox>Declined</mat-checkbox>
+            <mat-checkbox>Open</mat-checkbox>
+            <mat-checkbox>On Hold</mat-checkbox>
+        </div>
+        <div class="col-6">
+            <mat-checkbox>Pending Approval</mat-checkbox>
+            <mat-checkbox>In Progress</mat-checkbox>
+            <mat-checkbox>Closed</mat-checkbox>
+        </div>
+    </div>
+</div>
+<hr>
+<mat-form-field>
+    <mat-label>Priority</mat-label>
+    <mat-select>
+        <mat-option *ngFor="let priority of priorities" [value]="priority">
+            {{priority}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<hr>
+<mat-form-field>
+    <mat-label>Created By</mat-label>
+    <mat-select multiple>
+        <mat-option *ngFor="let user of users" [value]="user">{{user}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Assigned To</mat-label>
+    <mat-select multiple>
+        <mat-option *ngFor="let user of users" [value]="user">{{user}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Team</mat-label>
+    <mat-select multiple>
+        <mat-option *ngFor="let team of teams" [value]="team">{{team}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Additional Workers</mat-label>
+    <mat-select multiple>
+        <mat-option *ngFor="let worker of workers" [value]="worker">{{worker}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Requester</mat-label>
+    <mat-select multiple>
+        <mat-option *ngFor="let user of users" [value]="user">{{user}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Completed By</mat-label>
+    <mat-select multiple>
+        <mat-option *ngFor="let user of users" [value]="user">{{user}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<hr>
+<mat-form-field>
+    <mat-label>Location</mat-label>
+    <mat-select multiple>
+        <mat-option *ngFor="let location of locations" [value]="location">{{location}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Asset</mat-label>
+    <mat-select multiple>
+        <mat-option *ngFor="let asset of assets" [value]="asset">{{asset}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select multiple>
+        <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<hr>
+<div class="text-muted text-sm">Due Date</div>
+<div class="row">
+    <div class="col">
+        <mat-form-field style="display:inline-block; width:120px">
+            <input matInput [matDatepicker]="picker" placeholder="Start">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col">
+        <mat-form-field style="display:inline-block; width:120px">
+            <input matInput [matDatepicker]="picker1" placeholder="End">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>
+<br>
+<div class="text-muted text-sm">Date Created</div>
+
+<div class="row">
+    <div class="col">
+        <mat-form-field style="display:inline-block; width:120px">
+            <input matInput [matDatepicker]="picker2" placeholder="Start">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col">
+        <mat-form-field style="display:inline-block; width:120px">
+            <input matInput [matDatepicker]="picker3" placeholder="End">
+            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+            <mat-datepicker #picker3></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>
+<br>
+<div class="text-muted text-sm">Date Completed</div>
+
+<div class="row">
+    <div class="col">
+        <mat-form-field style="display:inline-block; width:120px">
+            <input matInput [matDatepicker]="picker4" placeholder="Start">
+            <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+            <mat-datepicker #picker4></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col">
+        <mat-form-field style="display:inline-block; width:120px">
+            <input matInput [matDatepicker]="picker5" placeholder="End">
+            <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+            <mat-datepicker #picker5></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>
+<br>
+<div class="text-muted text-sm">Date Last Updated</div>
+
+<div class="row">
+    <div class="col">
+        <mat-form-field style="display:inline-block; width:120px">
+            <input matInput [matDatepicker]="picker6" placeholder="Start">
+            <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+            <mat-datepicker #picker6></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col">
+        <mat-form-field style="display:inline-block; width:120px">
+            <input matInput [matDatepicker]="picker7" placeholder="End">
+            <mat-datepicker-toggle matSuffix [for]="picker7"></mat-datepicker-toggle>
+            <mat-datepicker #picker7></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>

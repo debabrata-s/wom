@@ -1,0 +1,17 @@
+<a (click)="closeDialog();" style="cursor: pointer;"><span class="close">&times;</span></a>
+<div class="card" style="width: 350px;">
+    <h6>Select Part</h6>
+    <br>
+    <mat-form-field>
+        <mat-label>Search</mat-label>
+        <input matInput>
+    </mat-form-field>
+    <hr>
+    <div *ngFor="let part of parts" class="m-2">
+        <div class="p-3 file-item" (click)="closeDialog();">
+            <i class="icon-wrench text-success"></i>
+            <span class="ml-2 text-muted"><small>{{part}}</small></span>
+        </div>
+
+    </div>
+</div>

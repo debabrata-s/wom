@@ -1,0 +1,24 @@
+<h4>Restock</h4>
+
+<div class="card mt-2" style="font-size: 0.85em;">
+    Original Quantity: 50
+    <br><br>
+    <mat-form-field>
+        <mat-label>Quantity to add</mat-label>
+        <input matInput type="number" >
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Total New Quantity</mat-label>
+        <input matInput disabled>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Restock Event Details</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+      <a (click)="fileInput.click();" style="cursor: pointer; color: #007bff;"><small>+ Attach Reciept</small></a>
+      <input #fileInput type="file" style="display:none;"/>
+</div>
+<div class="float-right">
+    <button type="button" class="btn btn-secondary btn-sm mr-2" (click)="closeDialog()">Cancel</button>
+    <button type="button" class="btn btn-primary btn-sm" (click)="closeDialog()">Save</button>
+</div>

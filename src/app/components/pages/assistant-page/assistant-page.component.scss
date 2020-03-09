@@ -1,0 +1,55 @@
+.card-fix{
+    text-align: left !important;
+    background: #fff !important;
+}
+.color-body{
+    background-color: rgba(0, 0, 0, 0.03);
+}
+.text-muted{
+    background: #fff !important;
+}
+.card-text{
+    color: #969696;
+}
+.text-center{
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    text-align: left !important;
+}
+.btn{
+    font-weight: 600 !important;
+    color: #007bff;
+}
+.padding_0
+{
+    padding:0 !important;
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+.b_radius
+{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+    border-radius:5px;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+}
+.bg_change
+{
+    cursor: pointer;
+    text-align: left;
+}
+.bg_change:hover
+{
+    background: rgba(0, 0, 0, 0.03) !important;
+}
+.m_r_6
+{
+    margin-right: 6px;
+}
+
+.f_right
+{
+    float: right;
+    margin-bottom: 0;
+    display: none;
+    line-height: 0;
+}
+
+.card:hover .f_right
+{
+    display: block;
+}

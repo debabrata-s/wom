@@ -1,0 +1,168 @@
+<div class="card-body">
+    <mat-form-field>
+        <mat-label>
+            Request Title
+        </mat-label>
+        <input matInput placeholder="Request Title">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>
+            Description
+        </mat-label>
+        <textarea matInput></textarea>
+    </mat-form-field>
+
+    <br>
+    <mat-label>
+        <span class="text-muted">Priority</span>
+    </mat-label>
+    <br>
+    <div class="btn-group mb-2 w-100" role="group">
+        <button type="button" class="btn btn-outline-secondary btn-sm">None</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm">Low</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm">Medium</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm">High</button>
+    </div>
+    <br><br>
+
+    <div class="form-group">
+        <label>
+            Image:
+        </label>
+        <div class="drop-zone">
+        </div>
+    </div>
+    <hr>
+    <mat-form-field>
+        <mat-label>Location</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let location of locations" [value]="location">
+                {{location}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Asset</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let asset of assets" [value]="asset">
+                {{asset}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let category of categories" [value]="category">
+                {{category}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Worker</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let worker of workers" [value]="worker">
+                {{worker}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Additional Users</mat-label>
+        <mat-select multiple>
+            <mat-option *ngFor="let user of users" [value]="user">{{user}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Team</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let team of teams" [value]="team">
+                {{team}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Due Date</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Assign End Due Date (stop repeating on this date) (optional)</mat-label>
+        <input matInput [matDatepicker]="picker1">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Assign Repeating Schedule</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let schedule of schedules" [value]="schedule">
+                {{schedule}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>
+            Estimated Duration (Hours)
+        </mat-label>
+        <input matInput placeholder="0.00" type="number">
+    </mat-form-field>
+    <h6>Form Items</h6>
+    <div class="mb-2">
+
+
+        <form [formGroup]="requestEditForm" (ngSubmit)="onSubmit()">
+
+            <div formGroupName="tasks">
+                <div formArrayName="taskItems"
+                    *ngFor="let task of requestEditForm.get('tasks.taskItems')['controls']; let i = index">
+                    <div [formGroupName]="i" class="row">
+                        <div class="col-2">
+                            <h6 class="display-2">{{i+1}}</h6>
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field>
+                                <mat-label>Select Type</mat-label>
+                                <mat-select formControlName="taskType">
+                                    <mat-option *ngFor="let type of types" [value]="type">
+                                        {{type}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Task/Form Question</mat-label>
+                                <input matInput formControlName="question">
+                            </mat-form-field>
+                            <div class="float-right">
+                                <a class="text-small text-danger" (click)="removeTask(i)">Remove</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+
+
+        <a (click)="addTask();">Add Task</a>
+    </div>
+    <div class="mb-2">
+        <a (click)="openChecklists()">Add Checklist</a>
+        <a class="float-right" routerLink="/settings/checklists">Manage Form Template</a>
+    </div>
+    <h6>Parts</h6>
+    <a (click)="openParts()">Add Part</a>
+    <br><br>
+    <div class="form-group">
+        <label>
+            File:
+        </label>
+        <div class="drop-zone">
+        </div>
+    </div>
+
+
+    <a (click)="openFileDialog()">Add Uploaded File</a><br>
+    <mat-checkbox><small>Requires Signature</small></mat-checkbox>
+</div>

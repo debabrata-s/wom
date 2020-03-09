@@ -1,0 +1,20 @@
+.table thead th{
+    font-weight: bold;
+}
+.btn-group > .active{
+    transition: all 100ms ease 0s;
+    background: linear-gradient(251deg, rgb(0, 174, 255), rgb(0, 118, 255)) rgb(0, 123, 255);
+    color: white;
+}
+.dropdown-item{
+    font-size: 0.95em !important;
+    cursor: pointer;
+    padding: .25rem 0.5rem !important;
+}
+.dropdown-item:hover{
+    background-color: #e2f5fc;
+    color: #007bff!important;
+}
+mat-card:hover{
+    background-color: #f0f0f0;
+}

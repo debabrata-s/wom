@@ -3,107 +3,139 @@
     <div class="page-header">
         <app-page-title [pageTitle]="pageTitle"></app-page-title>
     </div>
-    <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Company Request Portal</h4>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit officiis voluptatem adipisci harum
-                    corporis totam assumenda, vitae odit doloremque veniam et temporibus ullam incidunt dolorum
-                    voluptate. Temporibus nostrum neque maxime.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Work Order Requests</h4>
-                <div class="input-group">
-                    <input type="text" class="form-control" [value]="workOrderRequestUrl" disabled>
-                    <div class="input-group-append">
-                        <button class="btn btn-primary btn-sm" type="button">Copy URL</button>
-                    </div>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quasi cupiditate molestiae inventore
-                    aliquam necessitatibus aperiam, voluptate, harum itaque saepe dolor id officia est vitae commodi,
-                    explicabo neque alias provident.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 grid-margin stretch-card">
-        <button type="button" class="btn btn-light btn-rounded">Customize URL</button>
-        <button type="button" class="btn btn-light btn-rounded">Edit Public Request Form Items</button>
-    </div>
-    <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Log in to view requests</h4>
-                <div class="input-group">
-                    <input type="text" class="form-control" [value]="viewRequestUrl" disabled>
-                    <div class="input-group-append">
-                        <button class="btn btn-primary btn-sm" type="button">Copy URL</button>
-                    </div>
+    <div class="col-8 m-auto">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card rounded">
+                <div class="card-body">
+                    <h4 class="card-title">Company Request Portal <span class="float-right">
+                            <mat-slide-toggle [(ngModel)]="showPortal"></mat-slide-toggle>
+                        </span></h4> <br>
+                    <p class="text-muted">The Request Portal allows users that are not on your team to add and view
+                        their request
+                        just by signing in with their email account.</p>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <p>Submit work requests by sending an email to your company's unique wom email address.</p>
-                <h4 class="card-title">Create via Email</h4>
-                <div class="input-group">
-                    <input type="text" class="form-control" [value]="createRequestEmail" disabled>
-                    <div class="input-group-append">
-                        <button class="btn btn-primary btn-sm" type="button">Copy URL</button>
+        <div *ngIf="showPortal">
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card rounded">
+                    <div class="card-body">
+                        <h4>Work Order Requests</h4>
+                        <span class="text-sm">Create work requests</span>
+                        <div class="input-group input-group-sm mb-2">
+                            <input type="text" class="form-control" [value]="workOrderRequestUrl" disabled>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-sm" type="button">Copy URL</button>
+                            </div>
+                        </div>
+                        <p class="text-muted"><em>Anyone with the URL above can create work order requests that go
+                                directly
+                                to their admins for
+                                approval. They do not have to log in to their UpKeep account.</em></p>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="col-12 grid-margin stretch-card">
-        <button type="button" class="btn btn-light btn-rounded"><i class="icon-note"></i> Update Email ID</button>
-    </div>
-    <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <p>Submit work requests by sending an email to your company's unique wom email address.</p>
-                <h4 class="card-title">Create via Request Portal</h4>
-                <div class="input-group">
-                    <input type="text" class="form-control" [value]="createRequestEmail" disabled>
-                    <div class="input-group-append">
-                        <button class="btn btn-primary btn-sm" type="button">Copy URL</button>
+            <div class="col-12 grid-margin stretch-card">
+                <button type="button" class="btn btn-outline-dark btn-sm mr-2">Customize URL</button>
+                <button type="button" class="btn btn-outline-dark btn-sm">Edit Public Request Form Items</button>
+            </div>
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card rounded">
+                    <div class="card-body">
+                        <span class="text-sm">Log in to view requests</span>
+                        <div class="input-group input-group-sm mb-2">
+                            <input type="text" class="form-control" [value]="viewRequestUrl" disabled>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-sm" type="button">Copy URL</button>
+                            </div>
+                        </div>
+                        <span class="text-sm text-muted"><em>Users may view the status of their work request using the
+                                URL above.</em></span>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <p>Submit work requests by sending an email to your company's unique wom email address.</p>
-                <h4 class="card-title">Create via Email</h4>
-                <div class="input-group">
-                    <input type="text" class="form-control" [value]="createRequestEmail" disabled>
-                    <div class="input-group-append">
-                        <button class="btn btn-primary btn-sm" type="button">Copy URL</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card rounded">
+                    <div class="card-body">
+                        <span class="text-sm">Create via Email</span>
+                        <p class="text-sm">Submit work requests by sending an email to your company's unique wom email
+                            address.</p>
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control" [value]="createRequestEmail" disabled>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-sm" type="button">Copy URL</button>
+                            </div>
+                        </div>
+                        <em class="text-muted text-sm">WOM will use the subject line as the work order title, and the
+                            body of the email as the request
+                            description. Requests are updated every 15 minutes.</em>
+                        <br><br>
+                        <em class="text-sm">Note:</em>
+                        <em class="text-muted text-small">
+                            The email is CASE SENSITIVE. <br>
+                            Only 1 image can be atttached per request via email.
+                        </em>
 
-    <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">View Requests</h4>
-                <div class="input-group">
-                    <input type="text" class="form-control" [value]="viewRequestUrl" disabled>
-                    <div class="input-group-append">
-                        <button class="btn btn-primary btn-sm" type="button">Copy URL</button>
                     </div>
                 </div>
             </div>
+            <div class="col-12 grid-margin stretch-card">
+                <button type="button" class="btn btn-outline-dark btn-sm"><i class="icon-note"></i> Update Email
+                    ID</button>
+            </div>
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card rounded">
+                    <div class="card-body">
+                        <h4>Purchase Order Requests</h4>
+                        <br><br>
+                        <div class="d-flex">
+                            <div class="mr-4">
+                                <mat-slide-toggle [(ngModel)]="enablePurchaseOrderPublic"></mat-slide-toggle>
+                            </div>
+                            <div>
+                                <h5>Enable Purchase Order Public Request Portal</h5>
+                                <span class="text-muted text-sm">Enable access for non-users to request purchase orders
+                                    using the public request portal</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="enablePurchaseOrderPublic">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card rounded">
+                        <div class="card-body">
+                            <span class="text-sm">Create via Request Portal</span>
+                            <div class="input-group input-group-sm mb-2">
+                                <input type="text" class="form-control" [value]="viewRequestUrl" disabled>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary btn-sm" type="button">Copy URL</button>
+                                </div>
+                            </div>
+                            <span class="text-sm text-muted"><em>Anyone with the URL above can create purchase order
+                                    requests that go directly to their admins for
+                                    approval. They do not have to log in to their UpKeep account.</em></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card rounded">
+                        <div class="card-body">
+                            <h4 class="card-title">View Requests</h4>
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" [value]="viewRequestUrl" disabled>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary btn-sm" type="button">Copy URL</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
-
 </div>

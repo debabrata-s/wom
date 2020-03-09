@@ -1,0 +1,89 @@
+<div class="card p-3">
+  <button class="close-btn" (click)="closeDialog()"></button>
+  <h4>Add Webhook</h4>
+  <br>
+  <form [formGroup]="webhookForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" class="form-control" formControlName="title">
+    </div>
+    <div class="form-group">
+      <label>Endpoint</label>
+      <input type="text" class="form-control" placeholder="http://company-app.xyz.com/apps/webhook"
+        formControlName="endpoint">
+    </div>
+    <p>Which events would you like to trigger this webhook?</p>
+    <div class="form-group">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" value="allEvents" formControlName="eventSelection">
+          All events <i class="input-helper"></i></label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" value="customEvents" formControlName="eventSelection">
+           Let me choose individually <i class="input-helper"></i></label>
+      </div>
+    </div>
+    
+    <div class="overflow-auto border p-2" style="height: 165px;">
+      <div class="form-group">
+        <div class="form-check" *ngFor="let event of events">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" formControlName='events'> {{event}} <i class="input-helper"></i></label>
+        </div>
+      
+        <!-- <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input"> Checked <i class="input-helper"></i></label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input"> Disabled <i class="input-helper"></i></label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input"> Disabled checked <i class="input-helper"></i></label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input"> Default <i class="input-helper"></i></label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input"> Checked <i class="input-helper"></i></label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input"> Disabled <i class="input-helper"></i></label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input"> Disabled checked <i class="input-helper"></i></label>
+        </div> -->
+      </div>
+    </div>
+    <br>
+    <button mat-raised-button class="submit-btn" type="submit">Submit</button>
+  </form>
+</div>
+<!-- <div class="card p-3">
+    
+    <h4>Create Team</h4>
+    <small class="text-muted">You can add team members to the team from here</small>
+    <br>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Name" formControlName="name">
+    </div>
+
+    <div class="form-group">
+      <textarea class="form-control" rows="4" placeholder="Description" formControlName="desc"></textarea>
+    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>People in the team</mat-label>
+      <mat-select formControlName="peopleInTeam" multiple>
+        <mat-option *ngFor="let worker of workers" [value]="worker">{{worker}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button [disabled]="teamForm.invalid">Submit</button>
+  </div> -->

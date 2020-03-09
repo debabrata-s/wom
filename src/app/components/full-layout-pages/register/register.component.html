@@ -1,0 +1,50 @@
+<div class="content-wrapper" style="margin-top:0px; height: 100%;">
+    <div class="text-center">
+        <img src="assets/images/logo.png" alt="" srcset="" style="width: 150px;">
+    </div>
+    <div class="row flex-grow">
+        <div class="col-lg-8 mx-auto">
+            <div class="card" class="shadow p-3 mb-5 bg-white rounded" style="border-radius: 5px; margin-bottom: 70px;">
+                <div class="auth-form-light text-left p-5">
+                    <h3 class="display-4">Sign up!</h3>
+                    <br>
+                    <form [formGroup]="registerForm" (ngSubmit)="register()">
+                        <div class="row">
+                            <div class="col">
+                                <label for="firstname"><small class="text-muted">First Name:</small></label>
+                                <input type="text" class="form-control form-control-sm" formControlName="firstname" />
+                                <br>
+                                <label for="email"><small class="text-muted">Email:</small></label>
+                                <input type="text" class="form-control form-control-sm" formControlName="email" />
+                                <br>
+                                <label for="phone"><small class="text-muted">Phone Number:</small></label>
+                                <input type="text" class="form-control form-control-sm" formControlName="phone" />
+                                <br>
+
+                            </div>
+                            <div class="col">
+                                <label for="lastname"><small class="text-muted">Last Name:</small></label>
+                                <input type="text" class="form-control form-control-sm" formControlName="lastname" />
+                                <br>
+                                <label for="password"><small class="text-muted">Password:</small></label>
+                                <input type="password" class="form-control form-control-sm"
+                                    formControlName="password" />
+                                <br>
+                                <label for="business-type"><small class="text-muted">Business Type</small></label>
+                                <input type="text" class="form-control form-control-sm"
+                                    formControlName="business_type" />
+                                <br>
+                            </div>
+                        </div>
+                        <br>
+                        <button class="btn btn-success btn-sm m-0 w-100" type="submit">Register</button>
+                    </form>
+                    <br>
+                    <footer>
+                        <p class="text-muted">Already have an account? <a [routerLink]="['../login']">login</a></p>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,385 @@
+<app-reports-page></app-reports-page>
+<div class="card-body">
+    <div class="d-flex flex-row bd-highlight mt-2 p-2 rounded">
+        <div class="p-2">
+            <small>Start</small> <br>
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="startDate">
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <small><a (click)="picker.open()">{{startDate | date: 'dd/MM/yyyy'}}</a></small>
+        </div>
+        <i class="icon-arrow-right pt-3"></i>
+        <div class="p-2">
+            <small>End</small> <br>
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker1" placeholder="Choose a date" [(ngModel)]="endDate">
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+            <small><a (click)="picker1.open()">{{endDate |  date: 'dd/MM/yyyy'}}</a></small>
+        </div>
+        <i class="icon-arrow-right pt-3"></i>
+        <div class="p-2">
+            <small>Work Order Type</small> <br>
+            <div class="dropdown" style="display: inline;">
+                <button type="button" class="btn btn-sm p-0" id="pageMenus" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <a>{{workOrderType}}</a>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="pageMenus">
+                    <a class="dropdown-item" (click)="workOrderType='Reactive'">Reactive</a>
+                    <a class="dropdown-item" (click)="workOrderType='Repeating'">Repeating</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <h4>User Assigned</h4>
+
+    <div class="d-inline">
+        <div class="dashboard-card-left bd-highlight rounded p-2">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h6>USER WO STATS FOR JAN 24 - FEB 24</h6>
+                </div>
+                <div>
+                    <input type="text" class="small-input" style="width: 200px;" placeholder="Search">
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>NAME</th>
+                        <th class="text-success">CLOSED</th>
+                        <th class="text-secondary">IN PROGRESS</th>
+                        <th class="text-warning">ON HOLD</th>
+                        <th class="text-danger">OPEN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><i class="icon-badge text-warning"></i> New work order</td>
+                        <td class="text-success"><i class="icon-lock"></i> 0</td>
+                        <td class="text-secondary"><i class="icon-reload"></i> 0</td>
+                        <td class="text-warning"><i class="icon-flag"></i> 0</td>
+                        <td class="text-danger"><i class="icon-lock"></i> 0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="dashboard-card-right bd-highlight rounded p-2 float-right">
+            <div class="flex">
+                <div class="flex-item">
+                    <div style="display: block;">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6>WO GRAPH FOR JAN 24 - FEB 24</h6>
+                            </div>
+                            <div>
+                                <a href="" class="text-small">Export to PDF</a>
+                            </div>
+                        </div>
+                        <canvas baseChart width="400" height="270" [datasets]="lineChartData" [labels]="lineChartLabels"
+                            [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+                            [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <h4>Location Assigned</h4>
+
+    <div class="d-inline">
+        <div class="dashboard-card-left bd-highlight rounded p-2">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h6>LOCATION WO STATS FOR JAN 24 - FEB 24</h6>
+                </div>
+                <div>
+                    <input type="text" class="small-input" style="width: 200px;" placeholder="Search">
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>LOCATION</th>
+                        <th class="text-success">CLOSED</th>
+                        <th class="text-secondary">IN PROGRESS</th>
+                        <th class="text-warning">ON HOLD</th>
+                        <th class="text-danger">OPEN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><i class="icon-badge text-warning"></i> New location</td>
+                        <td class="text-success"><i class="icon-lock"></i> 0</td>
+                        <td class="text-secondary"><i class="icon-reload"></i> 0</td>
+                        <td class="text-warning"><i class="icon-flag"></i> 0</td>
+                        <td class="text-danger"><i class="icon-lock"></i> 0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="dashboard-card-right bd-highlight rounded p-2 float-right">
+            <div class="flex">
+                <div class="flex-item">
+                    <div style="display: block;">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6>WO GRAPH FOR JAN 24 - FEB 24</h6>
+                            </div>
+                            <div>
+                                <a href="" class="text-small">Export to PDF</a>
+                            </div>
+                        </div>
+                        <h5 class="text-muted text-center">No Work Orders assigned to Location were closed in chosen
+                            period.</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <h4>Asset Assigned</h4>
+
+    <div class="d-inline">
+        <div class="dashboard-card-left bd-highlight rounded p-2">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h6>ASSET WO STATS FOR JAN 24 - FEB 24</h6>
+                </div>
+                <div>
+                    <input type="text" class="small-input" style="width: 200px;" placeholder="Search">
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>ASSET</th>
+                        <th class="text-success">CLOSED</th>
+                        <th class="text-secondary">IN PROGRESS</th>
+                        <th class="text-warning">ON HOLD</th>
+                        <th class="text-danger">OPEN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><i class="icon-badge text-warning"></i> New asset</td>
+                        <td class="text-success"><i class="icon-lock"></i> 0</td>
+                        <td class="text-secondary"><i class="icon-reload"></i> 0</td>
+                        <td class="text-warning"><i class="icon-flag"></i> 0</td>
+                        <td class="text-danger"><i class="icon-lock"></i> 0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="dashboard-card-right bd-highlight rounded p-2 float-right">
+            <div class="flex">
+                <div class="flex-item">
+                    <div style="display: block;">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6>WO GRAPH FOR JAN 24 - FEB 24</h6>
+                            </div>
+                            <div>
+                                <a href="" class="text-small">Export to PDF</a>
+                            </div>
+                        </div>
+                        <h5 class="text-muted text-center">No Work Orders assigned to Asset were closed in chosen
+                            period.</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <h4>Team Assigned</h4>
+
+    <div class="d-inline">
+        <div class="dashboard-card-left bd-highlight rounded p-2">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h6>TEAM WO STATS FOR JAN 24 - FEB 24</h6>
+                </div>
+                <div>
+                    <input type="text" class="small-input" style="width: 200px;" placeholder="Search">
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>TEAM</th>
+                        <th class="text-success">CLOSED</th>
+                        <th class="text-secondary">IN PROGRESS</th>
+                        <th class="text-warning">ON HOLD</th>
+                        <th class="text-danger">OPEN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><i class="icon-badge text-warning"></i> New team</td>
+                        <td class="text-success"><i class="icon-lock"></i> 0</td>
+                        <td class="text-secondary"><i class="icon-reload"></i> 0</td>
+                        <td class="text-warning"><i class="icon-flag"></i> 0</td>
+                        <td class="text-danger"><i class="icon-lock"></i> 0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="dashboard-card-right bd-highlight rounded p-2 float-right">
+            <div class="flex">
+                <div class="flex-item">
+                    <div style="display: block;">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6>WO GRAPH FOR JAN 24 - FEB 24</h6>
+                            </div>
+                            <div>
+                                <a href="" class="text-small">Export to PDF</a>
+                            </div>
+                        </div>
+                        <h5 class="text-muted text-center">No Work Orders assigned to Team were closed in chosen period.
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <h4>Category Assigned</h4>
+
+    <div class="d-inline">
+        <div class="dashboard-card-left bd-highlight rounded p-2">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h6>CATEGORY WO STATS FOR JAN 24 - FEB 24</h6>
+                </div>
+                <div>
+                    <input type="text" class="small-input" style="width: 200px;" placeholder="Search">
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>CATEGORY</th>
+                        <th class="text-success">CLOSED</th>
+                        <th class="text-secondary">IN PROGRESS</th>
+                        <th class="text-warning">ON HOLD</th>
+                        <th class="text-danger">OPEN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><i class="icon-badge text-warning"></i> New category</td>
+                        <td class="text-success"><i class="icon-lock"></i> 0</td>
+                        <td class="text-secondary"><i class="icon-reload"></i> 0</td>
+                        <td class="text-warning"><i class="icon-flag"></i> 0</td>
+                        <td class="text-danger"><i class="icon-lock"></i> 0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="dashboard-card-right bd-highlight rounded p-2 float-right">
+            <div class="flex">
+                <div class="flex-item">
+                    <div style="display: block;">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6>WO GRAPH FOR JAN 24 - FEB 24</h6>
+                            </div>
+                            <div>
+                                <a href="" class="text-small">Export to PDF</a>
+                            </div>
+                        </div>
+                        <h5 class="text-muted text-center">No Work Orders assigned to Category were closed in chosen
+                            period.</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <h4>Requests</h4>
+
+    <div class="d-inline">
+        <div class="dashboard-card-left bd-highlight rounded p-2">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h6>REQUESTED WO STATS FOR JAN 24 - FEB 24</h6>
+                </div>
+                <div>
+                    <input type="text" class="small-input" style="width: 200px;" placeholder="Search">
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>REQUESTER</th>
+                        <th class="text-primary">REQUESTS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Sam Smith</td>
+                        <td class="text-primary">Compressor replacement</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="dashboard-card-right bd-highlight rounded p-2 float-right">
+            <div class="flex">
+                <div class="flex-item">
+                    <div style="display: block;">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6>WO GRAPH FOR JAN 24 - FEB 24</h6>
+                            </div>
+                            <div>
+                                <a href="" class="text-small">Export to PDF</a>
+                            </div>
+                        </div>
+                        <h5 class="text-muted text-center">No Work Orders were requested in chosen period.</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <h4>Low Parts/Inventory</h4>
+    <div class="bd-highlight mt-2 p-2 rounded" style="height: 240px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 pt-4">
+                    <div class="card border">
+                        <h6 class="text-center pt-3">Out of Stock</h6>
+                        <hr>
+                        <h2 class="text-center text-danger">0</h2>
+                        <p class="text-center text-muted">Parts/Inventory</p>
+                    </div>
+                </div>
+                <div class="col-6 p-4">
+                    <div class="card border">
+                        <h6 class="text-center pt-3">Running Low</h6>
+                        <hr>
+                        <h2 class="text-center text-danger">0</h2>
+                        <p class="text-center text-muted">Parts/Inventory</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

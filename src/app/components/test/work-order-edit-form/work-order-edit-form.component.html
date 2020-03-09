@@ -1,0 +1,136 @@
+<div class="card-body p-4">
+    <mat-form-field>
+        <input matInput placeholder="Title" [value]="title">
+        <mat-error>This field is mandatory.</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput [value]="desc"></textarea>
+        <mat-hint align="end">Max length 500</mat-hint>
+    </mat-form-field>
+    <!-- non functional -->
+    <div class="row">
+        <div class="col-4">
+            <button mat-button (click)="fileInput.click()">
+                <span><i class="icon-camera mr-2"></i>Image</span>
+                <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />
+            </button>
+        </div>
+        <div class="col">
+            <mat-form-field style="font-size: small;">
+                <input matInput type="text" [value]="imagePath">
+            </mat-form-field>
+        </div>
+    </div>
+
+
+
+
+    <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Due Date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select placeholder="Repeating Schedule">
+            <mat-option *ngFor="let duration of durations" [value]="duration">
+                {{duration}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
+    <label>
+        <small class="text-muted">Priority:</small><br>
+        <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle value="none">None</mat-button-toggle>
+            <mat-button-toggle value="low">Low</mat-button-toggle>
+            <mat-button-toggle value="midium">Medium</mat-button-toggle>
+            <mat-button-toggle value="high">High</mat-button-toggle>
+        </mat-button-toggle-group>
+    </label>
+    <mat-form-field>
+        <mat-select placeholder="Category">
+            <mat-option *ngFor="let category of categories" [value]="category.id">{{category}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select placeholder="Worker">
+            <mat-option *ngFor="let worker of workerss" [value]="worker">{{worker}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Additional Workers</mat-label>
+        <mat-select multiple>
+            <mat-option *ngFor="let worker of workerss" [value]="worker">{{worker}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select placeholder="Team">
+            <mat-option *ngFor="let team of teams" [value]="team.id">{{team}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select placeholder="Location">
+            <mat-option *ngFor="let location of locations" [value]="location">{{location}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Asset</mat-label>
+        <mat-select multiple>
+            <mat-option *ngFor="let asset of assets" [value]="asset.id">{{asset}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Purchase Order">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Estimated Duration">
+    </mat-form-field>
+    <!-- <mat-form-field>
+            <input matInput placeholder="Image" formControlName="Images">
+        </mat-form-field> -->
+    <mat-card class="mb-2">
+        <div class="row">
+            <div class="col-2">
+                <i class="icon-notebook icon-md"></i>
+            </div>
+            <div class="col-7">
+                <small class="text-muted">Tasks</small><br>
+                <span style="font-size: 0.70em;"><em>Assign custom tasks for technician's to fill
+                        out</em></span>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"><i class="icon-pencil"
+                        (click)="showAddTasks = !showAddTasks;"></i></button>
+            </div>
+        </div>
+    </mat-card>
+    <mat-card class="mb-4">
+        <div class="row">
+            <div class="col-2">
+                <i class="icon-notebook icon-md"></i>
+            </div>
+            <div class="col-7">
+                <small class="text-muted">Files</small><br>
+                <span style="font-size: 0.70em;"><em>Attach a file to this work order</em></span>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"><i class="icon-plus"
+                        (click)="openFileDialog()"></i></button>
+            </div>
+        </div>
+    </mat-card>
+    <div class="row">
+        <div class="col-2">
+            <mat-slide-toggle></mat-slide-toggle>
+        </div>
+        <div class="col">
+            <small>Requires Signature</small><br>
+            <small class="text-muted"><em>Require technicians to upload a signature image in order to complete a
+                    work order</em></small>
+        </div>
+    </div>
+</div>
+
+<br>
+<button mat-raised-button class="w-100">Submit</button>

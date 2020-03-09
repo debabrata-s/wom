@@ -1,37 +1,65 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FormDataService {
-x_workOrderCategories=['Category1', 'Category2', 'Category3'];
-x_workers=['workera', 'workerb', 'workerc'];
-x_teams=['ateam','bteam','cteam'];
-x_locations=['loc_a', 'loc_b', 'loc_c'];
-x_assets=['a1','a2','a3','a4','a5'];
-x_purchaseOrders=['PO1','PO2','PO3','PO4'];
-x_repeatingSchedules=['schedule1','schedule2','schedule3']
-  constructor() { }
+export class FormDataService implements OnInit {
+  x_workOrderCategories = [];
+  x_workers = [];
+  x_teams = [];
+  x_locations = [];
+  x_assets = [];
+  x_purchaseOrders = [];
+  x_repeatingSchedules = []
 
-  getWorkOrderCategories(){
+  x_eventData = [
+    { id: 1, name: '1some event' },
+    { id: 2, name: '2some event' },
+    { id: 3, name: '3some event' },
+    { id: 4, name: '4some event' },
+    { id: 5, name: '5some event' },
+    { id: 6, name: '6some event' },
+  ]
+  constructor(private apiService: ApiService) {}
+  ngOnInit() {
+
+  }
+  populateLocationForm(){
+    return {
+      Title: ['tettewr'],
+      Address: ['nv'],
+      WorkerId: ['vzcx'],
+      TeamId: ['vzxc'],
+      VendorId: ['vzxc'],
+      CustomerId: ['vzxc'],
+      ParentLocationId: ['vzxc'],
+      customDataArray: [],
+      showMapCoordinate: ['vzxc']
+    }
+  }
+  
+
+
+  getWorkOrderCategories() {
     return this.x_workOrderCategories;
   }
-  getWorkers(){
+  getWorkers() {
     return this.x_workers;
   }
-  getTeams(){
+  getTeams() {
     return this.x_teams;
   }
-  getLocations(){
+  getLocations() {
     return this.x_locations;
   }
-  getAssets(){
+  getAssets() {
     return this.x_assets;
   }
-  getPurchaseOrders(){
+  getPurchaseOrders() {
     return this.x_purchaseOrders;
   }
-  getRepeatingSchedules(){
+  getRepeatingSchedules() {
     return this.x_repeatingSchedules
   }
 }

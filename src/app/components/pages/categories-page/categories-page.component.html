@@ -3,9 +3,9 @@
     <div class="page-header">
         <app-page-title [pageTitle]="pageTitle"></app-page-title>
     </div>
-    <div class="card card-secondary">
+    <div class="card card-secondary rounded">
         <div class="toolbar">
-            <div class="btn-group" role="group" aria-label="Basic example">
+            <div class="btn-group" role="group">
                 <button type="button" class="btn btn-outline-secondary btn-sm" [class.active]="viewMode == 'tab1'"
                     rel="tab1" (click)="viewMode ='tab1'">Work orders</button>
                 <button type="button" class="btn btn-outline-secondary btn-sm" [class.active]="viewMode == 'tab2'"
@@ -16,72 +16,191 @@
                     rel="tab4" (click)="viewMode ='tab4'">Meter</button>
             </div>
 
-            <!-- <div class="align-right">
-                <button type="button" class="btn btn-sm btn-danger btn-rounded btn-fw"
-                    [routerLink]="['category-form']">Category</button>
-            </div> -->
 
             <div class="align-right">
-                <button class="btn btn-sm btn-danger btn-rounded btn-fw" type="button" data-toggle="modal"
-                    data-target="#myModal">
-                    Category
-                </button>
-                <div class="modal fade" id="myModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-
-                            <div class="modal-header">
-                                <h4 class="modal-title">Add a new Category</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-                            <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label>
-                                            Category Name:
-                                        </label>
-                                        <input type="text" class="form-control" formControlName="categoryName">
-                                    </div>
-                                </div>
-
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-                                    <button class="btn btn-primary mr-2" type="submit">Submit</button>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
+                <button mat-flat-button (click)="openDialog()">+ Category</button>
             </div>
         </div>
     </div>
     <div class="main-content">
         <!-- demo content -->
         <div class="col-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
+            <div class="card rounded" style="height: 600px; background-color: #fafafa;">
+                <div class="card-body m-auto" style="width: 700px">
                     <div class="tab-slider--container" [ngSwitch]="viewMode">
-                        <div id="tab1" class="tab-slider--body" *ngSwitchCase="'tab1'">
-                            <ul>
-                                <li *ngFor=" let workOrderCategory of workOrderCategories">{{workOrderCategory}}</li>
-                            </ul>
+
+                        <div id="tab1" *ngSwitchCase="'tab1'">
+                            <h5>Categories</h5>
+                            <mat-card *ngFor=" let category of categories">
+                                {{category.CatName}}
+                            </mat-card>
+                            <mat-card class="mb-2" *ngFor=" let workOrderCategory of workOrderCategories">
+                                <div *ngIf="workOrderCategory.isflipped; else show">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <input type="text" class="small-input" style="width: 100%;"
+                                                    [value]="workOrderCategory.name">
+                                            </div>
+                                            <div class="col-4 text-right">
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    (click)="workOrderCategory.isflipped = !workOrderCategory.isflipped;">Save</button>
+                                                <button class="ml-2 btn btn-sm" style="border-radius: 45%;"
+                                                    (click)="workOrderCategory.isflipped = !workOrderCategory.isflipped;"><i
+                                                        class="material-icons">
+                                                        cancel
+                                                    </i></button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <ng-template #show>
+                                    {{workOrderCategory.name}}
+                                    <div class="dropdown float-right">
+                                        <a role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <i class="icon-options-vertical"></i>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item"
+                                                (click)="workOrderCategory.isflipped = !workOrderCategory.isflipped;">Rename</a>
+                                            <a class="dropdown-item" style="color: rgb(204, 0, 0);"
+                                                (click)="deleteCategory()">Delete</a>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </mat-card>
                         </div>
-                        <div id="tab2" class="tab-slider--body" *ngSwitchCase="'tab2'">
-                            <ul>
-                                <li *ngFor=" let assetStatus of assetStatus">{{assetStatus}}</li>
-                            </ul>
+
+                        <div id="tab2" *ngSwitchCase="'tab2'">
+                            <h5>Categories</h5>
+                            <mat-card *ngFor=" let category of categories">
+                                {{category.CatName}}
+                            </mat-card>
+                            <mat-card class="mb-2" *ngFor=" let item of assetStatus">
+                                <div *ngIf="item.isflipped; else show">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <input type="text" class="small-input" style="width: 100%;"
+                                                    [value]="item.name">
+                                            </div>
+                                            <div class="col-4 text-right">
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    (click)="item.isflipped = !item.isflipped;">Save</button>
+                                                <button class="ml-2 btn btn-sm" style="border-radius: 45%;"
+                                                    (click)="item.isflipped = !item.isflipped;"><i
+                                                        class="material-icons">
+                                                        cancel
+                                                    </i></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <ng-template #show>
+                                    {{item.name}}
+                                    <div class="dropdown show float-right">
+                                        <a role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <i class="icon-options-vertical"></i>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item"
+                                                (click)="item.isflipped = !item.isflipped;">Rename</a>
+                                            <a class="dropdown-item" style="color: rgb(204, 0, 0);"
+                                                (click)="deleteCategory()">Delete</a>
+                                        </div>
+                                    </div>
+
+                                </ng-template>
+                            </mat-card>
                         </div>
-                        <div id="tab3" class="tab-slider--body" *ngSwitchCase="'tab3'">
-                            <ul>
-                                <li *ngFor=" let purchaseOrder of purchaseOrders">{{purchaseOrder}}</li>
-                            </ul>
+                        <div id="tab3" *ngSwitchCase="'tab3'">
+                            <h5>Categories</h5>
+                            <mat-card *ngFor=" let category of categories">
+                                {{category.CatName}}
+                            </mat-card>
+                            <mat-card class="mb-2" *ngFor=" let purchaseOrder of purchaseOrders">
+                                <div *ngIf="purchaseOrder.isflipped; else show">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <input type="text" class="small-input" style="width: 100%;"
+                                                    [value]="purchaseOrder.name">
+                                            </div>
+                                            <div class="col-4 text-right">
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    (click)="purchaseOrder.isflipped = !purchaseOrder.isflipped;">Save</button>
+                                                <button class="ml-2 btn btn-sm" style="border-radius: 45%;"
+                                                    (click)="purchaseOrder.isflipped = !purchaseOrder.isflipped;"><i
+                                                        class="material-icons">
+                                                        cancel
+                                                    </i></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <ng-template #show>
+                                    {{purchaseOrder.name}}
+                                    <div class="dropdown show float-right">
+                                        <a role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <i class="icon-options-vertical"></i>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item"
+                                                (click)="purchaseOrder.isflipped=!purchaseOrder.isflipped;">Rename</a>
+                                            <a class="dropdown-item" style="color: rgb(204, 0, 0);"
+                                                (click)="deleteCategory()">Delete</a>
+                                        </div>
+                                    </div>
+
+                                </ng-template>
+                            </mat-card>
                         </div>
-                        <div id="tab4" class="tab-slider--body" *ngSwitchCase="'tab4'">
-                            <ul>
-                                <li *ngFor=" let meter of meters">{{meter}}</li>
-                            </ul>
+                        <div id="tab4" *ngSwitchCase="'tab4'">
+                            <h5>Categories</h5>
+                            <mat-card *ngFor=" let category of categories">
+                                {{category.CatName}}
+                            </mat-card>
+                            <mat-card class="mb-2" *ngFor=" let meter of meters">
+                                <div *ngIf="meter.isflipped; else show">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-10">
+                                                <input type="text" class="small-input" style="width: 100%;"
+                                                    [value]="meter.name">
+                                            </div>
+                                            <div class="col text-right">
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    (click)="meter.isflipped = !meter.isflipped;">Save</button>
+                                                <button class="ml-2 btn btn-sm" style="border-radius: 45%;"
+                                                    (click)="meter.isflipped = !meter.isflipped;"><i
+                                                        class="material-icons">
+                                                        cancel
+                                                    </i></button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <ng-template #show>
+                                    {{meter.name}}
+                                    <div class="dropdown show float-right">
+                                        <a role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <i class="icon-options-vertical"></i>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item"
+                                                (click)="meter.isflipped=!meter.isflipped;">Rename</a>
+                                            <a class="dropdown-item" style="color: rgb(204, 0, 0);"
+                                                (click)="deleteCategory()">Delete</a>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </mat-card>
                         </div>
 
                     </div>

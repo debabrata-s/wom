@@ -1,0 +1,353 @@
+<app-reports-page></app-reports-page>
+<div *ngIf="!showStats; else statsPage">
+  <mat-drawer-container>
+    <mat-drawer mode="side" opened>
+      <div class="card">
+        <div class="card-header">
+          <h5>Filter</h5>
+        </div>
+        <div class="card-body">
+          <mat-form-field>
+            <mat-label>Work order name/number</mat-label>
+            <input matInput placeholder="Search here">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Reactive/Repeating</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let status of status" [value]="status">
+                {{status}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Archived</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let item of archivedOptions" [value]="item">
+                {{item}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Priority</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let item of priorities" [value]="item">
+                {{item}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <hr>
+          <mat-form-field>
+            <mat-label>Created By</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let item of users" [value]="item">
+                {{item}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Assigned To</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let item of users" [value]="item">
+                {{item}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Team</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let item of teams" [value]="item">
+                {{item}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Additional Workers</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let item of users" [value]="item">
+                {{item}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Completed By</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let item of users" [value]="item">
+                {{item}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <hr>
+          <mat-form-field>
+            <mat-label>Location</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let item of locations" [value]="item">
+                {{item}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Asset</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let item of assets" [value]="item">
+                {{item}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Categories</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let item of categories" [value]="item">
+                {{item}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <hr>
+          <div class="text-muted text-sm">Due Date</div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field style="display:inline-block; width:120px">
+                <input matInput [matDatepicker]="picker7" placeholder="Start">
+                <mat-datepicker-toggle matSuffix [for]="picker7"></mat-datepicker-toggle>
+                <mat-datepicker #picker7></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field style="display:inline-block; width:120px">
+                <input matInput [matDatepicker]="picker8" placeholder="End">
+                <mat-datepicker-toggle matSuffix [for]="picker8"></mat-datepicker-toggle>
+                <mat-datepicker #picker8></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="text-muted text-sm">Date Created</div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field style="display:inline-block; width:120px">
+                <input matInput [matDatepicker]="picker1" placeholder="Start">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field style="display:inline-block; width:120px">
+                <input matInput [matDatepicker]="picker2" placeholder="End">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="text-muted text-sm">Date Completed</div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field style="display:inline-block; width:120px">
+                <input matInput [matDatepicker]="picker3" placeholder="Start">
+                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field style="display:inline-block; width:120px">
+                <input matInput [matDatepicker]="picker4" placeholder="End">
+                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                <mat-datepicker #picker4></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="text-muted text-sm">Date Last Updated</div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field style="display:inline-block; width:120px">
+                <input matInput [matDatepicker]="picker5" placeholder="Start">
+                <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                <mat-datepicker #picker5></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field style="display:inline-block; width:120px">
+                <input matInput [matDatepicker]="picker6" placeholder="End">
+                <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+                <mat-datepicker #picker6></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-drawer>
+    <mat-drawer-content style="height: 800px;">
+      <div class="m-2">
+        <div class="dashboard-card rounded" (click)="showStats=!showStats">
+          <div class="flag-card border">
+            <div style="height: 30%;"></div>
+            <h1 class="text-primary text-center display-2">0</h1>
+            <h6 class="text-center text-muted">Total Work Orders</h6>
+          </div>
+          <div class="d-flex" style="height: 100px;">
+            <div class="p-2 border flex-fill">
+              <p class="text-center text-small">None</p>
+              <div style="height: 45%;"></div>
+              <p class="text-center text-small font-weight-bold">0</p>
+            </div>
+            <div class="p-2 border flex-fill">
+              <p class="text-center text-small">Low</p>
+              <div style="height: 45%;"></div>
+              <p class="text-center text-small font-weight-bold">0</p>
+            </div>
+            <div class="p-2 border flex-fill">
+              <p class="text-center text-small">Medium</p>
+              <div style="height: 45%;"></div>
+              <p class="text-center text-small font-weight-bold">0</p>
+            </div>
+            <div class="p-2 border flex-fill">
+              <p class="text-center text-small">High</p>
+              <div style="height: 45%;"></div>
+              <p class="text-center text-small font-weight-bold">0</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <div class="dashboard-card rounded dashboard-card-50">
+            <div class="flag-card border">
+              <div style="height: 30%;"></div>
+              <h1 class="text-danger text-center display-2">0</h1>
+              <h6 class="text-center text-muted">Open</h6>
+            </div>
+            <div class="d-flex" style="height: 100px;">
+              <div class="p-2 border flex-fill">
+                <p class="text-center text-small">None</p>
+                <div style="height: 45%;"></div>
+                <p class="text-center text-small font-weight-bold">0</p>
+              </div>
+              <div class="p-2 border flex-fill">
+                <p class="text-center text-small">Low</p>
+                <div style="height: 45%;"></div>
+                <p class="text-center text-small font-weight-bold">0</p>
+              </div>
+              <div class="p-2 border flex-fill">
+                <p class="text-center text-small">Medium</p>
+                <div style="height: 45%;"></div>
+                <p class="text-center text-small font-weight-bold">0</p>
+              </div>
+              <div class="p-2 border flex-fill">
+                <p class="text-center text-small">High</p>
+                <div style="height: 45%;"></div>
+                <p class="text-center text-small font-weight-bold">0</p>
+              </div>
+            </div>
+          </div>
+          <div class="dashboard-card rounded dashboard-card-50 float-right">
+            <div class="flag-card border">
+              <div style="height: 30%;"></div>
+              <h1 class="text-muted text-center display-2">0</h1>
+              <h6 class="text-center text-muted">In Progress</h6>
+            </div>
+            <div class="d-flex" style="height: 100px;">
+              <div class="p-2 border flex-fill">
+                <p class="text-center text-small">None</p>
+                <div style="height: 45%;"></div>
+                <p class="text-center text-small font-weight-bold">0</p>
+              </div>
+              <div class="p-2 border flex-fill">
+                <p class="text-center text-small">Low</p>
+                <div style="height: 45%;"></div>
+                <p class="text-center text-small font-weight-bold">0</p>
+              </div>
+              <div class="p-2 border flex-fill">
+                <p class="text-center text-small">Medium</p>
+                <div style="height: 45%;"></div>
+                <p class="text-center text-small font-weight-bold">0</p>
+              </div>
+              <div class="p-2 border flex-fill">
+                <p class="text-center text-small">High</p>
+                <div style="height: 45%;"></div>
+                <p class="text-center text-small font-weight-bold">0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <div class="dashboard-card rounded dashboard-card-50">
+            <div class="flag-card border">
+              <div style="height: 30%;"></div>
+              <h1 class="text-warning text-center display-2">0</h1>
+              <h6 class="text-center text-muted">On Hold</h6>
+            </div>
+            <div class="d-flex" style="height: 100px;">
+              <div class="p-2 border flex-fill">
+                <p class="text-center text-small">None</p>
+                <div style="height: 45%;"></div>
+                <p class="text-center text-small font-weight-bold">0</p>
+              </div>
+              <div class="p-2 border flex-fill">
+                <p class="text-center text-small">Low</p>
+                <div style="height: 45%;"></div>
+                <p class="text-center text-small font-weight-bold">0</p>
+              </div>
+              <div class="p-2 border flex-fill">
+                <p class="text-center text-small">Medium</p>
+                <div style="height: 45%;"></div>
+                <p class="text-center text-small font-weight-bold">0</p>
+              </div>
+              <div class="p-2 border flex-fill">
+                <p class="text-center text-small">High</p>
+                <div style="height: 45%;"></div>
+                <p class="text-center text-small font-weight-bold">0</p>
+              </div>
+            </div>
+          </div>
+          <div class="dashboard-card rounded dashboard-card-50 float-right">
+            <div class="flag-card border">
+              <div style="height: 30%;"></div>
+              <h1 class="text-success text-center display-2">0</h1>
+              <h6 class="text-center text-muted">Closed</h6>
+            </div>
+            <div class="d-flex" style="height: 100px;">
+              <div class="p-2 border flex-fill">
+                <p class="text-center text-small">None</p>
+                <div style="height: 45%;"></div>
+                <p class="text-center text-small font-weight-bold">0</p>
+              </div>
+              <div class="p-2 border flex-fill">
+                <p class="text-center text-small">Low</p>
+                <div style="height: 45%;"></div>
+                <p class="text-center text-small font-weight-bold">0</p>
+              </div>
+              <div class="p-2 border flex-fill">
+                <p class="text-center text-small">Medium</p>
+                <div style="height: 45%;"></div>
+                <p class="text-center text-small font-weight-bold">0</p>
+              </div>
+              <div class="p-2 border flex-fill">
+                <p class="text-center text-small">High</p>
+                <div style="height: 45%;"></div>
+                <p class="text-center text-small font-weight-bold">0</p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <div class="dashboard-card rounded dashboard-card-50">
+              <div style="height: 30%;"></div>
+              <h1 class="text-muted text-center display-2">0</h1>
+              <h6 class="text-center text-muted">Waiting Approval</h6>
+            </div>
+            <div class="dashboard-card rounded dashboard-card-50 float-right">
+              <div style="height: 30%;"></div>
+              <h1 class="text-muted text-center display-2">0</h1>
+              <h6 class="text-center text-muted">Out of Stock</h6>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
+
+
+<ng-template #statsPage>
+  <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon m-2" (click)="showStats=!showStats">
+    <i class="icon-arrow-left-circle"></i>
+  </button>
+  <app-dashboard-stats-page></app-dashboard-stats-page>
+</ng-template>

@@ -1,0 +1,98 @@
+<mat-form-field>
+    <mat-label>Part Name</mat-label>
+    <input (keyup)="filterByName($event.target.value)" matInput>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Part Barcode</mat-label>
+    <input (keyup)="filterByBarcode($event.target.value)" matInput>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Part Area</mat-label>
+    <input (keyup)="filterByArea($event.target.value)" matInput>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Part Category</mat-label>
+    <input (keyup)="filterByArea($event.target.value)" matInput>
+</mat-form-field>
+<div class="text-muted text-sm">Additional Filter</div>
+<mat-checkbox [(ngModel)]="showOutOfStock" (change)="filterOutOfStock()">Show Out Of Stock Parts Only</mat-checkbox>
+<mat-checkbox [(ngModel)]="showMinQuantity" (change)="filterMinQuantityParts()">Show Reached Minimum Quantity Parts Only</mat-checkbox>
+<mat-checkbox [(ngModel)]="showCreatedByMe">Parts Created By You</mat-checkbox>
+<mat-checkbox [(ngModel)]="showNonStock">Show Non-stock Parts Only</mat-checkbox>
+
+
+<!-- on selection filter the data table -->
+<mat-form-field>
+    <mat-label>Facility Location</mat-label>
+    <mat-select (selectionChange)="filterByLocation(selectedLocation)" [(ngModel)]="selectedLocation">
+        <mat-option value="">no selection</mat-option>
+        <mat-option *ngFor="let facilityLocation of facilityLocations" [value]="facilityLocation.Title">
+            {{facilityLocation.Title}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Assigned Users</mat-label>
+    <mat-select (selectionChange)="filterByUser(selectedUser)" [(ngModel)]="selectedUser">
+        <mat-option value="">no selection</mat-option>
+        <mat-option *ngFor="let user of users" [value]="user.firstname+' '+user.lastname">
+            {{user.firstname}} {{user.lastname}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Assigned Teams</mat-label>
+    <mat-select (selectionChange)="filterByTeam(selectedTeam)" [(ngModel)]="selectedTeam">
+        <mat-option value="">no selection</mat-option>
+        <mat-option *ngFor="let team of teams" [value]="team.id">
+            {{team.Name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Assigned Vendors</mat-label>
+    <mat-select (selectionChange)="filterByVendor(selectedVendor)" [(ngModel)]="selectedVendor">
+        <mat-option value="">no selection</mat-option>
+        <mat-option *ngFor="let vendor of vendors" [value]="vendor.id">
+            {{vendor.CompanyName}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Assigned Customers</mat-label>
+    <mat-select (selectionChange)="filterByCustomer(selectedCustomer)" [(ngModel)]="selectedCustomer">
+        <mat-option value="">no selection</mat-option>
+        <mat-option *ngFor="let customer of customers" [value]="customer.id">
+            {{customer.CustomerName}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Assigned Assets</mat-label>
+    <mat-select (selectionChange)="filterByAsset(selectedCustomer)" [(ngModel)]="selectedAsset">
+        <mat-option value="">no selection</mat-option>
+        <mat-option *ngFor="let asset of assets" [value]="asset.title">
+            {{asset.title}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<!-- .Title -->
+
+<div class="text-muted text-sm">Date Created</div>
+
+<div class="row">
+    <div class="col">
+        <mat-form-field style="display:inline-block; width:110px">
+            <input matInput (dateChange)="filterByDate()" [matDatepicker]="picker" placeholder="Start" [(ngModel)]='startDate'>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col">
+        <mat-form-field style="display:inline-block; width:110px">
+            <input matInput (dateChange)="filterByDate()" [matDatepicker]="picker1" placeholder="End" [(ngModel)]='endDate'>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>

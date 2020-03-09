@@ -1,0 +1,111 @@
+.text-fixed h4{
+    text-align: Center !important;
+    font-weight: 600;
+}
+.r-20{
+    text-align: center !important;
+}
+.form-control
+{
+    margin: 10px 0;
+    background: #e9ecef;
+    height: 40px;
+}
+.center
+{
+    text-align: center;
+}
+.m_t_20
+{
+    margin-top: 20px;
+}
+.m_t_35
+{
+    margin-top: 30px;
+}
+.m_t_50
+{
+    margin-top: 50px;
+}
+.m_t_30
+{
+    margin-top: 90px;
+}
+.form-control::placeholder
+{
+    color: #495057;
+}
+.m_r_5
+{
+    margin-right: 6px;
+}
+
+.padding_5
+{
+    padding: 6px;
+}
+.bg_radius
+{
+    background: #1bdbe0;
+    border-radius: 35px;
+    padding: 18px;
+    color:#fff;
+    margin-bottom: 20px;
+    font-size: 30px;
+  
+}
+.bg_twit
+{
+    background: transparent;
+    border: 1px solid #1bdbe0;
+    border-radius: 35px;
+    padding: 15px;
+    color:#1bdbe0;
+    margin-bottom: 20px;
+    font-size: 25px;
+    margin: 15px;
+    cursor: pointer;
+}
+.bg_twit:hover
+{
+    background: #1bdbe0;
+    color: #fff;
+}
+.bg_facebook
+{
+    background: transparent;
+    border: 1px solid #3b5998;
+    border-radius: 35px;
+    padding: 15px;
+    color:#3b5998;
+    margin-bottom: 20px;
+    font-size: 25px;
+    margin: 15px;
+    cursor: pointer;
+}
+.bg_facebook:hover
+{
+    background: #3b5998;
+    color: #fff;
+}
+.bg_linkedin
+{
+    background: transparent;
+    border: 1px solid #0e76a8;
+    border-radius: 35px;
+    padding: 15px;
+    color:#0e76a8;
+    margin-bottom: 20px;
+    font-size: 25px;
+    margin: 15px;
+    cursor: pointer;
+}
+.bg_linkedin:hover
+{
+    background: #0e76a8;
+    color: #fff;
+}
+.m_t_35
+{
+    margin-top: 35px;
+}

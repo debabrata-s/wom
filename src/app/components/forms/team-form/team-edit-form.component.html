@@ -1,0 +1,15 @@
+<div>
+  <h4>Edit Team Users</h4>
+  <small class="text-muted">Click on the list below to select people to add to the team</small>
+  <form [formGroup]="teamEditForm" (ngSubmit)="onSubmit()">
+    <div class="card p-3">
+      <mat-form-field appearance="outline">
+        <mat-label>People in the team</mat-label>
+        <mat-select formControlName="peopleInTeam" multiple>
+          <mat-option *ngFor="let worker of workers" [value]="worker">{{worker}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button [disabled]="teamEditForm.invalid">Update</button>
+    </div>
+  </form>
+</div>

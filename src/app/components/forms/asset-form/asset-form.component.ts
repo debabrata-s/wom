@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { AddFilesDialogFormComponent } from '../../detail-components/dialog-forms/add-files-dialog-form/add-files-dialog-form.component';
+import { SelectFileDialogComponent } from '../../detail-components/dialog-forms/select-file-dialog/select-file-dialog.component';
+import { DrawerService } from 'src/app/services/drawer.service';
 
 @Component({
   selector: 'app-asset-form',
@@ -8,14 +12,21 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class AssetFormComponent implements OnInit {
   assetForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  assets = ['a1', 'a2', 'a3', 'a4'];
+  workers = ['w1', 'w2', 'w3', 'w4', 'w5'];
+  teams = ['t1', 't2', 't3'];
+  vendors = ['v1', 'v2', 'v3', 'v4', 'v5'];
+  customers = ['c1', 'c2', 'c3', 'c4', 'c5'];
+  dataArray = [];
+  customDataArray: FormArray;
+  constructor(private fb: FormBuilder, public dialog: MatDialog, private drawerService: DrawerService) { }
 
   ngOnInit() {
     this.assetForm = this.fb.group({
       image: [''],
       title: [''],
       desc: [''],
-      track: [''],
+      track: [false],
       model: [''],
       barcode: [''],
       category: [''],
@@ -23,9 +34,9 @@ export class AssetFormComponent implements OnInit {
       area: [''],
       parentAsset: [''],
       worker: [''],
-      additionalWorker: [''],
+      additionalWorkers: [''],
       team: [''],
-      vendors: [''],
+      vendor: [''],
       customer: [''],
       purchaseDate: [''],
       placedInService: [''],
@@ -34,14 +45,35 @@ export class AssetFormComponent implements OnInit {
       residualPrice: [''],
       usefulLife: [''],
       additionalInformation: [''],
-      file: ['']
-      
+      file: [''],
+      customDataArray: this.fb.array(this.dataArray),
+
     });
+  }
+  createCustomData() {
+    return this.fb.group({
+      name: [''],
+      value: [''],
+      unit: ['']
+    })
+  }
+  addCustomData() {
+    this.customDataArray = <FormArray>this.assetForm.get('customDataArray');
+    this.customDataArray.push(this.createCustomData());
+  }
+  removeCustomData(i) {
+    this.dataArray.splice(i, 1);
+    this.customDataArray.removeAt(i);
   }
   onSubmit() {
     console.log(this.assetForm);
     console.log('Saved: ' + JSON.stringify(this.assetForm.value));
   }
-
+  openFileDialog() {
+    const dialogRef = this.dialog.open(SelectFileDialogComponent)
+  }
+  closeDrawer() {
+    this.drawerService.toggleStatus();
+  }
 
 }

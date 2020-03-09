@@ -1,0 +1,438 @@
+<app-reports-page></app-reports-page>
+<div class="card-body">
+    <div class="d-flex flex-row bd-highlight mt-2 p-2 rounded">
+        <div class="p-2">
+            <h5>KPI Dashboard</h5>
+            <small>Last update 3 hours ago</small>
+        </div>
+        <div class="vertical-divider"></div>
+        <div class="p-2">
+            <input type="text" ngxDaterangepickerMd [(ngModel)]="selected" class="form-control"
+                style="width: 210px; border-radius: 5px; font-weight: 700; font-size: .85em;"
+                placeholder="Select interval" />
+        </div>
+    </div>
+    <div class="mt-2">
+        <div class="dashboard-card bd-highlight shadow-sm p-2">
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <h6>Completed work orders grouped by Completed by</h6>
+                    <small class="text-muted"><i class="icon-calendar"></i> Jan 25, 2020 - Feb 24, 2020</small>
+                </div>
+                <div>
+                    <i class="icon-info text-muted"
+                        matTooltip="This module shows the breakdown of all completed work orders grouped by the users who completed each work order. The user who changes the work order status to “Complete” is considered the user to complete a work order."></i>
+                </div>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <h6 class="text-sm">COMPLETED WORK ORDERS</h6>
+                </div>
+                <div><a href="">0</a></div>
+            </div>
+            <hr>
+            <div style="display: block">
+                <canvas baseChart [data]="completedChartData" [labels]="completedChartLabels"
+                    [chartType]="doughnutChartType">
+                </canvas>
+            </div>
+        </div>
+        <div class="dashboard-card bd-highlight shadow-sm p-2 float-right">
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <h6>Completed work orders grouped by Users Assigned to</h6>
+                    <small class="text-muted"><i class="icon-calendar"></i> Jan 25, 2020 - Feb 24, 2020</small>
+                </div>
+                <div>
+                    <i class="icon-info text-muted" matTooltip="This module shows the breakdown of all completed work orders grouped by user assigned as the main worker. This is the user selected under “Assigned To” in a work order."></i>
+                </div>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <h6 class="text-sm">COMPLETED WORK ORDERS</h6>
+                </div>
+                <div><a href="">0</a></div>
+            </div>
+            <hr>
+            <div style="display: block">
+                <canvas baseChart [data]="userChartData" [labels]="userChartLabels" [chartType]="doughnutChartType">
+                </canvas>
+            </div>
+        </div>
+    </div>
+    <div class="mt-2">
+        <div class="dashboard-card bd-highlight shadow-sm p-2">
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <h6>Reactive Maintenance Compliance</h6>
+                    <small class="text-muted"><i class="icon-calendar"></i> Jan 25, 2020 - Feb 24, 2020</small>
+                </div>
+                <div>
+                    <i class="icon-info text-muted" matTooltip="This module shows the percentage of reactive work orders that were completed before or on the due date."></i>
+                </div>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <h6 class="text-sm">REACTIVE WORK ORDERS</h6>
+                </div>
+                <div><a href="">0</a></div>
+            </div>
+            <hr>
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <div style="height: 25%;"></div>
+                        <div class="text-center">
+                            <span class="display-2 text-primary">1</span>
+                            <span class="h6 text-muted">/2</span><br>
+                            <h6 class="text-muted">WORK ORDER WITH DUE DATE COMPLETED ON TIME</h6>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        <app-recharts-half-doughnut></app-recharts-half-doughnut>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-card bd-highlight shadow-sm p-2 float-right">
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <h6>Repeating Maintenance Compliance</h6>
+                    <small class="text-muted"><i class="icon-calendar"></i> Jan 25, 2020 - Feb 24, 2020</small>
+                </div>
+                <div>
+                    <i class="icon-info text-muted" matTooltip="This module shows the percentage of repeating work orders that were completed before or on the due date."></i>
+                </div>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <h6 class="text-sm">REPEATING WORK ORDERS</h6>
+                </div>
+                <div><a href="">0</a></div>
+            </div>
+            <hr>
+            <div class="text-center" style="margin-top: 7%;">
+                <h5 class="text-muted"> <i class="material-icons">
+                        timeline
+                    </i> No data found for the applied date range.</h5>
+            </div>
+        </div>
+    </div>
+    <div class="mt-2">
+        <div class="dashboard-card bd-highlight shadow-sm p-2">
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <h6>Completed WOs grouped by Categories</h6>
+                    <small class="text-muted"><i class="icon-calendar"></i> Jan 25, 2020 - Feb 24, 2020</small>
+                </div>
+                <div>
+                    <i class="icon-info text-muted" matTooltip="This module shows the breakdown of all completed work orders grouped by the Category assigned."></i>
+                </div>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <h6 class="text-sm">WORK ORDERS COMPLETED</h6>
+                </div>
+                <div><a href="">0</a></div>
+            </div>
+            <hr>
+            <div style="display: block">
+                <canvas baseChart [data]="categoriesChartData" [labels]="categoriesChartLabels"
+                    [chartType]="doughnutChartType">
+                </canvas>
+            </div>
+        </div>
+        <div class="dashboard-card bd-highlight shadow-sm p-2 float-right">
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <h6>Completed WOs grouped by Priority</h6>
+                    <small class="text-muted"><i class="icon-calendar"></i> Jan 25, 2020 - Feb 24, 2020</small>
+                </div>
+                <div>
+                    <i class="icon-info text-muted" matTooltip="This module shows the breakdown of all completed work orders grouped by the Priority assigned."></i>
+                </div>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <h6 class="text-sm">WORK ORDERS COMPLETED</h6>
+                </div>
+                <div><a href="">0</a></div>
+            </div>
+            <hr>
+            <div style="display: block">
+                <canvas baseChart [data]="priorityChartData" [labels]="priorityChartLabels"
+                    [chartType]="doughnutChartType">
+                </canvas>
+            </div>
+        </div>
+    </div>
+    <div class="full-dashboard-card bd-highlight shadow-sm mt-2">
+        <div class="d-flex justify-content-between p-2">
+            <div>
+                <h6>Estimated Time vs Actual Time Spent</h6>
+                <small class="text-muted"><i class="icon-calendar"></i> Jan 25, 2020 - Feb 24, 2020</small>
+            </div>
+            <div>
+                <i class="icon-info text-muted" matTooltip="This module shows the aggregated total estimated time versus the aggregated total actual time spent. The estimated time is entered in the “Estimated Duration” field when creating a work order. The actual time spent is the recorded time captured by the work order timer or added itemized time."></i>
+            </div>
+        </div>
+        <hr>
+        <div class="container">
+            <div class="row" style="height: 350px;">
+                <div class="col-6 border-right">
+                    <div class="p-2">
+                        <span class="h6 text-muted">COMPLETED WORK ORDERS THAT HAVE TIME INPUTED</span>
+                        <a href="" class="float-right">2</a>
+                    </div>
+                    <hr>
+                    <div class="container">
+                        <div class="row" style="height: 270px;">
+                            <div class="col-6 text-center" style="margin-top: 20%;">
+                                <span class="h2">0</span><span class="text-muted mr-2">h</span>
+                                <span class="h2">0</span><span class="text-muted">m</span>
+                                <br>
+                                <h6 class="text-muted">ESTIMATE TIME</h6>
+                            </div>
+                            <div class="col-6 text-center" style="margin-top: 20%;">
+                                <span class="h2">0</span><span class="text-muted mr-2">h</span>
+                                <span class="h2">0</span><span class="text-muted">m</span>
+                                <br>
+                                <h6 class="text-muted">ACTUAL TIME</h6>
+                            </div>
+                        </div>
+                        <div class="text-center text-small p-2 rounded bg-secondary"><i class="icon-clock"></i> 1 out of
+                            2 work orders have no time added</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="p-2 bg-secondary">
+                        <div class="d-inline"></div>
+                        <div class="d-inline text-muted">
+                            <small>Your Maintenance Efficiency Score is calculated using the total actual time you spent
+                                on work orders and the total available work hours.</small>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <app-recharts-half-doughnut></app-recharts-half-doughnut>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="full-dashboard-card bd-highlight shadow-sm mt-2">
+        <div class="d-flex justify-content-between p-2">
+            <div>
+                <h6>Reactive Maintenance vs Repeating Maintenance</h6>
+                <small class="text-muted"><i class="icon-calendar"></i> Jan 25, 2020 - Feb 24, 2020</small>
+            </div>
+            <div>
+                <i class="icon-info text-muted" matTooltip="This module compares how many of your completed work orders were reactive versus repeating."></i>
+            </div>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between p-2">
+            <div>
+                <h6 class="text-sm">COMPLETED WORK ORDERS</h6>
+            </div>
+            <div><a href="">2</a></div>
+        </div>
+        <hr>
+        <div class="container">
+            <div class="row" style="height: 350px;">
+                <div class="col-6 border-right">
+                    <div style="height: 25%;"></div>
+                    <div class="row">
+                        <div class="col-6 text-center">
+                            <h2 class="text-primary">0</h2>
+                            <span class="h6 text-muted">COMPLETED REPEATING WORK ORDERS</span>
+                        </div>
+                        <div class="col-6 text-center">
+                            <h2 class="text-primary">2</h2>
+                            <span class="h6 text-muted">COMPLETED REACTIVE WORK ORDERS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 text-center">
+                    <app-recharts-half-doughnut></app-recharts-half-doughnut>
+                    <div class="p-2 rounded bg-secondary text-small">0 of work orders completed between Jan 28, 2020 and
+                        Feb 27, 2020 were repeating work orders.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="full-dashboard-card bd-highlight shadow-sm mt-2">
+        <div class="d-flex justify-content-between p-2">
+            <div>
+                <h6>Completed Work Order Costs</h6>
+                <small class="text-muted"><i class="icon-calendar"></i> Jan 25, 2020 - Feb 24, 2020</small>
+            </div>
+            <div>
+                <i class="icon-info text-muted" matTooltip="This module shows the aggregated total cost for all completed work orders which had additional cost and/or parts cost inputted."></i>
+            </div>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between p-2">
+            <div>
+                <h6 class="text-sm">COMPLETED WORK ORDERS</h6>
+            </div>
+            <div><a href="">0</a></div>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-around text-center" style="margin-top: 50px;">
+            <div><span class="h2">$0</span><br><span class="text-muted">ADDITIONAL COSTS</span></div>
+            <div class="h2 text-muted">+</div>
+            <div><span class="h2">$0</span><br><span class="text-muted">PARTS COSTS</span></div>
+            <div class="h2 text-muted">=</div>
+            <div><span class="h2">$0</span><br><span class="text-muted">TOTAL COSTS</span></div>
+        </div>
+        <div class="p-2 text-small text-muted bg-secondary rounded text-center" style="margin-top: 92px;">2 out of 2
+            completed work orders have no cost</div>
+    </div>
+    <div class="full-dashboard-card bd-highlight shadow-sm mt-2">
+        <div class="d-flex justify-content-between p-2">
+            <div>
+                <h6>Parts Consumption</h6>
+                <small class="text-muted"><i class="icon-calendar"></i> Jan 25, 2020 - Feb 24, 2020</small>
+            </div>
+            <div>
+                <i class="icon-info text-muted" matTooltip="This module shows the aggregated total parts consumed and parts cost used for all completed work orders in the date range selected."></i>
+            </div>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between p-2">
+            <div>
+                <h6 class="text-sm">COMPLETED WORK ORDERS THAT REQUIRED PARTS</h6>
+            </div>
+            <div><a href="">0</a></div>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-around text-center" style="margin-top: 50px;">
+            <div><span class="h2">0</span><br><span class="text-muted">NUMBER OF PARTS CONSUMED</span></div>
+            <div><span class="h2">$0</span><br><span class="text-muted">TOTAL PARTS COST USED</span></div>
+        </div>
+    </div>
+    <div class="mt-2">
+        <div class="dashboard-card bd-highlight shadow-sm p-2">
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <h6>Reactive Work Orders</h6>
+                    <small class="text-muted"><i class="icon-calendar"></i> Jan 25, 2020 - Feb 24, 2020</small>
+                </div>
+                <div>
+                    <i class="icon-info text-muted" matTooltip="This module shows the aggregated total parts consumed and parts cost used for all completed work orders in the date range selected."></i>
+                </div>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <h6 class="text-sm">COMPLETED REACTIVE WORK ORDERS</h6>
+                </div>
+                <div><a href="">0</a></div>
+            </div>
+            <hr>
+            <div style="display: block">
+                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                    [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+                </canvas>
+            </div>
+        </div>
+        <div class="dashboard-card bd-highlight shadow-sm p-2 float-right">
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <h6>Repeating Work Orders</h6>
+                    <small class="text-muted"><i class="icon-calendar"></i> Jan 25, 2020 - Feb 24, 2020</small>
+                </div>
+                <div>
+                    <i class="icon-info text-muted" matTooltip="This module shows the breakdown of all completed work orders grouped by the users who completed each work order. The user who changes the work order status to “Complete” is considered the user to complete a work order."></i>
+                </div>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <h6 class="text-sm">COMPLETED REPEATING WORK ORDERS</h6>
+                </div>
+                <div><a href="">0</a></div>
+            </div>
+            <hr>
+            <div class="text-center" style="margin-top: 20%;">
+                <h5 class="text-muted"> <i class="material-icons">
+                        timeline
+                    </i> No data found for the applied date range.</h5>
+            </div>
+        </div>
+    </div>
+    <div class="full-dashboard-card bd-highlight shadow-sm mt-2">
+        <div class="d-flex justify-content-between p-2">
+            <div>
+                <h6>Requests created</h6>
+                <small class="text-muted"><i class="icon-calendar"></i> Jan 25, 2020 - Feb 24, 2020</small>
+            </div>
+            <div>
+                <i class="icon-info text-muted" matTooltip="This module shows, the percentage of completed reactive work orders that has Assigned Users, Assigned Location, Cost logged, Assigned Due Date, Required Parts, Assigned Category, Time logged, and Assigned Asset"></i>
+            </div>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between p-2">
+            <div>
+                <h6 class="text-sm">TOTAL REQUESTS</h6>
+            </div>
+            <div><a href="">0</a></div>
+        </div>
+        <hr>
+        <div class="text-center" style="margin-top: 7%;">
+            <h5 class="text-muted"> <i class="material-icons">
+                    timeline
+                </i> No data found for the applied date range.</h5>
+        </div>
+    </div>
+    <div class="full-dashboard-card bd-highlight shadow-sm mt-2">
+        <div class="d-flex justify-content-between p-2">
+            <div>
+                <h6>Asset Downtime</h6>
+                <small class="text-muted"><i class="icon-calendar"></i> Jan 25, 2020 - Feb 24, 2020</small>
+            </div>
+            <div>
+                <i class="icon-info text-muted" matTooltip="This module shows the aggregated total downtime for all assets."></i>
+            </div>
+        </div>
+        <hr>
+        <div class="text-center" style="margin-top: 7%;">
+            <h5 class="text-muted"> <i class="material-icons">
+                    timeline
+                </i> No data found for the applied date range.</h5>
+        </div>
+    </div>
+    <div class="full-dashboard-card bd-highlight shadow-sm mt-2">
+        <div class="d-flex justify-content-between p-2">
+            <div>
+                <h6>Assets Coverage - Repeating Maintenance</h6>
+                <small class="text-muted"><i class="icon-calendar"></i> Jan 25, 2020 - Feb 24, 2020</small>
+            </div>
+            <div>
+                <i class="icon-info text-muted" matTooltip="This module shows the percentage of asset that have at least 1 or more repeating schedules assigned."></i>
+            </div>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between p-2">
+            <div>
+                <h6 class="text-sm">REPEATING WORK ORDERS</h6>
+            </div>
+            <div><a href="">0</a></div>
+        </div>
+        <hr>
+        <div class="text-center" style="margin-top: 7%;">
+            <h5 class="text-muted"> <i class="material-icons">
+                    timeline
+                </i> No data found for the applied date range.</h5>
+        </div>
+    </div>
+
+</div>

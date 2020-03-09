@@ -1,0 +1,9 @@
+<form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+    <h4>Add Category</h4>
+    <br>
+    <mat-form-field>
+        <input matInput placeholder="Category Name" formControlName="categoryName">
+    </mat-form-field>
+    <button mat-button type="submit">Add</button>
+    <button mat-button type="button" (click)="dialogRef.close()">Cancel</button>
+</form>

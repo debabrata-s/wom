@@ -18,103 +18,101 @@
         </li>
 
         <!-- sidenav lists -->
-        <li class="nav-item nav-category">
-            <span class="nav-link">></span>
-        </li>
-        <li class="nav-item">
+        <br>
+        <li class="nav-item" [ngClass]="{'active': isActive === 1}" (click)=" toggleIsActive()">
             <a class="nav-link" routerLink="work-orders">
                 <span class="menu-title">Work Orders</span>
                 <i class=" icon-book-open menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink="reports">
+        <li class="nav-item" [ngClass]="{'active': isActive === 2}" (click)=" toggleIsActive()">
+            <a class="nav-link" routerLink="reports/leaderboard">
                 <span class="menu-title">Reports</span>
                 <i class="icon-graph menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" [ngClass]="{'active': isActive === 3}" (click)=" toggleIsActive()">
             <a class="nav-link" routerLink="requests">
                 <span class="menu-title">Requests</span>
                 <i class=" icon-drawer menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" [ngClass]="{'active': isActive === 4}" (click)=" toggleIsActive()">
             <a class="nav-link" routerLink="shared-work-order">
                 <span class="menu-title">Shared Work Order</span>
                 <i class="icon-share-alt menu-icon"></i>
             </a>
         </li>
+        <br>
 
-        <li class="nav-item nav-category">
-            <span class="nav-link">></span>
-        </li>
-        <li class="nav-item">
+        <li class="nav-item" [ngClass]="{'active': isActive === 5}" (click)="toggleIsActive()">
             <a class="nav-link" routerLink="locations">
                 <span class="menu-title">Locations</span>
                 <i class="icon-location-pin menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" [ngClass]="{'active': isActive === 6}" (click)="toggleIsActive()">
             <a class="nav-link" routerLink="assets">
                 <span class="menu-title">Assets</span>
                 <i class="icon-chemistry menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink="parts">
+        <li class="nav-item" [ngClass]="{'active': isActive === 7}" (click)="toggleIsActive()">
+            <a class="nav-link" routerLink="inventory/parts">
                 <span class="menu-title">Parts/Inventory</span>
                 <i class="icon-wrench menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" [ngClass]="{'active': isActive === 8}" (click)="toggleIsActive()">
             <a class="nav-link" routerLink="purchase-orders">
                 <span class="menu-title">Purchase Orders</span>
                 <i class="icon-book-open menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" [ngClass]="{'active': isActive === 9}" (click)="toggleIsActive()">
             <a class="nav-link" routerLink="meters">
                 <span class="menu-title">Meters</span>
                 <i class="icon-speedometer menu-icon"></i>
             </a>
         </li>
 
-        <li class="nav-item nav-category">
-            <span class="nav-link">></span>
-        </li>
-        <li class="nav-item">
+        <br>
+        <li class="nav-item" [ngClass]="{'active': isActive === 10}" (click)="toggleIsActive()">
             <a class="nav-link" routerLink="people">
                 <span class="menu-title">People & Teams</span>
                 <i class="icon-people menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" [ngClass]="{'active': isActive === 11}" (click)="toggleIsActive()">
             <a class="nav-link" routerLink="vendors">
                 <span class="menu-title">Vendors & Customers</span>
                 <i class="icon-people menu-icon"></i>
             </a>
         </li>
 
-        <li class="nav-item nav-category">
-            <span class="nav-link">></span>
-        </li>
-        <li class="nav-item">
+        <br>
+        <li class="nav-item" [ngClass]="{'active': isActive === 12}" (click)="toggleIsActive()">
             <a class="nav-link" routerLink="categories">
                 <span class="menu-title">Categories</span>
                 <i class="icon-tag menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" [ngClass]="{'active': isActive === 13}" (click)="toggleIsActive()">
             <a class="nav-link" routerLink="files">
                 <span class="menu-title">Files</span>
                 <i class="icon-docs menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" [ngClass]="{'active': isActive === 14}" (click)="toggleIsActive()">
             <a class="nav-link" routerLink="request-portal">
                 <span class="menu-title">Request Portal</span>
                 <i class="icon-drawer menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item" [ngClass]="{'active': isActive === 15}" (click)="isActive = 15">
+            <a class="nav-link" routerLink="faq">
+                <span class="menu-title">FAQ</span>
+                <i class="icon-question menu-icon"></i>
             </a>
         </li>
 
@@ -123,12 +121,9 @@
         <a href="/settings" style="color: inherit; text-decoration:none;"><i class="icon-settings icon-lg"></i></a>
     </div> -->
     <div class="d-flex justify-content-around">
-        <div class="p-2"><a href="/settings" style="color: inherit; text-decoration:none;"><i
+        <div class="p-2 pb-5"><a routerLink="/settings" style="color: grey; text-decoration:none;" (click)="isActive = -1"><i
                     class="icon-settings icon-md"></i></a></div>
-        <div class="p-2"><a href="/contact-info" style="color: inherit; text-decoration:none;"><i
+        <div class="p-2"><a href="/contact-info" style="color: grey; text-decoration:none;"><i
                     class="icon-info icon-md"></i></a></div>
     </div>
-
-
-
 </nav>

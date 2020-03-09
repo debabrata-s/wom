@@ -1,193 +1,212 @@
-<div class="content-wrapper">
-    <div class="card">
-        <div class="card-body">
-            <form [formGroup]="assetForm" (ngSubmit)="onSubmit()">
-
-                <div class="form-group">
-                    <label>
-                        Add an Image:
-                    </label>
-                    <input type="text" class="form-control" formControlName="image">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Title:
-                    </label>
-                    <input type="text" class="form-control" formControlName="title">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Description:
-                    </label>
-                    <input type="text" class="form-control" formControlName="desc">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Track Check-in/Check-out:
-                    </label>
-                    <input type="text" class="form-control" formControlName="track">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Model:
-                    </label>
-                    <input type="text" class="form-control" formControlName="model">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Barcode:
-                    </label>
-                    <input type="text" class="form-control" formControlName="barcode">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Category:
-                    </label>
-                    <input type="text" class="form-control" formControlName="category">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Location:
-                    </label>
-                    <input type="text" class="form-control" formControlName="location">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Area:
-                    </label>
-                    <input type="text" class="form-control" formControlName="area">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Parent Asset:
-                    </label>
-                    <input type="text" class="form-control" formControlName="parentAsset">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Worker:
-                    </label>
-                    <input type="text" class="form-control" formControlName="worker">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Additional Worker:
-                    </label>
-                    <input type="text" class="form-control" formControlName="additionalWorker">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Team:
-                    </label>
-                    <input type="text" class="form-control" formControlName="team">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Vendors:
-                    </label>
-                    <input type="text" class="form-control" formControlName="vendors">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Customers:
-                    </label>
-                    <input type="text" class="form-control" formControlName="customer">
-                </div>
-
-                <!-- <div class="form-group">
-                    
-                    <mat-form-field class="example-full-width">
-                        <input matInput [matDatepicker]="picker" placeholder="Purchase Date" formControlName="purchaseDate">
-                        <mat-datepicker-toggle matSuffix [for]="picker">
-                          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                        </mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                      </mat-form-field>
-                      
-                </div> -->
-                <div class="form-group">
-                        <label>
-                          Purchase Date:
-                        </label>
-                        <div class="input-group date">
-                          <div class="d-inline">
-                            <input [matDatepicker]="picker" type="text" class="form-control" formControlName="purchaseDate">
-                          </div>
-                          <div class="d-inline">
-                            <mat-datepicker-toggle matSuffix [for]="picker">
-                              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                            </mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                          </div>
-                        </div>
-                      </div>
-
-                <div class="form-group">
-                    <label>
-                        Placed in Service:
-                    </label>
-                    <input type="text" class="form-control" formControlName="placedInService">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Purchase Price:
-                    </label>
-                    <input type="text" class="form-control" formControlName="purchasePrice">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Warranty Expiration:
-                    </label>
-                    <input type="text" class="form-control" formControlName="warrantyExpiration">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Residual Price:
-                    </label>
-                    <input type="text" class="form-control" formControlName="residualPrice">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Useful Life:
-                    </label>
-                    <input type="text" class="form-control" formControlName="usefulLife">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Additional Information:
-                    </label>
-                    <input type="text" class="form-control" formControlName="additionalInformation">
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Add a file:
-                    </label>
-                    <input type="text" class="form-control" formControlName="file">
-                </div>
-
-
-                <button class="btn btn-primary mr-2" type="submit">Submit</button>
-            </form>
-        </div>
+<div class="card rounded">
+    <div class="card-header">
+        <h4>Add Assets</h4>
     </div>
+    <form [formGroup]="assetForm" (ngSubmit)="onSubmit()">
+        <div class="card-body">
+            <div class="form-group">
+                <label>
+                    Add an Image:
+                </label>
+                <div class="drop-zone">
+                </div>
+            </div>
+            <mat-form-field>
+                <mat-label>
+                    Title
+                </mat-label>
+                <input matInput formControlName="title">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>
+                    Description
+                </mat-label>
+                <textarea matInput placeholder="A detailed description about the work order..."
+                    formControlName="desc"></textarea>
+            </mat-form-field>
+            <small>Track Check-in/Check-out</small>
+            <div class="form-group">
+                <!-- <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" formControlName="track"> Track
+                                    Check-in/Check-out
+                                </label>
+                            </div> -->
+
+                <mat-checkbox formControlName="track"><small class="text-muted">Use WOM to track and manage check-ins
+                        and check-outs for this asset.</small></mat-checkbox>
+            </div>
+            <mat-form-field>
+                <mat-label>
+                    Model
+                </mat-label>
+                <input matInput formControlName="model">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>
+                    Barcode
+                </mat-label>
+                <input matInput formControlName="barcode">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>
+                    Category
+                </mat-label>
+                <input matInput formControlName="category">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>
+                    Location
+                </mat-label>
+                <input matInput formControlName="location">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>
+                    Area
+                </mat-label>
+                <input matInput formControlName="area">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Parent Asset</mat-label>
+                <mat-select formControlName="parentAsset">
+                    <mat-option *ngFor="let asset of assets" [value]="asset">{{asset}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select formControlName="worker" placeholder="Worker">
+                    <mat-option *ngFor="let worker of workers" [value]="worker">{{worker}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Additional Workers</mat-label>
+                <mat-select formControlName="additionalWorkers" multiple>
+                    <mat-option *ngFor="let worker of workers" [value]="worker">{{worker}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-select formControlName="team" placeholder="Team">
+                    <mat-option *ngFor="let team of teams" [value]="team">{{team}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-select formControlName="vendor" placeholder="Vendor">
+                    <mat-option *ngFor="let vendor of vendors" [value]="vendor">{{vendor}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-select formControlName="customer" placeholder="Customer">
+                    <mat-option *ngFor="let customer of customers" [value]="customer">{{customer}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker1" placeholder="Purchase Date" formControlName="purchaseDate">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+
+
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker2" placeholder="Placed in Service"
+                    formControlName="placedInService">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>
+                    Purchase Price
+                </mat-label>
+                <input matInput formControlName="purchasePrice">
+            </mat-form-field>
+            <a class="float-right" (click)="fileInput1.click();"><small>+ Attach receipt</small></a>
+            <input #fileInput1 type="file" style="display:none;" />
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker3" placeholder="Warranty Expiration"
+                    formControlName="warrantyExpiration">
+                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+            <a class="float-right" (click)="fileInput.click();"><small>+ Attach warranty file</small></a>
+            <input #fileInput type="file" style="display:none;" />
+            <mat-form-field>
+                <mat-label>
+                    Residual Price
+                </mat-label>
+                <input matInput formControlName="residualPrice">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>
+                    Useful Life
+                </mat-label>
+                <input matInput formControlName="usefulLife">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>
+                    Additional Information
+                </mat-label>
+                <textarea matInput placeholder="Enter additional information"
+                    formControlName="additionalInformation"></textarea>
+            </mat-form-field>
+
+            <div class="form-group">
+                <label>
+                    Add a File:
+                </label>
+                <div class="drop-zone">
+                </div>
+            </div>
+            <a (click)="openFileDialog()"><small>Add Uploaded File</small></a>
+            <br>
+            <br>
+            <!-- Custom Data array -->
+            <!-- start -->
+
+            <div *ngIf="assetForm.get('customDataArray')['controls'].length>0" class="container custom-fields p-2">
+                <div formArrayName="customDataArray"
+                    *ngFor="let customData of assetForm.get('customDataArray')['controls']; let i = index">
+                    <div [formGroupName]="i" class="row">
+                        <div class="col-4">
+                            <mat-form-field>
+                                <input matInput placeholder="Name" formControlName="name">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field>
+                                <input matInput placeholder="Value" formControlName="value">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field>
+                                <input matInput placeholder="Unit" formControlName="unit">
+                            </mat-form-field>
+                        </div>
+                        <div class="ml-auto mr-2">
+                            <a class="text-danger" (click)="removeCustomData(i)"><small>Remove</small></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- end -->
+            <br>
+            <a (click)="addCustomData()"><small>+ Custom
+                    Data</small></a>
+        </div>
+
+        <br>
+
+        <br>
+        <br>
+        <div class="card-footer d-flex justify-content-end">
+            <button mat-button (click)="closeDrawer()">Cancel</button>
+            <button mat-button type="submit">Submit</button>
+        </div>
+    </form>
 </div>

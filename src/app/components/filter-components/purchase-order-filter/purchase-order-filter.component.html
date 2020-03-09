@@ -1,0 +1,81 @@
+<mat-form-field>
+  <mat-label>Status</mat-label>
+  <mat-select multiple>
+    <mat-option *ngFor="let item of status" [value]="item">{{item}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Category</mat-label>
+  <input matInput>
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+<div class="row">
+  <small class="text-muted">
+    Total Cost (use either or both)
+  </small>
+  <div class="col-6">
+    <mat-form-field>
+      <mat-label>Min</mat-label>
+      <input matInput type="number">
+      <span matPrefix>$&nbsp;</span>
+      <span matSuffix>.00</span>
+    </mat-form-field>
+  </div>
+  <div class="col-6">
+    <mat-form-field>
+      <mat-label>Max</mat-label>
+      <input matInput type="number">
+      <span matPrefix>$&nbsp;</span>
+      <span matSuffix>.00</span>
+    </mat-form-field>
+  </div>
+</div>
+<hr>
+<div class="text-muted text-sm">Created Date</div>
+<div class="row">
+  <div class="col">
+    <mat-form-field style="display:inline-block; width:120px">
+      <input matInput [matDatepicker]="picker" placeholder="Start">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="col">
+    <mat-form-field style="display:inline-block; width:120px">
+      <input matInput [matDatepicker]="picker1" placeholder="End">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+  </div>
+</div>
+<div class="text-muted text-sm">Due Date</div>
+
+<div class="row">
+  <div class="col">
+    <mat-form-field style="display:inline-block; width:120px">
+      <input matInput [matDatepicker]="picker2" placeholder="Start">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="col">
+    <mat-form-field style="display:inline-block; width:120px">
+      <input matInput [matDatepicker]="picker3" placeholder="End">
+      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3></mat-datepicker>
+    </mat-form-field>
+  </div>
+</div>
+<hr>
+<mat-form-field>
+  <mat-label>Created By User</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let item of users" [value]="item">{{item}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Vendor</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let item of vendors" [value]="item">{{item}}</mat-option>
+  </mat-select>
+</mat-form-field>

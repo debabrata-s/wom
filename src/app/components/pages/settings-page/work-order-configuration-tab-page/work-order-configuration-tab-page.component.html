@@ -1,2 +1,53 @@
 <app-settings-page></app-settings-page>
-<p>work-order-configuration-tab-page works!</p>
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="card card-secondary">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-secondary" [class.active]="viewMode == 'tab1'"
+                        rel="tab1" (click)="viewMode ='tab1'">
+                        Creating a work order </button>
+                    <button type="button" class="btn btn-outline-secondary" [class.active]="viewMode == 'tab2'"
+                        rel="tab2" (click)="viewMode ='tab2'">
+                        Completing a work order </button>
+                </div>
+            </div>
+            <br />
+            <div class="tab-slider--container" [ngSwitch]="viewMode">
+                <div id="tab1" class="tab-slider--body" *ngSwitchCase="'tab1'">
+                    <h3>Creating a work order</h3>
+                    <p><em>Configure create work order form from this page. You can mark fields as Optional, Hidden or
+                            Required.</em></p>
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let field of createWorkOrderFields">{{field}}
+                            <div class="float-right">
+                                <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style">
+                                    <mat-button-toggle value="optional" checked>Optional</mat-button-toggle>
+                                    <mat-button-toggle value="hidden">Hidden</mat-button-toggle>
+                                    <mat-button-toggle value="required">Required</mat-button-toggle>
+                                </mat-button-toggle-group>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="tab2" class="tab-slider--body" *ngSwitchCase="'tab2'">
+                    <h3>Completing a work order</h3>
+                    <p><em>Configure complete work order form from this page. You can mark fields as Optional,
+                            Hidden or Required.</em></p>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let field of completeWorkOrderFields">{{field}}
+                                    <div class="float-right">
+                                        <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style">
+                                            <mat-button-toggle value="optional" checked>Optional</mat-button-toggle>
+                                            <mat-button-toggle value="hidden">Hidden</mat-button-toggle>
+                                            <mat-button-toggle value="required">Required</mat-button-toggle>
+                                        </mat-button-toggle-group>
+                                    </div>
+                                </li>
+                            </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

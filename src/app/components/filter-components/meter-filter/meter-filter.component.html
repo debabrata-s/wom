@@ -1,0 +1,42 @@
+<mat-form-field>
+    <mat-label>Meter Name</mat-label>
+    <input matInput>
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+<small class="text-muted">Additional Filters</small><br>
+<mat-checkbox style="font-size: small;">Meters Created By You</mat-checkbox>
+<hr>
+<mat-form-field>
+    <mat-label>Facility Location</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let location of locations" [value]="location">
+        {{location}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Asset</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let asset of assets" [value]="asset">
+        {{asset}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="text-muted text-sm">Created Date</div>
+<div class="row">
+    <div class="col">
+        <mat-form-field style="display:inline-block; width:120px">
+            <input matInput [matDatepicker]="picker" placeholder="Start">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col">
+        <mat-form-field style="display:inline-block; width:120px">
+            <input matInput [matDatepicker]="picker1" placeholder="End">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>
+<hr>

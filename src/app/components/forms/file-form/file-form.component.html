@@ -1,1 +1,25 @@
-<p>file-form works!</p>
+<div class="content-wrapper">
+    <form [formGroup]="fileForm" (ngSubmit)="onSubmit()">
+        <div class=" col-12 grid-margin stretch-card">
+            <div class="card rounded">
+                <div class="card-header">
+                    <h4 class="card-title">Add Files</h4>
+                </div>
+
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>
+                            Add a File:
+                        </label>
+                        <div class="drop-zone">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    <button mat-button [routerLink]="['../']">Cancel</button>
+                    <button mat-button type="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

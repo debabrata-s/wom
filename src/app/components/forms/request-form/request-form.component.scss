@@ -1,0 +1,15 @@
+::placeholder {
+  font-size: 0.85em;
+}
+mat-label {
+  font-size: 0.95em;
+}
+a {
+  color: #007bff !important;
+  cursor: pointer;
+}
+.btn-group > .active{
+    transition: all 100ms ease 0s;
+    background: linear-gradient(251deg, rgb(0, 174, 255), rgb(0, 118, 255)) rgb(0, 123, 255);
+    color: white;
+}

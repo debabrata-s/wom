@@ -1,0 +1,46 @@
+.form-control.mr-sm-2 {
+  font-size: 0.875rem !important;
+  font-weight: 600;
+}
+table {
+  width: 100%;
+}
+table > td, th{
+  min-width: 250px;
+}
+.btn-group > .active {
+  transition: all 100ms ease 0s;
+  background: linear-gradient(251deg, rgb(0, 174, 255), rgb(0, 118, 255)) rgb(0, 123, 255);
+  color: white;
+}
+.dropdown-item {
+  font-size: 0.95em !important;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem !important;
+}
+.dropdown-item:hover {
+  background-color: #e2f5fc;
+  color: #007bff !important;
+}
+.search-input {
+  border-width: 1px;
+  padding: 7px;
+  padding-left: 30px;
+  border-radius: 17px;
+  width: 300px;
+  font-size: small;
+}
+.search-input:focus {
+  border: solid 1px #1bdbe0;
+}
+#search-icon {
+  position: absolute;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+.text-sm {
+  font-size: 0.85em;
+}
+.card-container{
+  background-color: #fafafa;
+}

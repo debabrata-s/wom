@@ -9,6 +9,7 @@ import { fbind } from 'q';
 })
 export class CustomerFormComponent implements OnInit {
   customerForm: FormGroup;
+  currencies = ['c1','c2','c3','c4'];
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {

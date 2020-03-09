@@ -1,0 +1,25 @@
+<h4>Add new floor plan</h4>
+<div class="row">
+    <div class="col-8">
+        <mat-form-field>
+            <input matInput placeholder="Floor Plan Name">
+        </mat-form-field>
+    </div>
+    <div class="col-3">
+        <mat-form-field>
+            <input matInput placeholder="Floor Plan Area">
+        </mat-form-field>
+    </div>
+</div>
+<small class="text-muted"><em>Ex. “First Floor, Basement”</em></small>
+<div class="form-group mt-2">
+    <label>
+        Add a File:
+    </label>
+    <div class="drop-zone">
+    </div>
+</div>
+<div class="float-right">
+    <button type="button" class="btn btn-outline-secondary btn-sm" (click)="closeDialog()">Cancel</button>
+    <button type="button" class="btn btn-primary btn-sm" (click)="closeDialog()">Add Floor Plan</button>
+</div>

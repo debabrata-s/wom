@@ -5,15 +5,39 @@
     </div>
     <div class="card card-secondary">
         <div class="toolbar">
+            <div class="d-inline">
+                <i class="icon-magnifier" id="search-icon"></i>
+                <input class="search-input" placeholder="Search">
+            </div>
             <div class="align-right">
-                <button type="button" class="btn btn-sm btn-link btn-fw">Export</button>
-                <button type="button" class="btn btn-sm btn-danger btn-rounded btn-fw"
+                <a style="font-size: 0.85em;">Export</a>
+                <button type="button" class="btn btn-sm btn-danger btn-rounded ml-4"
                     [routerLink]="['purchase-order-form']">Purchase Order</button>
             </div>
         </div>
         <div class="filterbar">
-            <button type="button" class="btn btn-outline-secondary btn-rounded btn-sm"><i class="icon-magic-wand"></i>
-                Filter</button>
+            <button mat-raised-button (click)="drawer.toggle();"><i class="icon-equalizer mr-1"></i>Filter</button>
         </div>
+
+        <mat-drawer-container hasBackdrop="false" style="height: 100%;">
+            <mat-drawer #drawer mode="push" position="start" style="width: 350px;">
+                <div class="card">
+                    <div class="card-header">
+                        <a id="close-btn" (click)="drawer.toggle()" style="color: #ff4d6b !important;">
+                            <mat-icon>cancel</mat-icon>
+                        </a>
+                        <a (click)="drawer.toggle()" class="text-primary float-right"
+                            style="cursor: pointer;"><small>Save
+                                Filter</small></a>
+                    </div>
+                    <div class="card-body">
+                        <app-purchase-order-filter></app-purchase-order-filter>
+                    </div>
+                </div>
+            </mat-drawer>
+            <div class="main-content">
+                <button (click)="openDetails()">click</button>
+            </div>
+        </mat-drawer-container>
     </div>
 </div>

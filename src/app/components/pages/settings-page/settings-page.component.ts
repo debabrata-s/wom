@@ -43,7 +43,6 @@ export class SettingsPageComponent implements OnInit {
         link: '/settings/work-request-configuration',
         index: 6
       }
-
     ];
   }
   ngOnInit(): void {

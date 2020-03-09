@@ -1,0 +1,20 @@
+.role-btn-group{
+    width: 100%;
+}
+.role-btn{
+   border-radius: 5px;
+}
+
+.close-btn{
+    border-style: none;
+    background-color: inherit;
+    font: 14px/100% arial, sans-serif;
+    position: absolute;
+    right: 5px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #fff;
+    top: 5px;
+  }
+.close-btn:after {
+    content: '✖'; 
+  }

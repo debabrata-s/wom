@@ -1,0 +1,31 @@
+.bd-highlight{
+    background-color: white;
+    border: solid rgb(218, 218, 218) 1px;
+}
+.vertical-divider{
+    background-color: rgb(236, 236, 236);
+    width: 2px;
+    height: 62px;
+    margin: 0px 20px;
+}
+.dashboard-card{
+    display: inline-block;
+    border-radius: 10px;
+    // border: solid rgb(218, 218, 218) 1px;
+    width: 49%;
+    height: 400px;
+
+}
+.full-dashboard-card{
+    border-radius: 10px;
+    border: solid rgb(218, 218, 218) 1px;
+    min-height: 350px;
+}
+hr{
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+}
+.text-sm{
+    font-size: 0.85em;
+    margin-top: 6px;
+}

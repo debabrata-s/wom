@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-page-not-found',
@@ -10,6 +11,8 @@ pageTitle = "Page Not Found";
   constructor() { }
 
   ngOnInit() {
+    
+    console.log("Page nOt found 404")
   }
 
 }

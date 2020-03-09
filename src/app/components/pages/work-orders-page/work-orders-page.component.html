@@ -1,162 +1,200 @@
-<div class="content-wrapper">
-  <!-- title for the page -->
-  <div class="page-header">
-    <app-page-title [pageTitle]="pageTitle"></app-page-title>
-  </div>
+<mat-drawer-container hasBackdrop="true" style="height: 100%;">
+  <!-- <mat-drawer #filterdrawer mode="over" style="width: 400px;">
+    <app-work-order-filter></app-work-order-filter>
+  </mat-drawer> -->
+  <mat-drawer #drawer mode="over" [position]="position" (closed)="closeDrawer()" style="width: 400px;">
+    <app-work-order-filter *ngIf="filter"></app-work-order-filter>
+    <div style="margin-top: 70px" *ngIf="details">
+      <app-work-order-details></app-work-order-details>
+    </div>
 
-  <div class="card card-secondary">
-    <div class="toolbar">
-      <div class="align-right">
-        <button type="button" class="btn btn-sm btn-link btn-fw" id="importWorkOrder" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">Import/Export</button>
-        <div class="dropdown-menu" aria-labelledby="importWorkOrder">
-          <a *ngFor="let importMenu of importMenus" class="dropdown-item " href="#">{{importMenu}}</a>
+    <a id="close-btn"><i class="icon-close ml-2" (click)="drawer.toggle()"></i></a>
+  </mat-drawer>
+  <div class="content-wrapper">
+    <!-- title for the page -->
+    <div class="page-header">
+      <app-page-title [pageTitle]="pageTitle"></app-page-title>
+    </div>
+
+    <div class="card card-secondary">
+      <div class="row">
+        <div class="col-4 p-4">
+          <i class="icon-magnifier" id="search-icon"></i>
+          <input (keyup)="applyFilter($event.target.value)" class="search-input" placeholder="Search">
         </div>
-        <button type="button" class="btn btn-sm btn-link btn-fw" routerLink="#">Automate Workflows</button>
-        <button type="button" class="btn btn-sm btn-danger btn-rounded btn-fw"
-          [routerLink]="['work-order-form']">Create work order</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="card card-secondary">
-    <div class="filterbar">
-      <button type="button" class="btn btn-sm btn-primary btn-rounded btn-icon"><i class="icon-home"></i></button>
-      <button type="button" class="btn btn-sm btn-light btn-fw"><i class="icon-people"></i> Everyone</button>
-      <button type="button" class="btn btn-sm btn-light btn-fw"><i class="icon-map"></i> Anywhere</button>
-      <button type="button" class="btn btn-sm btn-light btn-fw"><i class="icon-calendar"></i> Any Day</button>
-      <button type="button" class="btn btn-sm btn-light btn-fw"><i class="icon-options"></i> By Status</button>
-      <button type="button" class="btn btn-sm btn-light btn-fw"><i class="icon-chart"></i> Any Priority</button>
-      <button type="button" class="btn btn-sm btn-light btn-fw"><i class="icon-tag"></i> Bookmarked</button>
-      <button type="button" class="btn btn-sm btn-light btn-fw align-right"><i class="icon-energy"></i> Quick
-        Filter</button>
-
-    </div>
-  </div>
-
-
-  <div class="main-content">
-    <!-- demo content -->
-    <div class="col-lg-12 grid-margin stretch-card">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Striped Table</h4>
-          <p class="card-description"> Add class <code>.table-striped</code>
-          </p>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th> User </th>
-                <th> First name </th>
-                <th> Progress </th>
-                <th> Amount </th>
-                <th> Deadline </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="py-1">
-                  <img src="../../assets/images/faces-clipart/pic-1.png" alt="image">
-                </td>
-                <td> Herman Beck </td>
-                <td>
-                  <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </td>
-                <td> $ 77.99 </td>
-                <td> May 15, 2015 </td>
-              </tr>
-              <tr>
-                <td class="py-1">
-                  <img src="../../assets/images/faces-clipart/pic-2.png" alt="image">
-                </td>
-                <td> Messsy Adam </td>
-                <td>
-                  <div class="progress">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </td>
-                <td> $245.30 </td>
-                <td> July 1, 2015 </td>
-              </tr>
-              <tr>
-                <td class="py-1">
-                  <img src="../../assets/images/faces-clipart/pic-3.png" alt="image">
-                </td>
-                <td> John Richards </td>
-                <td>
-                  <div class="progress">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </td>
-                <td> $138.00 </td>
-                <td> Apr 12, 2015 </td>
-              </tr>
-              <tr>
-                <td class="py-1">
-                  <img src="../../assets/images/faces-clipart/pic-4.png" alt="image">
-                </td>
-                <td> Peter Meggik </td>
-                <td>
-                  <div class="progress">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </td>
-                <td> $ 77.99 </td>
-                <td> May 15, 2015 </td>
-              </tr>
-              <tr>
-                <td class="py-1">
-                  <img src="../../assets/images/faces-clipart/pic-1.png" alt="image">
-                </td>
-                <td> Edward </td>
-                <td>
-                  <div class="progress">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 35%" aria-valuenow="35"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </td>
-                <td> $ 160.25 </td>
-                <td> May 03, 2015 </td>
-              </tr>
-              <tr>
-                <td class="py-1">
-                  <img src="../../assets/images/faces-clipart/pic-2.png" alt="image">
-                </td>
-                <td> John Doe </td>
-                <td>
-                  <div class="progress">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="65"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </td>
-                <td> $ 123.21 </td>
-                <td> April 05, 2015 </td>
-              </tr>
-              <tr>
-                <td class="py-1">
-                  <img src="../../assets/images/faces-clipart/pic-3.png" alt="image">
-                </td>
-                <td> Henry Tom </td>
-                <td>
-                  <div class="progress">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </td>
-                <td> $ 150.00 </td>
-                <td> June 16, 2015 </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="col-8">
+          <div class="toolbar d-flex">
+            <div class="btn-collapse ml-auto">
+              <button type="button" class="btn btn-sm btn-link btn-fw" id="importWorkOrder" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">Import/Export</button>
+              <div class="dropdown-menu" aria-labelledby="importWorkOrder">
+                <a *ngFor="let importMenu of importMenus" class="dropdown-item "
+                  (click)="open(importMenu)">{{importMenu}}</a>
+              </div>
+              <button type="button" class="btn btn-sm btn-link btn-fw"
+                [routerLink]="['../settings/automated-workflows']">Automate Workflows</button>
+            </div>
+            <button type="button" class="btn btn-sm btn-danger btn-rounded btn-fw" (click)="openDrawer()">Create Work
+              Order</button>
+          </div>
         </div>
       </div>
     </div>
+
+    <div class="card card-secondary">
+
+      <div class="filterbar d-flex">
+
+        <button type="button" class="btn btn-sm btn-primary btn-rounded btn-icon" matTooltip="Additional Filters"
+          (click)="filterDrawer();drawer.toggle();"><i class="icon-equalizer"></i></button>
+        <!-- class="btn btn-sm btn-light btn-fw -->
+        <div class="dropdown">
+          <button type="button" class="rounded filter-btn" data-toggle="dropdown" matTooltip="Filter by Assignee"><i class="icon-people"></i> <span
+              class="button-text d-none d-md-block">Everyone</span> </button>
+          <div class="dropdown-menu p-2">
+            <input type="text" class="small-input" placeholder="Search" style="width: 200px;">
+            <mat-checkbox (click)="$event.stopPropagation()">user 1</mat-checkbox>
+            <mat-checkbox (click)="$event.stopPropagation()">user 2</mat-checkbox>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button type="button" class="rounded filter-btn" data-toggle="dropdown" matTooltip="Filter by Location"><i class="icon-map"></i> <span
+              class="button-text d-none d-md-block">Anywhere</span> </button>
+          <div class="dropdown-menu p-2">
+            <input type="text" class="small-input" placeholder="Search" style="width: 200px;">
+            <mat-checkbox (click)="$event.stopPropagation()">location 1</mat-checkbox>
+            <mat-checkbox (click)="$event.stopPropagation()">location 2</mat-checkbox>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button type="button" class="rounded filter-btn" data-toggle="dropdown" matTooltip="Filter by Due Date"><i class="icon-calendar"></i> <span
+              class="button-text d-none d-md-block">Any Day</span> </button>
+          <div class="dropdown-menu p-2">
+            <a class="dropdown-item" style="font-size: small;" *ngFor="let duration of durations"
+              href="#">{{duration}}</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button type="button" class="rounded filter-btn" data-toggle="dropdown" matTooltip="Filter by Status"><i class="icon-options"></i> <span
+              class="button-text d-none d-md-block">By Status</span> </button>
+          <div class="dropdown-menu p-2">
+            <input type="text" class="small-input" placeholder="Search" style="width: 200px;">
+            <mat-checkbox (click)="$event.stopPropagation()">status 1</mat-checkbox>
+            <mat-checkbox (click)="$event.stopPropagation()">status 2</mat-checkbox>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button type="button" class="rounded filter-btn" data-toggle="dropdown" matTooltip="Filter by Priority"><i class="icon-chart"></i> <span
+              class="button-text d-none d-md-block">Any Priority</span> </button>
+          <div class="dropdown-menu p-2">
+            <a class="dropdown-item" style="font-size: 1em;">None</a>
+            <a class="dropdown-item" style="font-size: 1em;">Low</a>
+            <a class="dropdown-item" style="font-size: 1em;">Medium</a>
+            <a class="dropdown-item" style="font-size: 1em;">High</a>
+          </div>
+        </div>
+        <button type="button" class="rounded filter-btn"><i class="icon-tag"></i> <span
+            class="button-text d-none d-md-block" matTooltip="Show Bookmarked">Bookmarked</span> </button>
+            <div class="d-inline ml-auto">
+              <button type="button" class="rounded filter-btn ml-auto"><i class="icon-energy"></i> <span
+            class="button-text d-none d-md-block" matTooltip="Apply Quick Filter">Quick Filter</span> </button>
+            </div>
+        
+      </div>
+    </div>
+
+
+    <div class="main-content">
+      <!-- demo content -->
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="mb-4">
+            <div class="dropdown mt-4 float-right">
+              <button type="button" class="btn btn-light btn-sm mr-2" style="padding:2px 10px;" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <small>Customize</small>
+              </button>
+              <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">
+                <div class="checkbox" *ngFor="let option of displayedColumns">
+                  <label class="text-muted"><input type="checkbox" [(ngModel)]="option.show"
+                      (click)="$event.stopPropagation()"> {{option.title}}</label>
+                </div>
+              </div>
+            </div>
+
+            <table mat-table [dataSource]="dataSource" matSort>
+
+              <!-- Checkbox Column -->
+              <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                  <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                  </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                  <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                  </mat-checkbox>
+                </td>
+              </ng-container>
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="DueDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Due</th>
+                <td mat-cell *matCellDef="let element"> {{element.DueDate | date :'shortDate'}} </td>
+              </ng-container>
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>WO</th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+              </ng-container>
+              <!-- <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                <td mat-cell *matCellDef="let element"> {{element.DueDate}} </td>
+              </ng-container> -->
+              <ng-container matColumnDef="Title">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>WorkOrderTitle</th>
+                <td mat-cell *matCellDef="let element"> {{element.Title}} </td>
+              </ng-container>
+              <ng-container matColumnDef="Priority">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Priority</th>
+                <td mat-cell *matCellDef="let element"> {{element.Priority}} </td>
+              </ng-container>
+              <ng-container matColumnDef="WorkerId">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Assignee(s)</th>
+                <td mat-cell *matCellDef="let element"> {{element.WorkerId}} </td>
+              </ng-container>
+              <ng-container matColumnDef="LocationId">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
+                <td mat-cell *matCellDef="let element"> {{element.LocationId}} </td>
+              </ng-container>
+              <ng-container matColumnDef="AssetId">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Asset</th>
+                <td mat-cell *matCellDef="let element"> {{element.AssetId}} </td>
+              </ng-container>
+              <ng-container matColumnDef="updated_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Updated</th>
+                <td mat-cell *matCellDef="let element"> {{element.updated_at | date :'shortDate'}} </td>
+              </ng-container>
+              <ng-container matColumnDef="created_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Created On</th>
+                <td mat-cell *matCellDef="let element"> {{element.created_at | date :'shortDate'}} </td>
+              </ng-container>
+
+
+
+              <tr mat-header-row *matHeaderRowDef="getDisplayedColumns();"></tr>
+              <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"> -->
+              <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"
+                (click)="detailsDrawer();drawer.toggle()">
+
+              </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-<button (click)="showData()">show data</button>
-</div>
+</mat-drawer-container>

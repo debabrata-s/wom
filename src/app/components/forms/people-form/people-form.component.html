@@ -1,36 +1,75 @@
 <div class="card">
+
+    <button class="close-btn" (click)="closeDialog()"></button>
     <div class="card-body">
+
+        <h4>Invite User</h4>
+        <br>
         <form [formGroup]="peopleForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-secondary active">
-                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Administrator
-                    </label>
-                    <label class="btn btn-secondary">
-                        <input type="radio" name="options" id="option2" autocomplete="off"> Technician
-                    </label>
-                    <label class="btn btn-secondary">
-                        <input type="radio" name="options" id="option2" autocomplete="off"> Limited Technician
-                    </label>
-                    <label class="btn btn-secondary">
-                        <input type="radio" name="options" id="option2" autocomplete="off"> View Only
-                    </label>
-                    <label class="btn btn-secondary">
-                        <input type="radio" name="options" id="option2" autocomplete="off"> Requester
-                    </label>
-                </div>
-            </div>
+            <small class="text-muted">select user roles</small>
 
+            <div class="list-group">
+                <label class="role-btn">
+                    <a class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Administrator</h5>
+                            <input type="radio" id="option1" formControlName="userRole" value="admin" checked>
+                        </div>
 
-            <div class="form-group">
-                <label>
-                    Enter email address:
+                        <small class="text-muted">Administrator has full access; including editing, adding, deleting
+                            work orders and
+                            requests</small>
+                    </a>
                 </label>
-                <input type="text" class="form-control" formControlName="emailId">
+                <label class="role-btn">
+                    <a class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Technician</h5>
+                            <input type="radio" id="option2" formControlName="userRole" value="tech" autocomplete="off">
+                        </div>
+                        <small class="text-muted">Technicians can create and close work orders, assets and locations.
+                            Able to edit and delete only what they have created</small>
+                    </a>
+                </label>
+                <label class="role-btn">
+                    <a class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Limited Technician</h5>
+                            <input type="radio" id="option3" formControlName="userRole" value="ltdtech"
+                                autocomplete="off">
+                        </div>
+                        <small class="text-muted">Limited technicians can only see work orders assigned to them</small>
+                    </a>
+                </label>
+                <label class="role-btn">
+                    <a class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">View Only</h5>
+                            <input type="radio" id="option4" formControlName="userRole" value="view" autocomplete="off">
+                        </div>
+                        <small class="text-muted">View Only users have full view access, but cannot edit
+                            anything</small>
+                    </a>
+                </label>
+                <label class="role-btn">
+                    <a class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Reqeuster</h5>
+                            <input type="radio" id="option5" formControlName="userRole" value="req" autocomplete="off">
+                        </div>
+                        <small class="text-muted">Requesters can only submit work requests and view their status</small>
+                    </a>
+                </label>
             </div>
-
-            <button class="btn btn-primary mr-2" type="submit">Submit</button>
-            <button class="btn btn-light">Cancel</button>
+            <br>
+            <small class="text-muted">Enter email address</small>
+            <input type="text" class="small-input" formControlName="emailId">
+            <small class="text-muted"><em>You may add 20 users at a time by pressing 'tab' or 'enter' after each email
+                    entry. Any duplicate and registered emails will be removed while registering the requested users.
+                </em></small>
+            <br>
+            <br>
+            <button mat-raised-button class="submit-btn" type="submit">Send Invite</button>
         </form>
     </div>
 </div>

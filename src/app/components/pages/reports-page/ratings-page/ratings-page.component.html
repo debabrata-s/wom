@@ -1,0 +1,26 @@
+<app-reports-page></app-reports-page>
+
+<div class="card-body">
+    <div class="d-flex flex-row bd-highlight mt-2 p-2 rounded">
+        <div class="p-2">
+            <small>Start</small> <br>
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="startDate">
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            <small><a (click)="picker.open()">{{startDate | date: 'dd/MM/yyyy'}}</a></small>
+        </div>
+        <i class="icon-arrow-right pt-3"></i>
+        <div class="p-2">
+            <small>End</small> <br>
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker1" placeholder="Choose a date" [(ngModel)]="endDate">
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+            <small><a (click)="picker1.open()">{{endDate |  date: 'dd/MM/yyyy'}}</a></small>
+        </div>
+    </div>
+</div>
+
+<div class="text-muted text-center mt-4"><h3>Seems like no one has been rated yet!
+</h3></div>

@@ -1,0 +1,11 @@
+:host ::ng-deep .mat-tab-label {
+    height: 30px;
+    padding: 0 10px;
+    min-width: 70px;
+  }
+  .close{
+    float: left;
+  }
+  a{
+    cursor: pointer;
+  }

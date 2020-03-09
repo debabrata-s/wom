@@ -1,2 +1,43 @@
 <app-settings-page></app-settings-page>
-<p>authentication-tab-page works!</p>
+<div class="auth-container shadow p-3 m-4 bg-white rounded">
+    <div class="p-3 mb-5">
+        <h3>SAML Authentication</h3>
+        <small class="text-muted">Set up SSO for your enterprise with Okta, Google or your custom SAML 2.0
+            solution</small>
+    </div>
+
+    <div class="row">
+        <div class="col text-center">
+            <h4>Choose your SAML provider</h4>
+            <p><small class="text-muted">Select one of the providers to configure</small></p>
+            <p><small class="text-muted">Dont see the one you want? We'll be adding additional providers soon.</small>
+            </p>
+            <p><small><a href="">Instructions to setup SSO.</a></small></p>
+        </div>
+        <div class="col">
+            <div class="p-5">
+                <form [formGroup]="samlAuthForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" formControlName="provider" class="form-check-input" value="okta"> Okta <i
+                                    class="input-helper"></i></label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" formControlName="provider" class="form-check-input" value="google"> Google <i
+                                    class="input-helper"></i></label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" formControlName="provider" class="form-check-input" value="custom"> Custom SAML 2.0 <i
+                                    class="input-helper"></i></label>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-sm" type="submit">Configure</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>

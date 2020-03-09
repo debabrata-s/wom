@@ -1,0 +1,17 @@
+<a (click)="closeDialog();" style="cursor: pointer;"><span class="close">&times;</span></a>
+<div class="card" style="width: 350px;">
+    <h6>Select File</h6>
+    <br>
+    <mat-form-field>
+        <mat-label>Search</mat-label>
+        <input matInput>
+    </mat-form-field>
+    <hr>
+    <div *ngFor="let file of files" class="m-2">
+        <div class="p-3 file-item" (click)="closeDialog();">
+            <i class="icon-picture text-danger"></i>
+            <span class="ml-2 text-muted"><small>{{file}}</small></span>
+        </div>
+
+    </div>
+</div>

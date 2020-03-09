@@ -1,0 +1,217 @@
+<div class="content-wrapper">
+    <div class="card">
+        <div class="card-body">
+            <h4>Request Checklist</h4>
+        </div>
+        <div class="card-body">
+            <h4>Form Items</h4>
+
+            <!-- add task dynamic form using formarray-->
+            <form [formGroup]="requestFormTemplateForm" (ngSubmit)="onSubmit()">
+
+                <div formGroupName="tasks">
+                    <div formArrayName="taskItems"
+                        *ngFor="let task of requestFormTemplateForm.get('tasks.taskItems').controls; let i = index">
+                        <div [formGroupName]="i" class="row">
+                            <div class="col-2">
+                                <h1 class="display-2">{{i+1}}</h1>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>
+                                        Task:
+                                    </label>
+                                    <input type="text" class="form-control" formControlName="taskType">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        Question:
+                                    </label>
+                                    <input type="text" class="form-control" formControlName="question">
+                                </div>
+
+                                <div class="form-check form-check-flat form-check-primary">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input"
+                                            formControlName="required">Required
+                                        <i class="input-helper"></i>
+                                    </label>
+                                </div>
+                                <hr>
+
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-link btn-fw" (click)="addTask()"> + Add
+                        Task</button>
+                </div>
+
+
+
+                <!-- <div formGroupName="permissions">
+                    <h4>Permissions</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li *ngFor="let permission of permissions" class="list-group-item">{{permission.desc}}
+                                    <div class="d-inline float-right">
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-sm btn-secondary active">
+                                                <input type="radio" [formControlName]="permission.name" value="optional">
+                                                Optional
+                                            </label>
+                                            <label class="btn btn-sm btn-secondary">
+                                                <input type="radio" [formControlName]="permission.name" value="hidden">
+                                                Hidden
+                                            </label>
+                                            <label class="btn btn-sm btn-secondary">
+                                                <input type="radio" [formControlName]="permission.name" value="required">
+                                                Required
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br />
+                                </li><br>
+                            </ul>
+                        </div>
+                    </div>
+                </div> -->
+                <div formGroupName="permissions">
+                    <h4>Permissions</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">Allow Requesters to set Asset
+                                    <!-- <div class="d-inline float-right">
+                                    <div class="custom-control custom-radio">
+                                        <input id="optional1" type="radio" class="custom-control-input" value="optional"
+                                            name="setAsset" formControlName="setAsset">
+                                        <label class="custom-control-label" for="optional1">Optional</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="hidden1" type="radio" class="custom-control-input" value="hidden"
+                                            name="setAsset" formControlName="setAsset">
+                                        <label class="custom-control-label" for="hidden1">Hidden</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="required1" type="radio" class="custom-control-input" value="required"
+                                            name="setAsset" formControlName="setAsset">
+                                        <label class="custom-control-label" for="required1">Required</label>
+                                    </div>
+                                </div> -->
+                                    <div class="float-right">
+                                        <mat-button-toggle-group appearance="legacy" name="fontStyle"
+                                            aria-label="Font Style" formControlName="setAsset">
+                                            <mat-button-toggle value="optional">Optional</mat-button-toggle>
+                                            <mat-button-toggle value="hidden">Hidden</mat-button-toggle>
+                                            <mat-button-toggle value="required">Required</mat-button-toggle>
+                                        </mat-button-toggle-group>
+                                    </div>
+
+                                </li>
+
+                                <li class="list-group-item">Allow Requesters to set Location</li><br>
+                                <div class="d-inline float-right">
+                                    <div class="custom-control custom-radio">
+                                        <input id="optional2" type="radio" class="custom-control-input" value="optional"
+                                            name="setLocation" formControlName="setLocation">
+                                        <label class="custom-control-label" for="optional2">Optional</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="hidden2" type="radio" class="custom-control-input" value="hidden"
+                                            name="setLocation" formControlName="setLocation">
+                                        <label class="custom-control-label" for="hidden2">Hidden</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="required2" type="radio" class="custom-control-input" value="required"
+                                            name="setLocation" formControlName="setLocation">
+                                        <label class="custom-control-label" for="required2">Required</label>
+                                    </div>
+                                </div>
+
+                                <li class="list-group-item">Allow Requesters to set Worker Assigned</li><br>
+                                <div class="d-inline float-right">
+                                    <div class="custom-control custom-radio">
+                                        <input id="optional3" type="radio" class="custom-control-input" value="optional"
+                                            name="setWorkerAssigned" formControlName="setWorkerAssigned">
+                                        <label class="custom-control-label" for="optional3">Optional</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="hidden3" type="radio" class="custom-control-input" value="hidden"
+                                            name="setWorkerAssigned" formControlName="setWorkerAssigned">
+                                        <label class="custom-control-label" for="hidden3">Hidden</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="required3" type="radio" class="custom-control-input" value="required"
+                                            name="setWorkerAssigned" formControlName="setWorkerAssigned">
+                                        <label class="custom-control-label" for="required3">Required</label>
+                                    </div>
+                                </div>
+
+                                <li class="list-group-item">Allow Requesters to set Due Date</li><br>
+                                <div class="d-inline float-right">
+                                    <div class="custom-control custom-radio">
+                                        <input id="optional4" type="radio" class="custom-control-input" value="optional"
+                                            name="setDueDate" formControlName="setDueDate">
+                                        <label class="custom-control-label" for="optional4">Optional</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="hidden4" type="radio" class="custom-control-input" value="hidden"
+                                            name="setDueDate" formControlName="setDueDate">
+                                        <label class="custom-control-label" for="hidden4">Hidden</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="required4" type="radio" class="custom-control-input" value="required"
+                                            name="setDueDate" formControlName="setDueDate">
+                                        <label class="custom-control-label" for="required4">Required</label>
+                                    </div>
+                                </div>
+
+                                <li class="list-group-item">Allow Requesters to set Category</li><br>
+                                <div class="d-inline float-right">
+                                    <div class="custom-control custom-radio">
+                                        <input id="optional5" type="radio" class="custom-control-input" value="optional"
+                                            name="setCategory" formControlName="setCategory">
+                                        <label class="custom-control-label" for="optional5">Optional</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="hidden5" type="radio" class="custom-control-input" value="hidden"
+                                            name="setCategory" formControlName="setCategory">
+                                        <label class="custom-control-label" for="hidden5">Hidden</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="required5" type="radio" class="custom-control-input" value="required"
+                                            name="setCategory" formControlName="setCategory">
+                                        <label class="custom-control-label" for="required5">Required</label>
+                                    </div>
+                                </div>
+
+                                <li class="list-group-item">Allow Requesters to set Team</li><br>
+                                <div class="d-inline float-right">
+                                    <div class="custom-control custom-radio">
+                                        <input id="optional6" type="radio" class="custom-control-input" value="optional"
+                                            name="setTeam" formControlName="setTeam">
+                                        <label class="custom-control-label" for="optional6">Optional</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="hidden6" type="radio" class="custom-control-input" value="hidden"
+                                            name="setTeam" formControlName="setTeam">
+                                        <label class="custom-control-label" for="hidden6">Hidden</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="required6" type="radio" class="custom-control-input" value="required"
+                                            name="setTeam" formControlName="setTeam">
+                                        <label class="custom-control-label" for="required6">Required</label>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary mr-2" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

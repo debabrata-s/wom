@@ -1,0 +1,58 @@
+<div class="content-wrapper">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="col-md-8 grid-margin stretch-card m-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Edit Profile</h4>
+                    <small class="text-muted">{{profile.email}}</small>
+                </div>
+                <form [formGroup]="profileEditForm" (ngSubmit)="onSubmit()">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>
+                                Change Profile Picture:
+                            </label>
+                            <div class="drop-zone">
+                            </div>
+                        </div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>
+                                First Name
+                            </mat-label>
+                            <input matInput [value]="profile.firstName" formControlName="firstName">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>
+                                Last Name:
+                            </mat-label>
+                            <input matInput [value]="profile.lastName" formControlName="lastName">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>
+                                Email/Username:
+                            </mat-label>
+                            <input matInput [value]="profile.email" formControlName="email">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>
+                                Mobile Number:
+                            </mat-label>
+                            <input matInput [value]="profile.phone" formControlName="phone">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>
+                                Job Title:
+                            </mat-label>
+                            <input matInput [value]="profile.jobTitle" formControlName="jobTitle">
+                        </mat-form-field>
+                        <!-- <div class="ml-auto"><button class="btn btn-light" type="submit">Update</button></div> -->
+                    </div>
+                    <div class="card-footer d-flex justify-content-end">
+                        <button mat-button [routerLink]="['../profile']">Cancel</button>
+                        <button mat-button type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

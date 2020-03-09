@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { SelectFileDialogComponent } from '../../detail-components/dialog-forms/select-file-dialog/select-file-dialog.component';
+import { DrawerService } from 'src/app/services/drawer.service';
 
 @Component({
   selector: 'app-request-form',
@@ -8,7 +11,9 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class RequestFormComponent implements OnInit {
   requestForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  selection1 = -1;
+  selection2 = -1;
+  constructor(private fb: FormBuilder, public dialog: MatDialog, private drawerService: DrawerService) { }
 
   ngOnInit() {
     this.requestForm = this.fb.group({
@@ -19,8 +24,15 @@ export class RequestFormComponent implements OnInit {
       file: ['']
     });
   }
+  openFileDialog() {
+    const dialogRef = this.dialog.open(SelectFileDialogComponent)
+  }
+  closeDrawer() {
+    this.drawerService.toggleStatus();
+  }
   onSubmit() {
     console.log(this.requestForm);
     console.log('Saved: ' + JSON.stringify(this.requestForm.value));
   }
+
 }

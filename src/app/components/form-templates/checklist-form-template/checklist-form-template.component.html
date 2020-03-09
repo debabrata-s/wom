@@ -1,0 +1,62 @@
+<app-settings-page></app-settings-page>
+<div class="row">
+    <div class="col-7">
+        <a [routerLink]="['../']"><small>
+                &larr; Back to list</small> </a>
+        <div class="p-3">
+            <h4>Create Checklist</h4>
+            <form [formGroup]="checklistFormTemplateForm" (ngSubmit)="onSubmit()">
+                <div class="col">
+                    <div class="row">
+                        <div class="form-group col-8">
+                            <input type="text" class="form-control form-control-sm" placeholder="Name"
+                                formControlName="name">
+                        </div>
+                        <div class="col-3">
+                            <button type="button" class="btn btn-sm btn-light btn-rounded btn-fw" (click)="addTask()">
+                                + Add
+                                Task</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="list-container overflow-auto">
+                        <div cdkDropList formGroupName="tasks" (cdkDropListDropped)="drop($event)">
+                            <div cdkDropList formArrayName="taskItems"
+                                *ngFor="let task of checklistFormTemplateForm.get('tasks.taskItems')['controls']; let i = index"
+                                cdkDrag #elem="cdkDrag" (mouseenter)="enter(i)" style="width: 500px;">
+                                <div [formGroupName]="i" class="row">
+                                    <div class="col-1 mt-2 mr-2">
+                                        <small class="text-muted">{{i+1}}</small>
+                                        <span cdkDragHandle class="p-2"><i class="icon-menu"></i></span>
+                                    </div>
+                                    <div>
+                                        <div class="form-group">
+                                            <input type="text" class="small-input" formControlName="taskType">
+                                            <div class="ml-auto" style="width: 150px;">
+                                                <mat-form-field>
+                                                    <mat-label>Sub-task</mat-label>
+                                                    <mat-select>
+                                                        <mat-option *ngFor="let subtask of subtasks" [value]="subtask">
+                                                            {{subtask}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-sm btn-primary btn-fw" (ngSubmit)="onSubmit()">Save
+                        Checklist</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-6">
+
+    </div>
+</div>

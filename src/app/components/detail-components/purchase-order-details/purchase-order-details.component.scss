@@ -1,0 +1,12 @@
+a{
+    color: #007bff !important;
+    cursor: pointer;
+}
+:host ::ng-deep .mat-tab-label {
+    height: 30px;
+    padding: 0 20px;
+    min-width: 120px;
+  } 
+  mat-form-field{
+      font-size: 0.87em;
+  }

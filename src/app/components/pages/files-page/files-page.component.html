@@ -11,42 +11,66 @@
                 <button type="button" class="btn btn-outline-secondary btn-sm" [class.active]="viewMode == 'tab2'"
                     rel="tab2" (click)="viewMode ='tab2'">Summaries</button>
             </div>
+            <div class="d-inline ml-2">
+                <i class="icon-magnifier" id="search-icon"></i>
+                <input class="search-input" placeholder="Search">
+            </div>
 
             <div class="align-right">
                 <button type="button" class="btn btn-sm btn-danger btn-rounded btn-fw"
                     [routerLink]="['file-form']">File</button>
             </div>
         </div>
-    </div>
-    <div class="main-content">
-        <!-- demo content -->
-        <div class="col-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
+    
+    <div style="height: 600px; background-color: #F5F5F5;">
+        <div class="main-content">
+            <!-- demo content -->
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <!-- <div class="card-body"> -->
                     <div class="tab-slider--container" [ngSwitch]="viewMode">
                         <div id="tab1" class="tab-slider--body" *ngSwitchCase="'tab1'">
-                            <h2>Files Tab</h2>
-                            <p>Toggle switch style tab navigation. Currently only works with two tabs.</p>
-                            <p>Donec ullamcorper nulla non metus auctor fringilla. Donec ullamcorper nulla non metus
-                                auctor
-                                fringilla. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis
-                                vestibulum. Nullam
-                                id
-                                dolor id nibh ultricies vehicula ut id elit. Nulla
-                                vitae elit libero, a pharetra augue.</p>
+                            <table mat-table [dataSource]="dataSource">
+                                <ng-container matColumnDef="id">
+                                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                                    <td mat-cell *matCellDef="let files"> {{files.id}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="name">
+                                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                                    <td mat-cell *matCellDef="let files"> {{files.name}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="uploadedBy">
+                                    <th mat-header-cell *matHeaderCellDef> Uploaded By </th>
+                                    <td mat-cell *matCellDef="let files"> {{files.uploadedBy}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="uploadedOn">
+                                    <th mat-header-cell *matHeaderCellDef> Uploaded On </th>
+                                    <td mat-cell *matCellDef="let files"> {{files.uploadedOn}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="actions">
+                                    <th mat-header-cell *matHeaderCellDef> Actions </th>
+                                    <td mat-cell *matCellDef="let files">
+                                        <button type="button" class="btn btn-light btn-sm mr-2"
+                                            (click)="renameFile()">Rename</button>
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                            (click)="deleteFile()">Delete</button>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
                         </div>
                         <div id="tab2" class="tab-slider--body" *ngSwitchCase="'tab2'">
-                            <h2>Summaries Tab</h2>
-                            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                                Cras mattis
-                                consectetur purus sit amet fermentum. Nulla vitae elit libero, a pharetra augue. Cras
-                                mattis
-                                consectetur purus sit amet fermentum. Aenean eu leo
-                                quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+                            <h4 class="text-center mt-4">No files found.</h4>
                         </div>
                     </div>
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>

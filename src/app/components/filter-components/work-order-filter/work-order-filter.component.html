@@ -1,0 +1,155 @@
+<div class="card rounded" style="margin-top: 70px;">
+    <div class="card-header">
+        <h4>More Filters</h4>
+    </div>
+    <form (ngSubmit)="onSubmit()">
+        <div class="card-body">
+            <div class="text-muted">Reactive or Repeating</div><br>
+            <div class="btn-group w-100" role="group">
+                <button type="button" class="btn btn-outline-secondary btn-sm" (click)="selection1=1" [class.active]="selection1===1">All</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm" (click)="selection1=2" [class.active]="selection1===2">Reactive Only</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm" (click)="selection1=3" [class.active]="selection1===3">Repeating Only</button>
+            </div>
+            <p></p>
+            <mat-form-field>
+                <mat-label>Asset</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let asset of assets" [value]="asset">{{asset}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Team</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let team of teams" [value]="team">{{team}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Category</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let category of categories" [value]="category">{{category}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Part</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let part of parts" [value]="part">{{part}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>File</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let file of files" [value]="file">{{file}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <hr>
+            <mat-form-field>
+                <mat-label>Created By</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let people of people" [value]="people">{{people}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Completed By</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let people of people" [value]="people">{{people}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Requested By</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let people of people" [value]="people">{{people}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Additional Worker</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let people of people" [value]="people">{{people}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <hr>
+            <!-- <div class="mb-3">
+                <div class="text-muted">Created Date</div>
+                <input type="text" ngxDaterangepickerMd class="form-control" style="border-radius: 5px;"
+                    placeholder="Select interval" />
+            </div>
+
+            <div class="mb-3">
+                <div class="text-muted">Completed Date</div>
+                <input type="text" ngxDaterangepickerMd class="form-control" style="border-radius: 5px;"
+                    placeholder="Select interval" />
+            </div>
+
+            <div class="mb-3">
+                <div class="text-muted">Last updated Date</div>
+                <input type="text" ngxDaterangepickerMd class="form-control" style="border-radius: 5px;"
+                    placeholder="Select interval" />
+            </div> -->
+            <div class="text-muted">Created Date</div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field style="display:inline-block; width:150px">
+                        <input matInput [matDatepicker]="picker1" placeholder="Start">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field style="display:inline-block; width:150px">
+                        <input matInput [matDatepicker]="picker2" placeholder="End">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="text-muted">Completed Date</div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field style="display:inline-block; width:150px">
+                        <input matInput [matDatepicker]="picker3" placeholder="Start">
+                        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                        <mat-datepicker #picker3></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field style="display:inline-block; width:150px">
+                        <input matInput [matDatepicker]="picker4" placeholder="End">
+                        <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                        <mat-datepicker #picker4></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="text-muted">Last updated Date</div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field style="display:inline-block; width:150px">
+                        <input matInput [matDatepicker]="picker5" placeholder="Start">
+                        <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                        <mat-datepicker #picker5></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field style="display:inline-block; width:150px">
+                        <input matInput [matDatepicker]="picker6" placeholder="End">
+                        <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+                        <mat-datepicker #picker6></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+            
+            <br>
+            <hr>
+            <div class="text-muted">Archive</div><br>
+            <div class="btn-group w-100" role="group">
+                <button type="button" class="btn btn-outline-secondary btn-sm" (click)="selection2=1" [class.active]="selection2===1">Hide Archived</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm" (click)="selection2=2" [class.active]="selection2===2">Show All</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm" (click)="selection2=3" [class.active]="selection2===3">Only Archived</button>
+            </div>
+
+
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <button mat-button type="submit">Show Result</button>
+        </div>
+    </form>
+</div>

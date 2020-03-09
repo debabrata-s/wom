@@ -3,20 +3,51 @@
     <div class="page-header">
         <app-page-title [pageTitle]="pageTitle"></app-page-title>
     </div>
-    <div class="card card-secondary">
+    <div class="card card-secondary border-bottom">
         <div class="toolbar">
+            <div class="d-inline ml-2">
+                <i class="icon-magnifier" id="search-icon"></i>
+                <input class="search-input" placeholder="Search">
+            </div>
             <div class="align-right">
                 <div class="dropdown" style="display: inline;">
-                    <button type="button" class="btn btn-icon" id="pageMenus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="icon-options-vertical"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="pageMenus">
-                        <a *ngFor="let pageMenu of pageMenus" class="dropdown-item" href="#!">{{pageMenu}}</a>
-                      </div>
+                    <button type="button" class="btn btn-icon" id="pageMenus" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="icon-options-vertical"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="pageMenus">
+                        <a *ngFor="let pageMenu of pageMenus" class="dropdown-item"
+                            (click)="openPageMenu(pageMenu)">{{pageMenu}}</a>
+                    </div>
                 </div>
                 <button type="button" class="btn btn-sm btn-danger btn-rounded btn-fw"
-                    [routerLink]="['meter-form']">Meter</button>
+                    (click)="addMeter()">Meter</button>
             </div>
         </div>
     </div>
+    <div class="card card-secondary border-bottom">
+        <div class="filterbar">
+            <button mat-raised-button (click)="drawer.toggle();"><i class="icon-equalizer mr-1"></i>Filter</button>
+        </div>
+    </div>
+    <mat-drawer-container hasBackdrop="false" style="height: 100%; background-color:#F5F5F5;">
+        <mat-drawer #drawer mode="side" position="start">
+            <div class="card" style="width: 350px;">
+                <div class="card-header">
+                    <a id="close-btn" (click)="drawer.toggle()" style="color: #ff4d6b !important;">
+                        <mat-icon>cancel</mat-icon>
+                    </a>
+                    <a (click)="drawer.toggle()" class="float-right text-primary"><small>Save Filter</small></a>
+                </div>
+                <div class="card-body">
+                    <app-meter-filter></app-meter-filter>
+                </div>
+            </div>
+        </mat-drawer>
+
+
+        <div class="main-content" style="height: 600px;">
+            <button (click)="openDetails()">open details</button>
+        </div>
+    </mat-drawer-container>
 </div>

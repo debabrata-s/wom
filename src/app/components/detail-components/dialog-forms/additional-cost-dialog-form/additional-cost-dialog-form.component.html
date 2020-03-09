@@ -1,0 +1,42 @@
+<form>
+    <div class="card p-3">
+        <button class="close-btn" (click)="closeDialog()"></button>
+        <h4>Add Additional Cost</h4>
+        <br>
+        <mat-form-field>
+            <input matInput placeholder="Cost Description">
+        </mat-form-field>
+        <div class="row">
+            <div class="col">
+                <mat-form-field>
+                    <mat-select placeholder="Category">
+                        <mat-option value="option">Option</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select placeholder="Assigned To">
+                        <mat-option value="option">Option</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <input matInput placeholder="Cost">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker" placeholder="Date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <mat-slide-toggle>
+                <small>Include this cost to the total cost<br>
+                    <span class="text-muted font-italic">This will add the cost to the total cost spent on the Work
+                        Order.</span>
+                </small>
+            </mat-slide-toggle>
+        </div>
+        <button mat-raised-button class="mt-5" (click)="closeDialog()">Add</button>
+    </div>
+</form>

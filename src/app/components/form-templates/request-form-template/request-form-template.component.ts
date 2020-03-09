@@ -9,12 +9,13 @@ import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 export class RequestFormTemplateComponent implements OnInit {
   requestFormTemplateForm: FormGroup;
   taskItems: FormArray;
+  dataArray = [];
   constructor(private fb: FormBuilder) { }
   options = ['optional', 'hidden', 'required'];
   ngOnInit() {
     this.requestFormTemplateForm = this.fb.group({
       tasks: this.fb.group({
-        taskItems: this.fb.array([])
+        taskItems: this.fb.array(this.dataArray)
       }),
       permissions: this.fb.group({
         setAsset: ['optional'],
@@ -44,8 +45,12 @@ export class RequestFormTemplateComponent implements OnInit {
     });
   }
   addTask() {
-    this.taskItems = <FormArray>this.requestFormTemplateForm.get('tasks.taskItems')['controls'];
+    this.taskItems = <FormArray>this.requestFormTemplateForm.get('tasks.taskItems');
     this.taskItems.push(this.createTask());
+  }
+  removeTask(i) {
+    this.dataArray.splice(i, 1);
+    this.taskItems.removeAt(i);
   }
   onSubmit() {
     console.log(this.requestFormTemplateForm.value);

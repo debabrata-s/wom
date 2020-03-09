@@ -1,0 +1,15 @@
+mat-form-field, .text-sm{
+    font-size: 0.85em;
+}
+.btn-group{
+    width: 100%;
+}
+.to-align{
+    margin-top: 20px;
+    font-size: 0.85em;
+}
+.btn-group > .active{
+    transition: all 100ms ease 0s;
+    background: linear-gradient(251deg, rgb(0, 174, 255), rgb(0, 118, 255)) rgb(0, 123, 255);
+    color: white;
+}

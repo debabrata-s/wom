@@ -1,66 +1,311 @@
-<div class="content-wrapper">
-    <!-- title for the page -->
-    <div class="page-header">
-        <app-page-title [pageTitle]="pageTitle"></app-page-title>
-    </div>
-    <div class="card card-secondary">
-        <div class="toolbar">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-sm btn-outline-secondary" [class.active]="viewMode == 'tab1'"
-                    rel="tab1" (click)="viewMode ='tab1'"><i class="icon-list"></i> List
-                    View</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary" [class.active]="viewMode == 'tab2'"
-                    rel="tab2" (click)="viewMode ='tab2'"><i class="icon-map"></i> Map
-                    View</button>
-            </div>
-
-
-            <div class="align-right">
-                <div class="dropdown" style="display: inline;">
-                    <button type="button" class="btn btn-icon" id="pageMenus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="icon-options-vertical"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="pageMenus">
-                        <a *ngFor="let pageMenu of pageMenus" class="dropdown-item" href="#!">{{pageMenu}}</a>
-                      </div>
+<mat-drawer-container hasBackdrop="true" style="height: 100%;">
+    <mat-drawer #drawer mode="over" position="end" style="width: 800px;">
+        <div class="card" style="margin-top: 70px;">
+            <div class="card-header">
+                <div class="d-inline">
+                    <h4>{{selectedLocation.Title}}</h4>
+                    <small class="text-muted">{{selectedLocation.Address}}</small>
                 </div>
-                
-                <button type="button" class="btn btn-sm btn-danger btn-rounded btn-fw"
-                    [routerLink]="['location-form']">Location</button>
+                <div class="float-right">
+                    <a class="pr-2" (click)="deleteLocation()"><i class="icon-trash"></i></a>
+                    <a class="pr-2" (click)="drawer.toggle();openLocationEditDrawer()"><i class="icon-pencil"></i></a>
+                    <a (click)="drawer.toggle()"><i class="icon-close"></i></a>
+                </div>
+            </div>
+            <mat-tab-group>
+                <mat-tab label="Assets">
+                    <br>
+                    <div class="float-right">
+                        <button type="button" class="btn btn-inverse-primary btn-sm btn-rounded mr-4"
+                            routerLink="../assets/asset-form">+ Asset</button>
+                    </div>
+                    <br>
+                    <hr>
+                    <div *ngFor="let asset of assets" class="detail-lists p-2 m-0">
+                        <div class="container" style="font-size: 0.87em;">
+                            <div class="row">
+                                <div class="col">
+                                    {{asset.name}}<br>
+                                    <span class="text-muted">{{asset.desc}}</span>
+                                </div>
+                                <div class="col">
+                                    <span class="align-right">Model: <span
+                                            class="text-muted">{{asset.model}}</span></span><br>
+                                    <span class="align-right">Barcode: <span
+                                            class="text-muted">{{asset.barcode}}</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Files">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>
+                                Add a File:
+                            </label>
+                            <div class="drop-zone">
+                            </div>
+                        </div>
+                        <a (click)="addFile()"><small>+ Add Uploaded Files</small></a>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Work Orders">
+                    <br>
+                    <div class="float-right">
+                        <button type="button" class="btn btn-inverse-primary btn-sm btn-rounded mr-4"
+                            (click)="addWorkOrder()">+ Work
+                            Order</button>
+                    </div>
+                    <br>
+                    <hr>
+                    <div *ngFor="let wo of workOrders" class="detail-lists p-2 m-0">
+                        <div class="container" style="font-size: 0.87em;">
+                            <div class="row">
+                                <div class="col">
+                                    {{wo.name}}<br>
+                                    Last updated: <span class="text-muted">{{wo.last_updated}}</span>
+                                    Due date: <span class="text-muted">{{wo.due_date}}</span>
+                                </div>
+                                <div class="col">
+                                    <span class="align-right text-muted">{{wo.status}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Parts">
+                    <br>
+                    <div class="float-right">
+                        <button type="button" class="btn btn-inverse-primary btn-sm btn-rounded mr-4"
+                            routerLink="../parts/part-form">+ Part</button>
+                    </div>
+                    <br>
+                    <hr>
+                    <div *ngFor="let asset of assets" class="detail-lists p-2 m-0">
+                        <div class="container" style="font-size: 0.87em;">
+                            <div class="row">
+                                <div class="col">
+                                    {{asset.name}}<br>
+                                    <span class="text-muted">{{asset.desc}}</span>
+                                </div>
+                                <div class="col">
+                                    <span class="align-right">Model: <span
+                                            class="text-muted">{{asset.model}}</span></span><br>
+                                    <span class="align-right">Barcode: <span
+                                            class="text-muted">{{asset.barcode}}</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="People">
+                    <table class="table">
+                        <tr style="background-color: rgb(231, 231, 231);">
+                            <td>
+                                <h5>Assigned Users</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>user</td>
+                        </tr>
+                    </table>
+                    <table class="table">
+                        <tr style="background-color: rgb(231, 231, 231);">
+                            <td>
+                                <h5>Assigned Vendors</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>user</td>
+                        </tr>
+                    </table>
+
+
+                </mat-tab>
+                <mat-tab label="Custom">
+                    <table class="table table-striped mt-4" style="font-size: 0.87em;">
+                        <tr>
+                            <td>custom item 1</td>
+                            <td>dollar</td>
+                            <td>23</td>
+                        </tr>
+                        <tr>
+                            <td>custom item 2</td>
+                            <td>unit</td>
+                            <td>cost</td>
+                        </tr>            
+                    </table>
+                </mat-tab>
+                <mat-tab label="Floor Plans">
+                    <div class="d-block p-3" style="background-color: rgb(240, 240, 240); height: 55px;">
+                        <span class="text-muted" style="font-size: 0.87em;">This location doesn’t have any floor plans
+                            added yet!</span>
+                        <div class="float-right">
+                            <button type="button" class="btn btn-inverse-primary btn-sm btn-rounded mr-4"
+                                (click)="addFloorPlan()">+ Floor Plan
+                            </button>
+                        </div>
+                    </div>
+
+                </mat-tab>
+            </mat-tab-group>
+
+        </div>
+    </mat-drawer>
+    <div class="content-wrapper">
+
+        <!-- title for the page -->
+        <div class="page-header">
+            <app-page-title [pageTitle]="pageTitle"></app-page-title>
+        </div>
+        <div class="card card-secondary">
+
+            <div class="row toolbar">
+                <div class="col-3">
+                    <!-- <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                            [class.active]="viewMode == 'tab1'" rel="tab1" (click)="viewMode ='tab1'"><i
+                                class="icon-list"></i> List
+                            View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                            [class.active]="viewMode == 'tab2'" rel="tab2" (click)="viewMode ='tab2'"><i
+                                class="icon-map"></i> Map
+                            View</button>
+                    </div> -->
+                    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" value="list">
+                        <mat-button-toggle (click)="viewMode ='tab1'" value="list"><span><i class="icon-list"></i> List
+                                View</span></mat-button-toggle>
+                        <mat-button-toggle (click)="viewMode ='tab2'" value="map"><span><i class="icon-map"></i> Map
+                                View</span></mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+
+                <div class="col-4" style="padding-top: 5px;">
+                    <i class="icon-magnifier" id="search-icon"></i>
+                    <input (keyup)="applyFilter($event.target.value)" class="search-input" placeholder="Search">
+                </div>
+
+                <div class="col-5">
+                    <div class="align-right">
+                        <div class="dropdown" style="display: inline;">
+                            <button type="button" class="btn btn-icon" id="pageMenus" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="icon-options-vertical"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="pageMenus">
+                                <a *ngFor="let pageMenu of pageMenus" class="dropdown-item"
+                                    (click)="openPageMenu(pageMenu)">{{pageMenu}}</a>
+                            </div>
+                        </div>
+
+                        <!-- <button type="button" class="btn btn-sm btn-danger btn-rounded btn-fw"
+                            [routerLink]="['location-form']">Location</button> -->
+                        <button type="button" class="btn btn-sm btn-danger btn-rounded btn-fw"
+                            (click)="openLocationDrawer()">Location</button>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="main-content">
-        <!-- demo content -->
-        <div class="col-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
+
+        <div class="main-content">
+            <div class="col-12 grid-margin stretch-card ng-star-inserted">
+                <div class="card">
                     <div class="tab-slider--container" [ngSwitch]="viewMode">
                         <div id="tab1" class="tab-slider--body" *ngSwitchCase="'tab1'">
-                            <h2>List View</h2>
-                            <p>Toggle switch style tab navigation. Currently only works with two tabs.</p>
-                            <p>Donec ullamcorper nulla non metus auctor fringilla. Donec ullamcorper nulla non metus
-                                auctor
-                                fringilla. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis
-                                vestibulum. Nullam
-                                id
-                                dolor id nibh ultricies vehicula ut id elit. Nulla
-                                vitae elit libero, a pharetra augue.</p>
-                        </div>
-                        <div id="tab2" class="tab-slider--body" *ngSwitchCase="'tab2'">
-                            <h2>Map View</h2>
-                            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                                Cras mattis
-                                consectetur purus sit amet fermentum. Nulla vitae elit libero, a pharetra augue. Cras
-                                mattis
-                                consectetur purus sit amet fermentum. Aenean eu leo
-                                quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
-                        </div>
 
+                            <div class="center" *ngIf="locations.length === 0">
+                                <img src="assets/images/location.svg" alt="" class="m_b_30">
+                                <h4 class="m_b_20">Locations</h4>
+                                <p class="text_primary m_b_20">Manage your primary locations and sub-locations.</p>
+                                <p class="text_primary m_b_20">Click the + button above to create your first
+                                    location.
+                                </p>
+                            </div>
+                            <div class="" *ngIf="locations.length > 0">
+                                <div class="dropdown mt-2 float-right">
+                                    <button type="button" class="btn btn-light btn-sm mr-2" style="padding:2px 10px;"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <small>Customize</small>
+                                    </button>
+                                    <div class="dropdown-menu p-2 " aria-labelledby="dropdownMenuButton">
+                                        <div class="checkbox" *ngFor="let option of displayedColumns">
+                                            <label class="text-muted"><input type="checkbox" [(ngModel)]="option.show"
+                                                    (click)="$event.stopPropagation()"> {{option.title}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table mat-table [dataSource]="dataSource" matSort>
+
+                                    <!-- Checkbox Column -->
+                                    <ng-container matColumnDef="select">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            <mat-checkbox (change)="$event ? masterToggle() : null"
+                                                [checked]="selection.hasValue() && isAllSelected()"
+                                                [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                                [aria-label]="checkboxLabel()">
+                                            </mat-checkbox>
+                                        </th>
+                                        <td mat-cell *matCellDef="let row">
+                                            <mat-checkbox (click)="$event.stopPropagation()"
+                                                (change)="$event ? selection.toggle(row) : null"
+                                                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                                            </mat-checkbox>
+                                        </td>
+                                    </ng-container>
+
+                                    <!-- Position Column -->
+                                    <ng-container matColumnDef="Title">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name of Location</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.Title}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Address">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.Address}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="created_at">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Created At</th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{element.created_at | date :'shortDate'}} </td>
+                                    </ng-container>
+
+
+
+                                    <tr mat-header-row *matHeaderRowDef="getDisplayedColumns();"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"
+                                        (click)="detailsDrawer(row);drawer.toggle()">
+                                    </tr>
+                                </table>
+                                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card center ">
+                        <div class="tab-slider--container" [ngSwitch]="viewMode">
+
+                            <div id="tab2" class="tab-slider--body" *ngSwitchCase="'tab2'">
+
+                                <div class="card-body">
+                                    <h4 class="m_b_20">Locations Map</h4>
+                                    <app-map></app-map>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
+</mat-drawer-container>

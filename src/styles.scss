@@ -1,66 +1,154 @@
-
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
-// Plus imports for other components in your app.
-
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat-core();
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$wom-stellar-primary: mat-palette($mat-indigo);
-$wom-stellar-accent: mat-palette($mat-pink, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$wom-stellar-warn: mat-palette($mat-red);
-
-// Create the theme object (a Sass map containing all of the palettes).
-$wom-stellar-theme: mat-light-theme($wom-stellar-primary, $wom-stellar-accent, $wom-stellar-warn);
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include angular-material-theme($wom-stellar-theme);
-
-/* You can add global styles to this file, and also import other style files */
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-.full-width{
-    // margin-top:70px;
-    width:100%;
+html,
+body {
+  height: 100%;
 }
-.page-body-wrapper{
-    min-height: 100vh;
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-.content-wrapper{
-    margin-top:70px;
-    width:100%;
-    height: calc(100% - 70px);
+
+.full-width {
+  // margin-top:70px;
+  width: 100%;
 }
-.align-right{
-    float: right;
+.page-body-wrapper {
+  min-height: 100vh;
 }
-.filterbar>.btn-fw{
-    min-width: 100px;
+.content-wrapper {
+  margin-top: 70px;
+  width: 100%;
+  height: calc(100% - 70px);
+  overflow: hidden;
 }
-.toolbar{
-    padding: 20px;
+.align-right {
+  float: right;
 }
-.filterbar{
-    padding: 20px;
+.filterbar > .btn-fw {
+  min-width: 100px;
 }
+.toolbar {
+  padding: 20px;
+}
+.filterbar {
+  padding: 20px;
+}
+.main-content {
+  margin-top: 20px;
+}
+
+.dropdown-item {
+  font-size: 0.875rem;
+}
+
+// .btn {
+//   margin-left: 5px;
+// }
+.brand {
+  margin: 30px;
+}
+mat-form-field {
+  width: 100%;
+}
+.search-field {
+  width: 250px;
+  padding: 10px;
+}
+.close-btn {
+  border-style: none;
+  background-color: inherit;
+  font: 14px/100% arial, sans-serif;
+  position: absolute;
+  right: 5px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #fff;
+  top: 5px;
+}
+.close-btn:after {
+  content: "✖";
+}
+.submit-btn {
+  width: 150px !important;
+  min-width: unset !important;
+  float: right;
+}
+.small-input {
+  height: 30px;
+  width: 450px;
+  display: block;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(214, 214, 214);
+  border-radius: 3px;
+  padding: 5px;
+  margin-bottom: 5px;
+  font-size: small;
+}
+.small-input:focus {
+  border-color: lightblue;
+}
+.small-input:hover {
+  border-color: rgb(199, 199, 199);
+}
+
+.drop-zone {
+  width: 100%;
+  height: 100px;
+  border-style: dashed;
+  border-color: rgb(190, 190, 190);
+  border-radius: 5px;
+}
+//testing
+.ngx-file-drop__drop-zone {
+  border: none !important;
+}
+//align checkbox in the table
+.mat-checkbox-layout {
+  margin-top: 7px;
+  margin-right: 10px;
+}
+//to allign the check box in dropdown in filters of work order page
+.dropdown-menu > mat-checkbox {
+  display: block;
+}
+//to fix on dynamic top value on mat dialog pop
+.cdk-global-scrollblock {
+  position: static;
+  overflow: hidden !important;
+}
+//  CUSTOM MAT-TABLE
+.mat-row:hover {
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 10px;
+  border-radius: 6px;
+  z-index: 999;
+  transform: translate(1px, 1px);
+}
+
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+  padding: 0;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+//added because of fixedsize for the filter and other drawer
 .main-content{
-    margin-top: 20px;
+  min-height: 600px;
 }
-
-.dropdown-item{
-    font-size: .875rem;
+//scroll styling
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+	background-color: #F5F5F5;
 }
-.btn{
-    margin-left: 5px;
+/* Track */
+::-webkit-scrollbar-track {
+	border-radius: 10px;
+  background-color: #F5F5F5;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+	background-color: rgb(180, 180, 180);
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(141, 141, 141); 
 }

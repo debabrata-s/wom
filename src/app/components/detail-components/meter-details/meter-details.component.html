@@ -1,0 +1,40 @@
+<div class="card">
+    <div class="card-header">
+        New Meter <br>
+        <small class="text-success"><i class="icon-badge"></i> Reading due today</small>
+        <div class="d-inline float-right">
+            <a><i class="icon-pencil mr-2" (click)="editMeter()"></i></a>
+            <a><i class="icon-trash mr-2" (click)="deleteMeter()"></i></a>
+            <!-- <a><i class="icon-close"></i></a> -->
+        </div>
+    </div>
+
+    <mat-tab-group>
+        <mat-tab label="Details">
+            <div class="card-body">
+                <small class="text-muted">New meter reading (psi)</small>
+                <div class="input-group input-group-sm">
+                    <input type="number" class="form-control" placeholder="Enter current meter value">
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-primary" type="button">Add Reading</button>
+                    </div>
+                </div>
+            </div>
+
+            <h6 class="p-2" style="background-color: #f8f9f9;">Details</h6>
+            <div class="pl-4">
+                <img src="" alt="">
+                <p><span class="text-muted mr-2">Meter Reading Frequency</span> <span>Every 7 days</span></p>
+                <p><span class="text-muted mr-2">Assigned To</span> <a>James H</a></p>
+            </div>
+
+            <h6 class="p-2" style="background-color: #f8f9f9;">Work Order Triggers</h6>
+            <div class="pl-4 mt-2" style="color: #007bff!important;"><a (click)="addWorkOrderTrigger()"><small>+ New Work Order Trigger</small></a></div>
+        </mat-tab>
+        <mat-tab label="History">
+            <div class="card-body">
+                <p class="text-center">No readings yet</p>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

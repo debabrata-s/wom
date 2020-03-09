@@ -1,0 +1,157 @@
+<div class="card">
+  <div class="card-header">
+    <h5 style="margin-bottom: 0px;">Work Order Trigger</h5>
+    <small>new meter</small>
+  </div>
+  <div class="card-body">
+    <div class="btn-group btn-group-sm" role="group" style="width: 100%;">
+      <button type="button" class="btn btn-outline-primary">Trigger every time</button>
+      <button type="button" class="btn btn-outline-primary">One-time trigger</button>
+    </div>
+    <div class="row mt-2">
+      <div class="col-6">
+        <mat-form-field>
+          <mat-label>When Meter Reading</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let triggerType of triggerTypes" [value]="triggerType">
+              {{triggerType}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field>
+          <mat-label>Value (psi)</mat-label>
+          <input matInput placeholder="Enter number" type="number">
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-form-field>
+      <mat-label>Work Order Title</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Work Order Description (Optional)</mat-label>
+      <textarea matInput rows="5"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Assign Main Worker</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let worker of workers" [value]="worker">
+          {{worker}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <small class="text-muted">Add Images</small>
+    <div class="drop-zone mb-2">
+    </div>
+    <mat-form-field>
+      <mat-label>Estimated Duration (hours)</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+    <div class="btn-group mb-2 w-100" role="group">
+      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="selection1=1" [class.active]="selection1===1">None</button>
+      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="selection1=2" [class.active]="selection1===2">Low</button>
+      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="selection1=3" [class.active]="selection1===3">Medium</button>
+      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="selection1=4" [class.active]="selection1===4">High</button>
+    </div>
+    <mat-form-field>
+      <mat-label>Assign Category</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{category}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Assign Additional Worker</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let worker of workers" [value]="worker">
+          {{worker}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Assign Team</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let team of teams" [value]="team">
+          {{team}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Assign to a Facility Location</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let location of locations" [value]="location">
+          {{location}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Assign Asset</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let asset of assets" [value]="asset">
+          {{asset}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <a (click)="selectPurchaseOrder()"><small>+ Add Purchase Order</small></a>
+
+
+  </div>
+  <h6 class="p-2" style="background-color: #f8f9f9;">Form Items</h6>
+  <div class="card-body">
+
+
+    <form [formGroup]="workOrderTriggerForm">
+
+      <div formGroupName="tasks">
+        <div formArrayName="taskItems"
+          *ngFor="let task of workOrderTriggerForm.get('tasks.taskItems')['controls']; let i = index">
+          <div [formGroupName]="i" class="row">
+            <div class="col-2">
+              <h6 class="display-3">{{i+1}}</h6>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Select Type</mat-label>
+                <mat-select formControlName="taskType">
+                  <mat-option *ngFor="let type of types" [value]="type">
+                    {{type}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Task/Form Question</mat-label>
+                <input matInput formControlName="question">
+              </mat-form-field>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+
+
+
+    <a (click)="addTask()"><small>+ Add Task</small></a>
+  </div>
+  <h6 class="p-2" style="background-color: #f8f9f9;">Files</h6>
+  <div class="card-body">
+    <small class="text-muted">Add a File:</small>
+    <div class="drop-zone">
+    </div>
+    <br>
+    <a (click)="selectFile()"><small>+ Add Uploaded File</small></a>
+    <br><br>
+    <mat-checkbox style="font-size: small;">Requires Signature</mat-checkbox>
+
+  </div>
+  <div class="card-footer">
+    <div class="d-inline float-right">
+      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="openMeterDetails()">Cancel</button>
+      <button type="button" class="btn btn-primary btn-sm ml-2" (click)="openMeterDetails()">Add Trigger</button>
+    </div>
+  </div>
+</div>

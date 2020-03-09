@@ -1,0 +1,69 @@
+.center {
+  text-align: center;
+}
+.m_b_30 {
+  margin-bottom: 30px;
+}
+.m_b_20 {
+  margin-bottom: 20px;
+}
+.text_primary {
+  color: #6c757d !important;
+}
+.m_t_30 {
+  margin-top: 30px;
+}
+table {
+  width: 100%;
+}
+:host ::ng-deep .mat-tab-label {
+  height: 40px;
+  padding: 0 30px;
+  min-width: 100px;
+}
+.btn-sm {
+  padding: 0.5rem 0.7rem;
+}
+.search-input {
+  border-width: 1px;
+  padding: 7px;
+  padding-left: 30px;
+  border-radius: 17px;
+  width: 300px;
+  font-size: small;
+}
+.search-input:focus {
+  border: solid 1px #1bdbe0;
+}
+#search-icon {
+  position: absolute;
+  top: 12px;
+  left: 17px;
+}
+mat-button-toggle-group {
+  height: auto;
+  font-size: 0.9em;
+}
+:host ::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+  line-height: 37px;
+  padding: 0 12px;
+}
+.mat-button-toggle-checked {
+  background: linear-gradient(251deg, #00aeff, #0076ff) #007bff;
+  color: #fff;
+}
+.detail-lists:hover{
+  background-color: rgb(240, 240, 240);
+}
+.icon-trash:hover{
+  color: rgb(206, 36, 36);
+}
+.dropdown-item {
+  font-size: 0.95em !important;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem !important;
+}
+.dropdown-item:hover {
+  background-color: #e2f5fc;
+  color: #007bff !important;
+}

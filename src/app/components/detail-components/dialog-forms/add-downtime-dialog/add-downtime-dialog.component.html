@@ -1,0 +1,52 @@
+<h4>Add Downtime</h4>
+<div class="p-2">
+    <mat-form-field>
+        <mat-label>Primary User</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let user of users" [value]="user">
+                {{user}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Operational Status</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let opStatus of opStatus" [value]="opStatus">
+                            {{opStatus}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="input-group">
+                    <input type="number" class="form-control" placeholder="0">
+                    <div class="input-group-append">
+                        <span class="input-group-text">hr</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <div class="input-group">
+                    <input type="number" class="form-control" placeholder="0">
+                    <div class="input-group-append">
+                        <span class="input-group-text">min</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="float-right mt-4">
+        <button type="button" class="btn btn-light btn-sm" (click)="closeDialog()">Cancel</button>
+        <button type="button" class="btn btn-danger btn-sm" (click)="closeDialog()">Add Downtime</button>
+    </div>
+
+</div>

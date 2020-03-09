@@ -1,0 +1,65 @@
+<div class="card-body" style="width: 500px;">
+    <h5>Add Time</h5>
+    <div class="row">
+        <div class="col-8">
+            <mat-form-field>
+                <mat-label>Assigned To</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let user of users" [value]="user">
+                        {{user}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-4">
+            <mat-form-field>
+                <mat-label>Hourly Rate</mat-label>
+                <input matInput type="number">
+                <span matPrefix>$&nbsp;</span>
+            </mat-form-field>
+        </div>
+    </div>
+    <br>
+    <mat-slide-toggle><small class="pl-2">Include the hourly rate in the total cost<br><em class="text-muted">This will
+                add a new cost item to total cost spent on the Work Order.</em></small></mat-slide-toggle>
+    <br><br>
+    <div class="row">
+        <div class="col-6">
+            <mat-form-field>
+                <mat-label>Work Started At</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field>
+                <mat-label>Hours</mat-label>
+                <input matInput type="number">
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field>
+                <mat-label>Minutes</mat-label>
+                <input matInput type="number">
+            </mat-form-field>
+        </div>
+    </div>
+    <br>
+    <mat-slide-toggle><small class="pl-2">Include this time in the total time<br><em class="text-muted">This will add
+                the duration to the total time spent on the Work Order.</em></small></mat-slide-toggle>
+    <br>
+    <br>
+    <mat-form-field>
+        <mat-label>Timer Category</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let item of timerOptions" [value]="item">
+                {{item}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="float-right mt-4">
+        <button type="button" class="btn btn-light btn-sm mr-2" (click)="closeDialog()">Cancel</button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="closeDialog()">Add</button>
+    </div>
+</div>

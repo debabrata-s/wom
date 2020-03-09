@@ -3,94 +3,115 @@
   <div class="page-header">
     <app-page-title [pageTitle]="pageTitle"></app-page-title>
   </div>
-  <div class="card card-secondary">
+  <div class="card card-secondary border-bottom">
     <div class="toolbar">
-
+      <div class="d-inline">
+        <i class="icon-magnifier" id="search-icon"></i>
+        <input class="search-input" placeholder="Search">
+      </div>
       <div class="align-right">
-        <button type="button" class="btn btn-sm btn-link btn-fw"
+        <button type="button" class="btn btn-sm btn-link"
           [routerLink]="['../form-templates/request-form-template']">Edit request form</button>
-        <button type="button" class="btn btn-sm btn-danger btn-rounded btn-fw" [routerLink]="['request-form']">Request
+        <button type="button" class="btn btn-sm btn-danger btn-rounded" (click)="openRequestForm()">Request
         </button>
       </div>
-
     </div>
   </div>
-  <div class="card card-secondary">
+
+  <div class="card card-secondary  border-bottom">
     <div class="filterbar">
-      <button type="button" class="btn btn-outline-secondary btn-rounded btn-sm"><i class="icon-magic-wand"></i>
-        Filter</button>
-
-      <div class="btn-group">
-        <button type="button" class="btn btn-outline-secondary dropdown-toggle btn-sm" data-toggle="dropdown"
-          aria-expanded="false">Sort by:</button>
-        <div class="dropdown-menu" x-placement="top-start"
-          style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, -110px, 0px);">
-          <a class="dropdown-item">Due Date</a>
-          <a class="dropdown-item">Date Created</a>
-          <a class="dropdown-item">Last Updated</a>
-        </div>
+      <!-- <button type="button" class="btn btn-outline-secondary btn-rounded btn-sm"><i class="icon-magic-wand"></i>
+        Filter</button> -->
+      <button mat-raised-button (click)="openFilterDrawer();drawer.toggle();"><i
+          class="icon-equalizer mr-1"></i>Filter</button>
+      <div class="d-inline ml-2 dropdown float-right">
+        <button class="btn btn-light btn-sm text-sm" type="button" data-toggle="dropdown">Sort By: {{selectedSorting}}</button>
+        <ul class="dropdown-menu">
+          <li class="dropdown-item" *ngFor="let item of sortOptions"><a (click)="selectedSorting=item">{{item}}</a></li>
+        </ul>
       </div>
-
-      <div class="btn-group">
-        <button type="button" class="btn btn-outline-secondary dropdown-toggle btn-sm" data-toggle="dropdown"
-          aria-expanded="false">Show:</button>
-        <div class="dropdown-menu" x-placement="top-start"
-          style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, -110px, 0px);">
-          <a class="dropdown-item">All</a>
-          <a class="dropdown-item">Reactive</a>
-          <a class="dropdown-item">Repeating</a>
-        </div>
+      <div class="d-inline ml-2 dropdown float-right">
+        <button class="btn btn-light btn-sm text-sm" type="button" data-toggle="dropdown">Show: {{selectedShowOption}}</button>
+        <ul class="dropdown-menu">
+          <li class="dropdown-item" *ngFor="let item of showOptions"><a (click)="selectedShowOption=item">{{item}}</a></li>
+        </ul>
       </div>
     </div>
+
+    <mat-drawer-container hasBackdrop="false" style="height: 100%; background-color: rgb(243, 243, 243);">
+      <mat-drawer #drawer mode="side" [position]="position">
+        <div *ngIf="drawerName==='filter'" class="card" style="width: 350px;">
+          <div class="card-header">
+            <a id="close-btn" (click)="drawer.toggle()" style="color: #ff4d6b !important;">
+              <mat-icon>cancel</mat-icon>
+            </a>
+            <a (click)="drawer.toggle()" class="float-right text-primary"><small>Save Filter</small></a>
+          </div>
+          <div class="card-body">
+            <app-request-filter></app-request-filter>
+          </div>
+        </div>
+        <div *ngIf="drawerName==='form'" class="card" style="width: 470px;">
+          <div class="card-header">
+            <div class="d-inline float-right">
+              <button type="button" class="btn btn-inverse-secondary btn-sm mr-2"
+                (click)="drawer.toggle()">Cancel</button>
+              <button type="button" class="btn btn-secondary btn-sm mr-2" (click)="drawer.toggle()">Save</button>
+              <button type="button" class="btn btn-danger btn-sm mr-2" (click)="drawer.toggle()">Reject</button>
+              <button type="button" class="btn btn-success btn-sm" (click)="drawer.toggle()">Approve</button>
+            </div>
+          </div>
+          <app-request-edit-form></app-request-edit-form>
+          <div class="card-footer">
+            <div class="d-inline float-right">
+              <button type="button" class="btn btn-inverse-secondary btn-sm mr-2"
+                (click)="drawer.toggle()">Cancel</button>
+              <button type="button" class="btn btn-secondary btn-sm mr-2" (click)="drawer.toggle()">Save</button>
+              <button type="button" class="btn btn-danger btn-sm mr-2" (click)="drawer.toggle()">Reject</button>
+              <button type="button" class="btn btn-success btn-sm" (click)="drawer.toggle()">Approve</button>
+            </div>
+          </div>
+        </div>
+      </mat-drawer>
+
+
+      <div class="main-content" style="height: 600px;">
+        <div class="card m-auto" style="width: 550px; border-radius: 5px;">
+          <div class="p-4 border-bottom">
+            <small class="text-muted">1 Filter applied</small>
+            <span class="float-right text-sm" style="color: #007bff !important"><a><i
+                  class="icon-refresh mr-2"></i>Reset Filters</a></span>
+          </div>
+          <div class="p-2">
+            <mat-chip-list #chipList aria-label="filter selection">
+              <mat-chip *ngFor="let filter of filters" [selectable]="selectable" [removable]="removable"
+                (removed)="remove(filter)">
+                {{filter.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="card m-auto" style="width: 550px; border-radius: 5px; cursor: pointer;"
+          (click)="openFormDrawer();drawer.toggle()" [ngClass]="status ? 'success' : 'danger'">
+          <div class="row p-3">
+            <div class="col">
+              <span class="text-sm text-primary">Low</span><br>
+              <span class="text-sm">New Req</span><br>
+              <small class="text-muted mr-2">Requested By</small>
+              <span class="text-sm">Sam</span>
+
+            </div>
+            <div class="col">
+              <span class="text-sm float-right">Requested</span><br>
+              <small class="text-muted pos_br"><em>Created 5 hours ago </em></small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-drawer-container>
   </div>
 
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Hoverable Table</h4>
-      <p class="card-description"> Add class <code>.table-hover</code>
-      </p>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Product</th>
-            <th>Sale</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Jacob</td>
-            <td>Photoshop</td>
-            <td class="text-danger"> 28.76% <i class="icon-arrow-down-circle"></i></td>
-            <td><label class="badge badge-danger">Pending</label></td>
-          </tr>
-          <tr>
-            <td>Messsy</td>
-            <td>Flash</td>
-            <td class="text-danger"> 21.06% <i class="icon-arrow-down-circle"></i></td>
-            <td><label class="badge badge-warning">In progress</label></td>
-          </tr>
-          <tr>
-            <td>John</td>
-            <td>Premier</td>
-            <td class="text-danger"> 35.00% <i class="icon-arrow-down-circle"></i></td>
-            <td><label class="badge badge-info">Fixed</label></td>
-          </tr>
-          <tr>
-            <td>Peter</td>
-            <td>After effects</td>
-            <td class="text-success"> 82.00% <i class="icon-arrow-up-circle"></i></td>
-            <td><label class="badge badge-success">Completed</label></td>
-          </tr>
-          <tr>
-            <td>Dave</td>
-            <td>53275535</td>
-            <td class="text-success"> 98.05% <i class="icon-arrow-up-circle"></i></td>
-            <td><label class="badge badge-warning">In progress</label></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
 </div>

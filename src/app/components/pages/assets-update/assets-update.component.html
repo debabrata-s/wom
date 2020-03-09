@@ -1,0 +1,63 @@
+<div class="content-wrapper">
+    <!-- title for the page -->
+    <div class="page-header">
+        <app-page-title [pageTitle]="pageTitle"></app-page-title>
+    </div>
+
+
+    <div class="main-content">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <i class="icon-close" style="font-size: 20px;"></i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 center">
+                            <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
+                                        (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                                            <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                                              
+                                              <button type="button" class="btn btn-danger" (click)="openFileSelector()">
+                                                  Upload CSV</button>
+                                            </ng-template>
+                                        </ngx-file-drop>
+                                        <div class="upload-table">
+                                            <table class="table">
+                                            
+                                                <tbody class="upload-name-style">
+                                                    <tr *ngFor="let item of files; let i=index">
+                                                        <td><strong>{{ item.relativePath }}</strong></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                            <div class="m_t_25">
+                                <p class="text_primary">Max 1000 Records. Documents must be saved and uploaded as a CSV file (excel is not
+                                    supported)</p>
+                            </div>
+                            <div class="m_t_25">
+                                <a href="#">Download Current Assets</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <div class="m_t_25">
+                                <ul class="text_primary">
+                                    <li>Download the sample template which has the headers (Leave only that headers which you want to update)</li>
+                                    <li>Each row starting at row 2 will update the asset which matches ID in first column. </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

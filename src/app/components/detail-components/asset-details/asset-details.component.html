@@ -1,0 +1,287 @@
+<div class="pb-4">
+    <a (click)="closeDialog();"><span class="close">&times;</span></a>
+    <a class="float-right" (click)="deleteAsset()"><small class="text-muted">Delete</small></a>
+    <span class="float-right p-2"></span>
+    <a class="float-right" (click)="editAsset()"><small class="text-muted">Edit</small></a>
+</div>
+<div class="container p-4">
+    <div class="row">
+        <div class="col-1">
+            <i class="icon-book-open icon-md" style="color: rgb(175, 175, 175);"></i>
+        </div>
+        <div class="col">
+            <h3>Refrigerator</h3>
+            <h5 class="text-muted">short description on the asset</h5>
+        </div>
+    </div>
+
+</div>
+<mat-tab-group style="font-size: 0.85em;">
+    <mat-tab label="Details">
+        <div class="card mt-4">
+            <mat-form-field style="width: 300px;">
+                <mat-label>Status</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let status of status" [value]="status">
+                        {{status}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <h5>Details</h5>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="text-muted">
+                            Name
+                        </div>
+                        name
+                        <p></p>
+                        <div class="text-muted">
+                            Type
+                        </div>
+                        type
+                        <p></p>
+                        <div class="text-muted">
+                            Placed in Service
+                        </div>
+
+                        <div class="text-muted">
+                            Area
+                        </div>
+                        area
+                        <p></p>
+                        <div class="text-muted">
+                            Last Time Checked In
+                        </div>
+                        Feb 5,
+                        <p></p>
+                        <h5>Asset Status</h5>
+                        <mat-checkbox>Active</mat-checkbox>
+                        <p></p>
+                        <h5>Depreciation</h5>
+                        <p></p>
+                        <h5>Location Details</h5>
+                        <div class="text-muted">
+                            fsakjlkfaslg
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="text-muted">
+                            ID
+                        </div>
+                        tuiew
+                        <p></p>
+                        <div class="text-muted">
+                            Barcode
+                        </div>
+
+                        <img src="assets/images/qr/asset_qr.png" alt="" style="width: 150px; height: 150px;">
+                        <br>
+                        fasjfak
+                        <p></p>
+                        <div class="text-muted">
+                            Warranty Expiration
+                        </div>
+                        <p></p>
+                        <div class="text-muted">
+                            Description
+                        </div>
+                        <div class="text-muted">
+                            Number of Checkouts
+                        </div>
+                        0
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </mat-tab>
+    <mat-tab label="Files">
+        <div class="card mt-4">
+            <div class="form-group">
+                <label>
+                    Add a File:
+                </label>
+                <div class="drop-zone">
+                </div>
+            </div>
+            <a (click)="openFileDialog()">Add Uploaded File</a>
+        </div>
+    </mat-tab>
+    <mat-tab label="Work Orders">
+        <div class="card mt-4">
+            <div class="mb-2">
+                <button type="button" class="btn btn-inverse-primary btn-sm btn-rounded float-right"
+                    (click)="addWorkOrder()">+ Work
+                    Order</button>
+            </div>
+            <mat-card>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <h5>Work order 1</h5>
+                            <small class="text-muted">Last Updated 7 hours ago Feb 13, 2020</small>
+                        </div>
+                        <div class="col-2">
+                            <h5 style="color: red;">Open</h5>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </mat-tab>
+    <mat-tab label="Updates">
+        <mat-card><span class="text-muted">Asset1 Non-Operational by Sam Smith @ Monday</span></mat-card>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Post an Update" aria-label="Recipient's username"
+                aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-danger" type="button">Post Update</button>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Parts">
+        <div class="card mt-4">
+            <mat-card>
+                <div class="row">
+                    <div class="col">
+                        <h5>Compressor</h5>
+                        <small class="text-muted">Model no. 1923</small>
+                        <small class="text-muted ml-2">Cost: 87</small>
+                        <small class="text-muted ml-2">Quantity: 30</small>
+                    </div>
+                </div>
+            </mat-card>
+            <a class="mt-2" (click)="addPart()">Add Part</a>
+        </div>
+
+    </mat-tab>
+    <mat-tab label="Assets">
+        <div class="card mt-4">
+            <mat-card>
+            <div class="row">
+                <div class="col">
+                    <h5>Asset1</h5>
+                    <small class="text-muted">Model: 5029 series</small>
+                    <small class="text-muted ml-2">Barcode: 78954523</small>
+                    <small class="text-muted ml-2">Category: Refridgrator</small>
+                    <small class="text-muted ml-2">Description: this is some part of the jaor</small>
+
+                </div>
+                <div class="col-2">
+                    <h5 style="color: red;">Open</h5>
+                </div>
+            </div>
+        </mat-card>
+        </div>
+        
+    </mat-tab>
+    <mat-tab label="Meters">
+        <div class="container p-4 mt-4">
+            <div class="row">
+                <div class="col-6">
+                    <input type="text" class="small-input">
+                </div>
+                <div class="col">
+                    <div class="float-right">
+                        <button class="btn btn-danger btn-sm" (click)="addReading()">+ Add Reading</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </mat-tab>
+    <mat-tab label="Depreciation">
+        <div class="d-flex justify-content-around mt-4">
+            <div>
+                Purchase Price:
+                <strong>$90</strong>
+            </div>
+            <div>
+                Residual Price:
+                <strong>$5</strong>
+            </div>
+            <div>
+                Useful Life:
+                <strong>5 years</strong>
+            </div>
+        </div>
+        <mat-card>
+            <div class="d-flex justify-content-around">
+                <div>
+                    $9.40 / year <br> <span class="text-muted">Depreciation rate
+                    </span>
+                </div>
+                <div>
+                    Feb 05, 2025<br><span class="text-muted">End of useful life</span>
+                </div>
+            </div>
+        </mat-card>
+        <img src="assets/images/graphs/depreciation_rate.png" alt="" class="mt-4">
+        <table class="mt-4" style="width: 100%;">
+            <tr>
+                <th>Years</th>
+                <th>Depreciation Value</th>
+            </tr>
+            <tr>
+                <td>Feb 05, 2020</td>
+                <td>$50.00</td>
+            </tr>
+            <tr>
+                <td>Feb 05, 2021</td>
+                <td>$40.60</td>
+            </tr>
+            <tr>
+                <td>Feb 05, 2022</td>
+                <td>$31.20</td>
+            </tr>
+            <tr>
+                <td>Feb 05, 2023</td>
+                <td>$21.80</td>
+            </tr>
+        </table>
+    </mat-tab>
+    <mat-tab label="Downtime">
+        <div class="mt-4">
+            <button class="btn btn-sm btn-danger" (click)="addDowntime()">+ Add Downtime</button>
+        </div>
+        <hr>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <mat-form-field>
+                        <mat-label>Start Date</mat-label>
+                        <input matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field>
+                        <mat-label>End Date</mat-label>
+                        <input matInput [matDatepicker]="picker2">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <mat-card>
+            <div class="row">
+                <div class="col">
+                    Uptime Percentage<br>
+                    100%
+                </div>
+                <div class="col">
+                    <div class="d-flex justify-content">
+                        <div class="mr-4">Downtime Percentage <br> 0.00%</div>
+                        <div>Total Downtime <br> 0hr 0min</div>
+                    </div>
+
+                </div>
+            </div>
+
+        </mat-card>
+
+    </mat-tab>
+</mat-tab-group>

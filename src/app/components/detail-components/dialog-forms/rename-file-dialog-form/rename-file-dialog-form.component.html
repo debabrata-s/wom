@@ -1,0 +1,11 @@
+<div class="card p-2" style="width: 400px;">
+    <h4>Rename</h4>
+    <mat-form-field appearance="outline" style="font-size: 0.85em;">
+        <mat-label>Change current file name</mat-label>
+        <input matInput [value]="filename">
+      </mat-form-field>
+    <div class="ml-auto mt-4">
+        <button type="button" class="btn btn-secondary btn-sm mr-2" (click)="closeDialog()">Cancel</button>
+        <button type="button" class="btn btn-danger btn-sm" (click)="closeDialog()">Rename</button>
+    </div>
+</div>

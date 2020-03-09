@@ -1,1 +1,108 @@
-<h3>Assistant Page</h3>
+<div class="content-wrapper">
+    <!-- title for the page -->
+    <div class="page-header">
+        <app-page-title [pageTitle]="pageTitle"></app-page-title>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+
+            <div class="card text-center b_radius">
+                <div class="card-header card-fix">
+                    <i class="icon-paper-plane  m_r_6"></i> Assets
+                    <p class="f_right"><i class="icon-close"></i></p>
+                </div>
+
+
+
+                <div class="card-body color-body">
+                    <h5 class="card-title">No assets added</h5>
+                    <p class="card-text">Managing your assets is an integral feature of UpKeep and will help you be more
+                        productive overall. </p>
+
+                </div>
+                <div class="card-footer text-muted bg_change">
+                    <a href="#" class="btn padding_0" [routerLink]="['/../assets/asset-form']">
+                        <i class="icon-arrow-right-circle m_r_6" ></i>Add an Asset
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card text-center b_radius">
+                <div class="card-header card-fix">
+                    <i class="icon-calendar  m_r_6"></i>Work Orders
+                    <p class="f_right"><i class="icon-close"></i></p>
+                </div>
+
+
+
+                <div class="card-body color-body">
+                    <h5 class="card-title">You don't have any preventative work orders</h5>
+                    <p class="card-text">Adding preventative work orders can help you keep things organized and prevent
+                        issues from happening in the future. </p>
+
+                </div>
+                <div class="card-footer text-muted bg_change">
+                    <a href="#" class="btn padding_0" [routerLink]="['/../work-orders',true]">
+                        <i class="icon-arrow-right-circle m_r_6"></i>Create a Preventative Work Order
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card text-center b_radius">
+                <div class="card-header card-fix">
+                    <i class="icon-pin  m_r_6"></i> Parts
+                    <p class="f_right"><i class="icon-close"></i></p>
+                </div>
+
+
+
+                <div class="card-body color-body">
+                    <h5 class="card-title">Your inventory is empty </h5>
+                    <p class="card-text">Protip: Link inventory items to your assets for the full UpKeep experience!
+                    </p>
+
+                </div>
+                <div class="card-footer text-muted bg_change">
+                    <a href="#" class="btn padding_0" [routerLink]="['/../parts/part-form']">
+                        <i class="icon-arrow-right-circle m_r_6"></i>Add a Part
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-3" *ngIf="exit">
+
+            <div class="card text-center b_radius">
+                <div class="card-header card-fix">
+                    <i class="icon-location-pin m_r_6"></i>Locations 
+                    <p class="f_right"><i class="icon-close" (click)="cross()"></i></p>
+                </div>
+
+
+
+                <div class="card-body color-body">
+                    <h5 class="card-title"> No locations added </h5>
+                    <p class="card-text">Protip: Link locations to your assets, parts, or work orders for the full UpKeep experience! </p>
+
+                </div>
+                <div class="card-footer text-muted bg_change">
+                    <a href="#" class="btn padding_0" [routerLink]="['/../locations/location-form']">
+                        <i class="icon-arrow-right-circle m_r_6" ></i>Add a Location
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div>

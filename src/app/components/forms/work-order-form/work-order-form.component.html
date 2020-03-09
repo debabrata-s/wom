@@ -1,44 +1,107 @@
-<div class="content-wrapper">
-    <!-- title for the page -->
-    <div class="page-header">
-        <app-page-title [pageTitle]="pageTitle"></app-page-title>
-    </div>
-    <form [formGroup]="workOrderForm" (ngSubmit)="onSubmit()">
-        <div class="card p-5 w-50">
-            <h4>Add Work Order</h4>
-            <br>
+<form *ngIf="!showAddTasks; else elseblock;" [formGroup]="workOrderForm" (ngSubmit)="onSubmit()">
+    <div class="card">
+        <div class="card-header" id="work-order-header">
+            <h5 class="pt-2">Add Work Order</h5>
+        </div>
 
+        <br>
+        <div class="card-body p-4">
             <mat-form-field>
-                <input matInput placeholder="Title" formControlName="title" required>
+                <input matInput placeholder="Title" formControlName="Title">
                 <mat-error>This field is mandatory.</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Description</mat-label>
-                <textarea matInput formControlName="desc"></textarea>
+                <textarea matInput formControlName="Description"></textarea>
                 <mat-hint align="end">Max length 500</mat-hint>
             </mat-form-field>
+            <!-- non functional -->
+            <div class="row">
+                <div class="col-4">
+                    <button mat-button (click)="fileInput.click()">
+                        <span><i class="icon-camera mr-2"></i>Image</span>
+                        <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />
+                    </button>
+                </div>
+                <div class="col">
+                    <mat-form-field style="font-size: small;">
+                        <input matInput type="text" [value]="imagePath" formControlName="Images">
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+
+
             <mat-form-field>
-                <input matInput placeholder="Image" formControlName="image">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput [matDatepicker]="picker" placeholder="Due Date" formControlName="dueDate">
+                <input matInput [matDatepicker]="picker" placeholder="Due Date" formControlName="DueDate">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
             <mat-form-field>
-                <mat-select formControlName="repeatingSchedule" placeholder="Repeating Schedule">
-                    <mat-option *ngFor="let repeatingSchedule of repeatingSchedules" [value]="repeatingSchedule">
-                        {{repeatingSchedule}}</mat-option>
+                <mat-select formControlName="RepeatingDuration" placeholder="Repeating Schedule">
+                    <mat-option *ngFor="let duration of repeatingSchedules" [value]="duration">
+                        {{duration}}</mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Estimated Duration" formControlName="estimatedDuration">
-            </mat-form-field>
+            <div *ngIf="workOrderForm.get('RepeatingDuration').value !==''" class="rounded bg-secondary p-2">
+                <div *ngIf="workOrderForm.get('RepeatingDuration').value ==='Select Repeating Days'" class="mb-2">
+                    <small>Select Repeating Days</small>
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-light">Sun</button>
+                        <button type="button" class="btn btn-light">Mon</button>
+                        <button type="button" class="btn btn-light">Tue</button>
+                        <button type="button" class="btn btn-light">Wed</button>
+                        <button type="button" class="btn btn-light">Thu</button>
+                        <button type="button" class="btn btn-light">Fri</button>
+                        <button type="button" class="btn btn-light">Sat</button>
+                    </div>
+                </div>
+                <div *ngIf="workOrderForm.get('RepeatingDuration').value ==='Custom Schedule'" class="mb-2">
+                    <small>Specify custom re-schedule time</small>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <mat-form-field>
+                                <mat-label></mat-label>
+                                <input matInput type="number">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6">
+                            <mat-form-field>
+                                <mat-label></mat-label>
+                                <mat-select>
+                                    <mat-option *ngFor="let cs of customSchedules" [value]="cs">
+                                        {{cs}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                </div>
+                <mat-form-field>
+                    <mat-label>Stop Repeating On</mat-label>
+                    <input matInput [matDatepicker]="picker1">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+                <div class="d-flex">
+                    <div>
+                        <mat-slide-toggle></mat-slide-toggle>
+                    </div>
+                    <div class="ml-2">
+                        <span class="text-sm">Schedule Based on Completion Date</span><br>
+                        <small class="text-muted"><em>Instead of having a regularly occuring work order, this work order
+                                will schedule the next date based on when it was completed.</em></small>
+                    </div>
+                </div>
+            </div>
             <br>
             <label>
-                Priority:
+                <small class="text-muted">Priority:</small><br>
                 <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style"
-                    formControlName="priority">
+                    formControlName="Priority">
                     <mat-button-toggle value="none">None</mat-button-toggle>
                     <mat-button-toggle value="low">Low</mat-button-toggle>
                     <mat-button-toggle value="midium">Medium</mat-button-toggle>
@@ -46,44 +109,261 @@
                 </mat-button-toggle-group>
             </label>
             <mat-form-field>
-                <mat-select formControlName="category" placeholder="Category">
-                    <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+                <mat-select formControlName="CategoryId" placeholder="Category">
+                    <mat-option *ngFor="let category of categories" [value]="category.id">{{category.CatName}}
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
-                <mat-select formControlName="worker" placeholder="Worker">
-                    <mat-option *ngFor="let worker of workers" [value]="worker">{{worker}}</mat-option>
+                <mat-select formControlName="WorkerId" placeholder="Worker">
+                    <mat-option *ngFor="let worker of workerss" [value]="worker">{{worker}}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Additional Workers</mat-label>
-                <mat-select formControlName="additionalWorkers" multiple>
-                    <mat-option *ngFor="let worker of workers" [value]="worker">{{worker}}</mat-option>
+                <mat-select formControlName="AdditionalWorkerId" multiple>
+                    <mat-option *ngFor="let worker of workerss" [value]="worker">{{worker}}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
-                <mat-select formControlName="team" placeholder="Team">
-                    <mat-option *ngFor="let team of teams" [value]="team">{{team}}</mat-option>
+                <mat-select formControlName="TeamId" placeholder="Team">
+                    <mat-option *ngFor="let team of teams" [value]="team.id">{{team.Name}}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
-                <mat-select formControlName="location" placeholder="Location">
-                    <mat-option *ngFor="let location of locations" [value]="location">{{location}}</mat-option>
+                <mat-select formControlName="LocationId" placeholder="Location">
+                    <mat-option *ngFor="let location of locations" [value]="location.id">{{location.Title}}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Asset</mat-label>
-                <mat-select formControlName="assets" multiple>
-                    <mat-option *ngFor="let asset of assets" [value]="asset">{{asset}}</mat-option>
+                <mat-select formControlName="AssetId" multiple>
+                    <mat-option *ngFor="let asset of assets" [value]="asset.id">{{asset.title}}</mat-option>
                 </mat-select>
             </mat-form-field>
-
-            tasks and file
-            <br><br>
-            <mat-slide-toggle formControlName="signature">Requires Signature!</mat-slide-toggle>
-            <br>
-            <button mat-raised-button [disabled]="workOrderForm.invalid">Submit</button>
-
+            <mat-form-field>
+                <input matInput placeholder="Purchase Order" formControlName="PurchaseOrderId">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Estimated Duration" formControlName="EstimatedDuration">
+            </mat-form-field>
+            <!-- <mat-form-field>
+                <input matInput placeholder="Image" formControlName="Images">
+            </mat-form-field> -->
+            <mat-card class="mb-2">
+                <div class="row">
+                    <div class="col-2">
+                        <i class="icon-notebook icon-md"></i>
+                    </div>
+                    <div class="col-7">
+                        <small class="text-muted">Tasks</small><br>
+                        <span style="font-size: 0.70em;"><em>Assign custom tasks for technician's to fill
+                                out</em></span>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"><i
+                                class="icon-pencil" (click)="showAddTasks = !showAddTasks;"></i></button>
+                    </div>
+                </div>
+            </mat-card>
+            <mat-card class="mb-4">
+                <div class="row">
+                    <div class="col-2">
+                        <i class="icon-notebook icon-md"></i>
+                    </div>
+                    <div class="col-7">
+                        <small class="text-muted">Files</small><br>
+                        <span style="font-size: 0.70em;"><em>Attach a file to this work order</em></span>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"><i
+                                class="icon-plus" (click)="openFileDialog()"></i></button>
+                    </div>
+                </div>
+            </mat-card>
+            <div class="row">
+                <div class="col-2">
+                    <mat-slide-toggle></mat-slide-toggle>
+                </div>
+                <div class="col">
+                    <small>Requires Signature</small><br>
+                    <small class="text-muted"><em>Require technicians to upload a signature image in order to complete a
+                            work order</em></small>
+                </div>
+            </div>
         </div>
-    </form>
-</div>
+
+
+
+        <br><br>
+
+        <br>
+        <button mat-raised-button [disabled]="workOrderForm.invalid">Submit</button>
+
+    </div>
+</form>
+<ng-template #elseblock>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-4">
+                    <a (click)="showAddTasks=!showAddTasks;"><small class="text-muted">
+                            < Back to Create</small> </a> </div>
+                <div class="col">
+                    <h5> Add Tasks </h5>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>
+                <small class="text-muted">Customize your work orders by creating your own tasks for technician’s to
+                    fill out. You can drop these into your work order templates.</small>
+            </p>
+
+            <!-- add tasks -->
+            <form [formGroup]="checklistFormTemplateForm" (ngSubmit)="onSubmit2()">
+                <div>
+
+                    <div class="float-right">
+                        <button type="button" class="btn btn-outline-secondary btn-sm mr-2" (click)="addTask()">+
+                            Task</button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="showChecklists()">+
+                            Checklist</button>
+                    </div>
+
+                    <br>
+                    <mat-form-field [hidden]="hidechklist">
+                        <mat-label>Select Checklist</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let checklist of checklists" [value]="checklist">
+                                {{checklist}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <div cdkDropList formGroupName="tasks" class="mt-4" (cdkDropListDropped)="drop($event)">
+                        <div cdkDropList formArrayName="taskItems"
+                            *ngFor="let task of checklistFormTemplateForm.get('tasks.taskItems')['controls']; let i = index"
+                            cdkDrag #elem="cdkDrag" (mouseenter)="enter(i)">
+                            <div [formGroupName]="i" class="row mt-2">
+                                <div class="col-1 pt-2">
+                                    <span cdkDragHandle class=""><i class="icon-menu"></i></span>
+                                </div>
+
+                                <div class="col-6">
+                                    <input type="text" class="small-input" style="width: inherit;"
+                                        formControlName="taskType">
+                                </div>
+
+                                <div class="dropdown col-3">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="text-muted"
+                                            style="font-size: x-small;">{{checklistFormTemplateForm.get('tasks.taskItems')['controls'][i].value.subtask}}</span>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" *ngFor="let subtask of subtasks"
+                                            (click)="checklistFormTemplateForm.get('tasks.taskItems')['controls'][i].value.subtask=subtask"><small
+                                                class="text-muted">{{subtask}}</small></a>
+                                    </div>
+                                </div>
+                                <div class="dropdown col-1">
+                                    <button class="btn btn-sm" type="button" id="dropdownMenuButton2"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="text-muted"><i class="icon-options-vertical"></i></span>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                        <a class="dropdown-item"
+                                            (click)="checklistFormTemplateForm.get('tasks.taskItems')['controls'][i].value.showAssignedUser = true"><small
+                                                class="text-muted">Assign User</small></a>
+                                        <a class="dropdown-item"
+                                            (click)="checklistFormTemplateForm.get('tasks.taskItems')['controls'][i].value.showAssignedAsset = true"><small
+                                                class="text-muted">Assign Asset</small></a>
+                                    </div>
+                                </div>
+                                <div class="col-1 pt-2"><span style="font-size: small;"><a (click)="removeTask(i)"><i
+                                                class="icon-trash"></i></a></span></div>
+                            </div>
+                            <div class="row"
+                                *ngIf="checklistFormTemplateForm.get('tasks.taskItems')['controls'][i].value.subtask === 'Multiple Choice'">
+
+
+
+
+
+                                <!-- Multiple choice -->
+
+
+                                <div formArrayName="options"
+                                    *ngFor="let task of checklistFormTemplateForm.get('tasks.taskItems')[i].get('multipleChoiceQuestions.options'); let j = index">
+                                    <div [formGroupName]="j" class="row mt-2">
+                                        <input type="text" class="small-input" style="width: inherit;"
+                                            formControlName="options">
+                                    </div>
+                                </div>
+                                <button (click)="addOptions(i)">add option</button>
+
+
+
+
+
+
+
+
+
+
+
+
+                            </div>
+                            <div class="card rounded p-2" style="background-color: rgba(0, 0, 0, 0.03) ;"
+                                *ngIf="checklistFormTemplateForm.get('tasks.taskItems')['controls'][i].value.subtask === 'Meter Reading'">
+                                <mat-form-field>
+                                    <mat-label>Meter</mat-label>
+                                    <mat-select>
+                                        <mat-option *ngFor="let meter of meters" [value]="meter">
+                                            {{meter}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="card rounded p-2" style="background-color: rgba(0, 0, 0, 0.03) ;"
+                                *ngIf="checklistFormTemplateForm.get('tasks.taskItems')['controls'][i].value.showAssignedUser || checklistFormTemplateForm.get('tasks.taskItems')['controls'][i].value.showAssignedAsset">
+                                <div class="row"
+                                    *ngIf="checklistFormTemplateForm.get('tasks.taskItems')['controls'][i].value.showAssignedUser">
+                                    <div class="col">
+                                        <mat-form-field>
+                                            <mat-label>Assigned User</mat-label>
+                                            <mat-select>
+                                                <mat-option *ngFor="let user of users" [value]="user">
+                                                    {{user}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row"
+                                    *ngIf="checklistFormTemplateForm.get('tasks.taskItems')['controls'][i].value.showAssignedAsset">
+                                    <div class="col">
+                                        <mat-form-field>
+                                            <mat-label>Assigned Asset</mat-label>
+                                            <mat-select>
+                                                <mat-option *ngFor="let asset of assets" [value]="asset">
+                                                    {{asset}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-sm btn-primary btn-fw">Add Tasks</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</ng-template>

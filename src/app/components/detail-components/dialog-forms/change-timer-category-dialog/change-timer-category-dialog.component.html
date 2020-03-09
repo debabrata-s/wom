@@ -1,0 +1,15 @@
+<div class="p4" style="width: 400px;">
+<h4>Change Category</h4>
+<mat-form-field>
+    <mat-label>Timer Category</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let category of categories" [value]="category">
+        {{category}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="float-right mt-4">
+    <button type="button" class="btn btn-light btn-sm mr-2" (click)="closeDialog()">Cancel</button>
+    <button type="button" class="btn btn-primary btn-sm" (click)="closeDialog()">Submit</button>
+</div>
+</div>

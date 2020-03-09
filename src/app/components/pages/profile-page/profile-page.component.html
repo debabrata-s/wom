@@ -1,0 +1,88 @@
+<div class="content-wrapper">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="col-md-8 grid-margin stretch-card m-auto">
+            <div class="card">
+                <div class="ml-auto">
+                    <div class="dropdown" style="display: inline;">
+                        <button type="button" class="btn btn-icon" id="pageMenus" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="icon-options-vertical"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="pageMenus">
+                            <a class="dropdown-item" [routerLink]="['../edit-profile']">Edit Proflie</a>
+                            <a class="dropdown-item text-danger" href="#">Delete Account</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-4">
+                            <img class="img-lg rounded-circle ml-2" [src]="profile.profileImg" alt="Profile image">
+                        </div>
+                        <div class="col-8">
+                            <h3>{{profile.firstName}} {{profile.lastName}}</h3>
+                            <div class="dropdown" style="display: inline;">
+                                <button type="button" class="btn btn-icon" id="pageMenus" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    {{profile.status}}
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="pageMenus">
+                                    <a *ngFor="let s of status" class="dropdown-item" href="#!">{{s}}</a>
+                                </div>
+                            </div>
+                            <!-- <mat-form-field>
+                                <mat-select placeholder="Status">
+                                    <mat-option *ngFor="let status of statuses" [value]="status">
+                                        {{status}}</mat-option>
+                                </mat-select>
+                            </mat-form-field> -->
+                            <div class="profile-item">
+                                <h4>
+                                    <small class="text-muted">USERNAME/EMAIL</small>
+                                </h4>
+                                {{profile.email}} <br>
+                                <a [routerLink]="['../change-password']"><small>CHANGE PASSWORD</small></a>
+                            </div>
+                            <br>
+                            <div class="profile-item">
+                                <h4>
+                                    <small class="text-muted">FIRST NAME</small>
+                                </h4>
+                                {{profile.firstName}}
+                            </div>
+                            <br>
+                            <div class="profile-item">
+                                <h4>
+                                    <small class="text-muted">LAST NAME</small>
+                                </h4>
+                                {{profile.lastName}}
+                            </div>
+                            <br>
+                            <div class="profile-item">
+                                <h4>
+                                    <small class="text-muted">PHONE NUMBER</small>
+                                </h4>
+                                {{profile.phone}}
+                            </div>
+                            <br>
+                            <div class="profile-item">
+                                <h4>
+                                    <small class="text-muted">JOB TITLE</small>
+                                </h4>
+                                {{profile.jobTitle}}
+                            </div>
+                            <br>
+                            <div class="profile-item">
+                                <h4>
+                                    <small class="text-muted">NOTIFICATIONS</small>
+                                </h4>
+                                <mat-slide-toggle>Email Notification</mat-slide-toggle>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

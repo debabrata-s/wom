@@ -1,1 +1,54 @@
-
+.button-text {
+  margin-left: 5px;
+  font-size: 0.75rem;
+}
+.filter-btn {
+  border-style: solid;
+  border-color: grey;
+  border-width: 1px;
+  padding: 5px 12px;
+  margin-left: 5px;
+  background-color: inherit;
+  transition: border-color 0.5s;
+}
+.filter-btn:hover {
+  border-color: rgb(214, 214, 214);
+  background-color: rgb(214, 214, 214);
+}
+table {
+  width: 100%;
+}
+.search-input {
+  border-width: 1px;
+  padding: 7px;
+  padding-left: 30px;
+  border-radius: 17px;
+  width: 300px;
+  font-size: small;
+}
+.search-input:focus {
+  border: solid 1px #1bdbe0;
+  
+}
+.dropdown-menu{
+    font-size: 0.85em;
+}
+#search-icon{
+  position: absolute;
+  padding-top: 7px;
+  padding-left: 10px;
+}
+#close-btn{
+  position: absolute;
+  top:82px;
+  right:20px
+}
+.dropdown-item {
+  font-size: 0.95em !important;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem !important;
+}
+.dropdown-item:hover {
+  background-color: #e2f5fc;
+  color: #007bff !important;
+}

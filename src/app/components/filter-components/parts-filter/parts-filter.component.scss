@@ -1,0 +1,14 @@
+mat-form-field, .text-sm{
+    font-size: 0.85em;
+}
+.btn-group{
+    width: 100%;
+}
+.to-align{
+    margin-top: 20px;
+    font-size: 0.85em;
+}
+:host ::ng-deep .mat-checkbox-label{
+    font-size: 0.85em;
+    color: grey;
+}

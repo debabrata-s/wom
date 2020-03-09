@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
+import { Team } from 'src/app/interfaces/team';
 
 @Component({
   selector: 'app-team-form',
@@ -7,8 +9,10 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./team-form.component.scss']
 })
 export class TeamFormComponent implements OnInit {
+  teamFormData:Team;
   teamForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  workers = ['jare','eres','fdafd'];
+  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<TeamFormComponent>) { }
 
   ngOnInit() {
     this.teamForm = this.fb.group({
@@ -20,6 +24,11 @@ export class TeamFormComponent implements OnInit {
   onSubmit() {
     console.log(this.teamForm);
     console.log('Saved: ' + JSON.stringify(this.teamForm.value));
+    this.teamFormData = this.teamForm.value;
+    this.dialogRef.close();
+  }
+  closeDialog(){
+    this.dialogRef.close();
   }
 
 }

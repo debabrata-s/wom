@@ -1,0 +1,53 @@
+<div class="card p3">
+    <h4>Configure SAML Authentication</h4>
+    <br>
+    <div class="row">
+        <div class="col-4">
+            Unique Company Identifier<br><small class="text-muted">For example - if your company's name is ABC Inc, you can enter abc.</small>
+        </div>
+        <div class="col">
+            <input type="text" class="small-input" placeholder="For example - if your company's name is ABC Inc, you can enter abc.">
+            <small class="text-muted">SSO post back url (Assertion Consumer Service URL) will be</small>
+            <input type="text" class="small-input" disabled [value]="customerServiceUrl">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-4">
+            SAML 2.0 Endpoint(HTTP)<br><small class="text-muted">This is where you go when you try to login.</small>
+        </div>
+        <div class="col">
+            <input type="text" class="small-input" placeholder="">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-4">
+            Identity Provider Issuer<br><small class="text-muted">IDP Entity ID for the service you use.</small>
+        </div>
+        <div class="col">
+            <input type="text" class="small-input" placeholder="">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-4">
+            Public certificate<br><small class="text-muted">Copy and paste your entire x.509 Certificate here.</small>
+        </div>
+        <div class="col">
+            <textarea class="form-control" rows="5"></textarea>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-4">
+            Service Provider Issuer<br><small class="text-muted">The SP Entity ID or Audience URI that we will send</small>
+        </div>
+        <div class="col">
+            <small><strong>https://app.wom.com</strong></small>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <button class="btn btn-sm btn-primary btn-rounded btn-fw">Save</button>
+</div>

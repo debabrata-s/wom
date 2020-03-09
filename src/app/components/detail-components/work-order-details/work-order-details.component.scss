@@ -1,0 +1,60 @@
+.btn-timer {
+  border: solid 1px #1bdbe0;
+  padding: 5px 20px;
+  border-radius: 15px;
+  background-color: white;
+}
+table {
+  margin-left: 20px;
+}
+td {
+  padding-left: 10px;
+}
+.link-tag:hover {
+  color: #1bdbe0;
+}
+.selected {
+  color: #1bdbe0;
+}
+.dropdown .dropdown-menu .dropdown-item {
+  font-size: small;
+}
+.danger {
+  color: grey;
+}
+.success {
+  color: green;
+}
+:host ::ng-deep #work-order-header {
+  visibility: hidden;
+  position: absolute;
+  height: 0px;
+}
+#detail-menus {
+  position: absolute;
+  top: 12px;
+  // left: 260px;
+  right: 40px;
+}
+a {
+  cursor: pointer;
+}
+.dropdown-item {
+  font-size: 0.95em !important;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem !important;
+}
+.dropdown-item:hover {
+  background-color: #e2f5fc;
+  color: #007bff !important;
+}
+.text-xs{
+  font-size: 0.7em;
+}
+.time-field{
+  display: inline-block;
+  height: 30px;
+  width: 60px;
+  font-size: small;
+  padding: 5px;
+}

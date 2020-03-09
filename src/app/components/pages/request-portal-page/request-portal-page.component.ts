@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestPortalPageComponent implements OnInit {
   pageTitle = "Request Portal";
+  showPortal = false;
+  enablePurchaseOrderPublic = false;
   workOrderRequestUrl="https://requests.wom.com/#/publicrequest/sNjUXKiHCz";
   viewRequestUrl="https://requests.wom.com/#/sNjUXKiHCz/login";
   createRequestEmail="notifications+{Custom ID}@wom.com";

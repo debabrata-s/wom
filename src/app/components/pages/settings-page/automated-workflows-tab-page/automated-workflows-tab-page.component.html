@@ -1,2 +1,65 @@
 <app-settings-page></app-settings-page>
-<p>automated-workflows-tab-page works!</p>
+<div class="card p-4">
+    <h4>Automated Workflows</h4>
+    <div class="text-muted">
+        <p><small>Create custom workflows as easy as If, And, Then. Save time and easily assign your work orders
+                automatically
+                through workflows to customize UpKeep for the way your team operates.</small></p>
+        <p><small>All plans can create up to 1 custom workflow. To add additional workflows, upgrade to our <a
+                    href="">Business Plus plan</a></small></p>
+        <p><small>Check out our <a href="">Workflows Library</a> to see how others in your industry are using automated
+                workflows to
+                improve their internal process and increase efficiency today!</small></p>
+    </div>
+    <hr>
+    <button type="button" class="btn btn-primary btn-rounded btn-sm" [hidden]="isClicked"
+        (click)="isClicked=!isClicked">
+        Create new Workflow
+    </button>
+    <div [hidden]="!isClicked">
+        <form [formGroup]="AutomatedWorkflowsForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label class="display-4">
+                    Workflow Title
+                </label>
+                <input type="text" formControlName="workflowTitle" class="form-control form-control-sm" placeholder="Automatically accept requsts">
+            </div>
+            <div class="row">
+                <div class="col">
+                    <small class="text-muted">If</small>
+                    <select formControlName="ifCondition" class="form-control form-control-sm">
+                        <option *ngFor="let ifcond of ifConditions">{{ifcond}}</option>
+                    </select>
+                </div>
+                <div formGroupName="andCondition" class="col">
+                    <small class="text-muted">And(<em>optional</em>)</small>
+                    <select formControlName="name" class="form-control form-control-sm">
+                        <option *ngFor="let andcond of andConditions">{{andcond}}</option>
+                    </select>
+                    <select formControlName="value" class="form-control form-control-sm">
+                        <option *ngFor="let condVal of conditionValues">{{condVal}}</option>
+                    </select>
+                </div>
+                <div formGroupName="thenCondition" class="col">
+                    <small class="text-muted">Then</small>
+                    <select formControlName="name" class="form-control form-control-sm">
+                        <option *ngFor="let thencond of thenConditions">{{thencond}}</option>
+                    </select>
+                    <select formControlName="value" class="form-control form-control-sm">
+                        <option *ngFor="let condVal of conditionValues">{{condVal}}</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="d-flex">
+                <button type="button" class="btn btn-outline-secondary btn-sm"
+                    (click)="isClicked=!isClicked">Cancel</button>
+                <button type="submit" class="btn btn-primary btn-sm">Save</button>
+            </div>
+
+        </form>
+
+
+
+    </div>
+</div>

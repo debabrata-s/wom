@@ -1,0 +1,91 @@
+<div class="content-wrapper">
+    <!-- title for the page -->
+    <div class="page-header">
+        <app-page-title [pageTitle]="pageTitle"></app-page-title>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <div class="f_right">
+                            <i class="icon-question m_r_10 text_primary"></i>
+                            <i class="icon-close text_primary"></i>
+                        </div>
+                    </div>
+                    <div class="row m_t_40">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="card bg_hover m_b_40">
+                                <div class="center m_t_60 m_b_30">
+                                    <i class="icon-camrecorder text_primary_1"></i>
+                                    <h4 class="m_t_15">How to Prepare your import</h4>
+                                    <p>New to UpKeep? This video will guide you through the data importing process </p>
+                                </div>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="card bg_hover m_b_40">
+                                <div class="center m_t_60 m_b_30">
+                                    <i class="icon-cloud-download text_primary_1"></i>
+                                    <h4 class="m_t_15">Download our Sample Template</h4>
+                                    <p>Download our Sample Template and begin entering your information starting with
+                                        row 2.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                                            
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="card bg_hover m_b_40">
+                                <div class="center m_t_30 m_b_30">
+                                    <div class="center">
+                                        <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
+                                        (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                                            <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                                              
+                                              <button type="button" class="btn_1" (click)="openFileSelector()">
+                                                  <i class="icon-cloud-upload text_primary_1"></i></button>
+                                            </ng-template>
+                                        </ngx-file-drop>
+                                        <div class="upload-table">
+                                            <table class="table">
+                                            
+                                                <tbody class="upload-name-style">
+                                                    <tr *ngFor="let item of files; let i=index">
+                                                        <td><strong>{{ item.relativePath }}</strong></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+                                    <h4 class="m_t_15">Import your File</h4>
+                                    <p>Now that you have all the information you need to import. Click to upload your CSV file</p>
+                                
+                        
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+                               
+                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
