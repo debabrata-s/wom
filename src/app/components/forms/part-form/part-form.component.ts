@@ -164,6 +164,14 @@ export class PartFormComponent implements OnInit {
       }
     }
   }
+  addImageFile(event){
+    console.log(event.path[0].files[0]);
+    this.images.push(event.path[0].files[0]);
+  }
+  addFile(event){
+    console.log(event.path[0].files[0]);
+    this.files.push(event.path[0].files[0]);
+  }
 
   public fileOver(event) {
     console.log(event);

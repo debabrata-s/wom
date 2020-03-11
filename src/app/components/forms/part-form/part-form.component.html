@@ -145,7 +145,7 @@
         </label>
         <ngx-file-drop dropZoneClassName="drop-zone" (onFileDrop)="fileDropped($event)" (onFileOver)="fileOver($event)"
           (onFileLeave)="fileLeave($event)" (click)="fileSelect.click()">
-          <input type="file" #fileSelect/>
+          <input type="file" #fileSelect (change)="addFile($event)" />
         </ngx-file-drop>
         <br>
         <a (click)="selectFiles()" style="cursor: pointer; color: #007bff;"><small>+ Add File</small></a>
@@ -154,7 +154,12 @@
         <table class="table">
           <tbody class="upload-name-style">
             <tr *ngFor="let item of files; let i=index">
-              <td>{{ item.relativePath }}</td>
+              <td *ngIf="item.relativePath; else name">
+                {{ item.relativePath }}
+              </td>
+              <ng-template #name>
+                <td>{{item.name}}</td>
+              </ng-template>
             </tr>
           </tbody>
         </table>
@@ -165,15 +170,23 @@
           Add an image
         </label>
         <ngx-file-drop dropZoneClassName="drop-zone" (onFileDrop)="imageDropped($event)" (click)="imageSelect.click()">
-          <input type="file" #imageSelect/>
+          <input type="file" #imageSelect (change)="addImageFile($event)" />
         </ngx-file-drop>
       </div>
       <div class="upload-table">
         <table class="table">
           <tbody class="upload-name-style">
             <tr *ngFor="let item of images; let i=index">
-              <td>{{ item.relativePath }}</td>
+              <td *ngIf="item.relativePath; else name">
+                {{ item.relativePath }}
+              </td>
+              <ng-template #name>
+                <td>{{item.name}}</td>
+              </ng-template>
             </tr>
+            <!-- <tr *ngFor="let item of images; let i=index">
+              <td>{{ item.name }}</td>
+            </tr> -->
           </tbody>
         </table>
       </div>
