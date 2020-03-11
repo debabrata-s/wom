@@ -38,7 +38,6 @@ export class PartsFilterComponent implements OnInit {
     })
     apiService.getAllTeam().subscribe((data: any) => {
       this.teams = data.message;
-      console.log(this.teams);
 
     })
     apiService.getAllVendor().subscribe((data: any) => {
@@ -46,7 +45,6 @@ export class PartsFilterComponent implements OnInit {
     })
     apiService.getAllCustomers().subscribe((data: any) => {
       this.customers = data.message;
-      console.log('customers', this.customers);
 
     })
     apiService.getAllAsset().subscribe((data: any) => {
@@ -84,8 +82,7 @@ export class PartsFilterComponent implements OnInit {
   filterByUser(user: string) {
     this.dataSource.filterPredicate = (data, filter: string) => data.WorkerTitle.indexOf(filter) != -1;
     this.dataSource.filter = user.trim();
-    console.log('selected user is ', this.selectedUser);
-    console.log('selected data for filter is'), this.dataSource.filterPredicate;
+  
 
 
   }

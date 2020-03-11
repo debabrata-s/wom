@@ -78,7 +78,7 @@ export class PartEditFormComponent implements OnInit {
     });
     this.customPartForm = this.fb.group({
       customDataArray: this.fb.array(this.dataArray)
-           
+
     })
     this.newCustomPartForm = this.fb.group({
       newCustomDataArray: this.fb.array(this.newDataArray)
@@ -117,10 +117,10 @@ export class PartEditFormComponent implements OnInit {
         data.message.map(x => this.customDataIds.push(x.id))
         this.customPartForm.setControl('customDataArray', this.getCustomDataArray(data.message))
         console.log(this.customPartForm.value);
-  
-    })
 
-    
+      })
+
+
     })
   }
   getCustomDataArray(data): FormArray {
@@ -192,21 +192,22 @@ export class PartEditFormComponent implements OnInit {
           console.log('custom data', res);
         })
       }
-
+      for (let i = 0; i < customData.length; i++) {
+        this.apiService.updateCustomPartData(this.customDataIds[i], customData[i]).subscribe(res => {
+          console.log('custom data', res);
+        })
+      }
+      for (let i = 0; i < this.removeCustomDataIds.length; i++) {
+        this.apiService.deleteCustomPartData(this.removeCustomDataIds[i]).subscribe(res => {
+          console.log('delete custom data', res);
+        })
+      }
+      window.location.reload();
     }, (error: HttpErrorResponse) => {
       console.log(error)
     })
     // for the existing custom data: updatecustompart.
-    for (let i = 0; i < customData.length; i++) {
-      this.apiService.updateCustomPartData(this.customDataIds[i], customData[i]).subscribe(res => {
-        console.log('custom data', res);
-      })
-    }
-    for (let i = 0; i < this.removeCustomDataIds.length; i++) {
-      this.apiService.deleteCustomPartData(this.removeCustomDataIds[i]).subscribe(res => {
-        console.log('delete custom data', res);
-      })
-    }
+
     this.drawerService.toggleStatus();
   }
 }

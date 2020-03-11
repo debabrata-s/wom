@@ -9,7 +9,7 @@
         <mat-label>
           Title
         </mat-label>
-        <input matInput formControlName="Title" autocomplete="off" required >
+        <input matInput formControlName="Title" autocomplete="off" required>
         <mat-error>Title is requrired</mat-error>
       </mat-form-field>
 
@@ -75,7 +75,8 @@
 
       <mat-form-field>
         <mat-select formControlName="WorkerId" placeholder="Workers" required>
-          <mat-option *ngFor="let worker of workers" [value]="worker.id">{{worker.firstname}} {{worker.lastname}}</mat-option>
+          <mat-option *ngFor="let worker of workers" [value]="worker.id">{{worker.firstname}} {{worker.lastname}}
+          </mat-option>
         </mat-select>
         <mat-error>Please select worker</mat-error>
       </mat-form-field>
@@ -100,8 +101,9 @@
 
       <!-- Custom Data array -->
       <!-- start -->
-    
-      <div *ngIf=" customPartForm.get('customDataArray')['controls'].length>0" [formGroup]="customPartForm" class="p-2 rounded bg-secondary">
+
+      <div *ngIf=" customPartForm.get('customDataArray')['controls'].length>0" [formGroup]="customPartForm"
+        class="p-2 rounded bg-secondary">
         <div formArrayName="customDataArray"
           *ngFor="let customData of customPartForm.get('customDataArray')['controls']; let i = index">
           <div [formGroupName]="i" class="row">
@@ -141,22 +143,39 @@
         <label class="text-muted">
           Add a file
         </label>
-        <div class="drop-zone">
-        </div>
+        <ngx-file-drop dropZoneClassName="drop-zone" (onFileDrop)="fileDropped($event)" (onFileOver)="fileOver($event)"
+          (onFileLeave)="fileLeave($event)" (click)="fileSelect.click()">
+          <input type="file" #fileSelect/>
+        </ngx-file-drop>
         <br>
         <a (click)="selectFiles()" style="cursor: pointer; color: #007bff;"><small>+ Add File</small></a>
       </div>
-
-
-
+      <div class="upload-table">
+        <table class="table">
+          <tbody class="upload-name-style">
+            <tr *ngFor="let item of files; let i=index">
+              <td>{{ item.relativePath }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <br>
       <div class="form-group">
         <label class="text-muted">
           Add an image
         </label>
-        <div class="drop-zone">
-          <input type="file" formControlName="Images">
-        </div>
+        <ngx-file-drop dropZoneClassName="drop-zone" (onFileDrop)="imageDropped($event)" (click)="imageSelect.click()">
+          <input type="file" #imageSelect/>
+        </ngx-file-drop>
+      </div>
+      <div class="upload-table">
+        <table class="table">
+          <tbody class="upload-name-style">
+            <tr *ngFor="let item of images; let i=index">
+              <td>{{ item.relativePath }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
     </div>

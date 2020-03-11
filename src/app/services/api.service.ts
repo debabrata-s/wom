@@ -246,6 +246,21 @@ export class ApiService {
       catchError(this.errorMgmt)
     )
   }
+
+  addPartFile(id, data): Observable<any>{
+    let url = `${this.baseUri}/addpartfile`;
+    const formData = new FormData();
+    formData.append("PartId", id)
+    
+    for(let i = 0; i < data.length; i++ ){
+      formData.append(`file[${i}]`,data[i])
+    }
+    return this.http.post(url, formData)
+      .pipe(
+        catchError(this.errorMgmt)
+      )
+  }
+ 
   //----------------------------------------------------------------------------------------------------
 
   //--------------------------------------        SET OF PARTS       ---------------------------------------
