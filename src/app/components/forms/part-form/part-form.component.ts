@@ -117,7 +117,7 @@ export class PartFormComponent implements OnInit {
       // Is it a file?
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-        fileEntry.file((file: File) => { 
+        fileEntry.file((file: File) => {
           // Here you can access the real file
           console.log(droppedFile.relativePath, file);
 
@@ -164,11 +164,11 @@ export class PartFormComponent implements OnInit {
       }
     }
   }
-  addImageFile(event){
+  addImageFile(event) {
     console.log(event.path[0].files[0]);
     this.images.push(event.path[0].files[0]);
   }
-  addFile(event){
+  addFile(event) {
     console.log(event.path[0].files[0]);
     this.files.push(event.path[0].files[0]);
   }
@@ -191,17 +191,14 @@ export class PartFormComponent implements OnInit {
       for (let i = 0; i < customData.length; i++) {
         this.apiService.addCustomPartData(res.PartId, customData[i]).subscribe(res => {
           console.log('custom data', res);
-          // window.location.reload();
         })
       }
-     
-        this.apiService.addPartFile(res.PartId, this.files).subscribe(res => {
-          console.log(res);
-        },(err) => {
-          console.log(err);
-          
-        })
-     
+      this.apiService.addPartFile(res.PartId, this.files).subscribe(res => {
+        console.log(res);
+      }, (err) => {
+        console.log(err);
+      })
+      window.location.reload();
 
     }, (err) => {
       console.log(err)
