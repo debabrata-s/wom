@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 })
 export class PartEditFormComponent implements OnInit {
   id;
+  removePartIds = [];
   customDataIds = [];
   removeCustomDataIds = [];
   workers = [];
@@ -24,7 +25,8 @@ export class PartEditFormComponent implements OnInit {
   vendors = [];
   customers = [];
   locations = [];
-  
+
+  existingFiles = [];
   public files: NgxFileDropEntry[] = [];
   public images: NgxFileDropEntry[] = [];
 
@@ -90,8 +92,7 @@ export class PartEditFormComponent implements OnInit {
     })
 
     this.populateFields();
-    //file: [''],
-    // customDataArray: this.fb.array(this.dataArray),
+
   }
   populateFields() {
     console.log("populate form from part form; ", this.populateFormService.getFormData());
@@ -122,11 +123,30 @@ export class PartEditFormComponent implements OnInit {
         data.message.map(x => this.customDataIds.push(x.id))
         this.customPartForm.setControl('customDataArray', this.getCustomDataArray(data.message))
         console.log(this.customPartForm.value);
-
       })
-
-
     })
+    this.addExistingPartFiles(this.id);
+  }
+  addExistingPartFiles(id) {
+    this.apiService.getPartFiles(id).subscribe((x: any) => {
+      if (x.message != ["Cannot find record!"]) {
+        this.existingFiles = x.message.File
+      }
+
+      console.log(this.existingFiles);
+
+    });
+  }
+  removeExistingFile(file) {
+    this.removePartIds.push(file);
+  }
+  addFile(event) {
+    console.log(event.path[0].files[0]);
+    this.files.push(event.path[0].files[0]);
+  }
+  removeFile(i) {
+    this.files.splice(i, 1);
+    console.log(this.files[i])
   }
   getCustomDataArray(data): FormArray {
     const formArray = new FormArray([])
@@ -171,11 +191,7 @@ export class PartEditFormComponent implements OnInit {
   removeCustomItem(i) {
     this.removeCustomDataIds.push(this.customPartForm.get('customDataArray').value[i].id);
     (<FormArray>this.customPartForm.get('customDataArray')).removeAt(i);
-
-
-
     console.log('remove custom data Ids', this.removeCustomDataIds);
-
   }
   removeNewCustomItem(i) {
     this.newDataArray.splice(i, 1);
@@ -191,26 +207,9 @@ export class PartEditFormComponent implements OnInit {
       // Is it a file?
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-        fileEntry.file((file: File) => { 
+        fileEntry.file((file: File) => {
           // Here you can access the real file
           console.log(droppedFile.relativePath, file);
-
-          /**
-          // You could upload it like this:
-          const formData = new FormData()
-          formData.append('logo', file, relativePath)
- 
-          // Headers
-          const headers = new HttpHeaders({
-            'security-token': 'mytoken'
-          })
- 
-          this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
-          .subscribe(data => {
-            // Sanitized logo returned from backend
-          })
-          **/
-
         });
       } else {
         // It was a directory (empty directories are added, otherwise only files)
@@ -269,6 +268,11 @@ export class PartEditFormComponent implements OnInit {
           console.log('delete custom data', res);
         })
       }
+      this.apiService.addPartFile(this.id, this.files).subscribe(res => {
+        console.log(res);
+      }, (err) => {
+        console.log(err);
+      })
       window.location.reload();
     }, (error: HttpErrorResponse) => {
       console.log(error)

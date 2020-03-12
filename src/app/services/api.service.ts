@@ -253,12 +253,23 @@ export class ApiService {
     formData.append("PartId", id)
     
     for(let i = 0; i < data.length; i++ ){
-      formData.append(`file[${i}]`,data[i])
+      formData.append(`file[${i}]`,data[i]);
+      console.log('data: ', data[i]);
     }
     return this.http.post(url, formData)
       .pipe(
         catchError(this.errorMgmt)
       )
+  }
+  getPartFiles(id){
+    // https://mobwom.net/webapi/user/api/v1/addpartfile/{partid}/getpartwisefile
+    let url = `${this.baseUri}/addpartfile/${id}/getpartwisefile`;
+    return this.http.get(url, { headers: this.headers }).pipe(
+      map((res: Response) => {
+        return res || {}
+      }),
+      catchError(this.errorMgmt)
+    )
   }
  
   //----------------------------------------------------------------------------------------------------

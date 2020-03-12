@@ -19,7 +19,9 @@ export class DeleteSetOfPartDialogComponent implements OnInit {
   ngOnInit() {
   }
   deleteSetOfPart(){
-    this.apiService.deletePart(this.data).subscribe(res => {
+    console.log(this.data);
+    
+    this.apiService.deleteSetOfPart(this.data).subscribe(res => {
       console.log(res);
       window.location.reload();
     }, (error: HttpErrorResponse) => {

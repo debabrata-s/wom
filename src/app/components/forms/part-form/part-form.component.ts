@@ -18,7 +18,7 @@ export class PartFormComponent implements OnInit {
   vendors = [];
   customers = [];
   locations = [];
-
+  
   public files: NgxFileDropEntry[] = [];
   public images: NgxFileDropEntry[] = [];
 
@@ -179,6 +179,10 @@ export class PartFormComponent implements OnInit {
 
   public fileLeave(event) {
     console.log(event);
+  }
+  removeFile(i){
+   this.files.splice(i,1);
+    
   }
 
   onSubmit() {

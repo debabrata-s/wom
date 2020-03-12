@@ -151,44 +151,31 @@
           <mat-option *ngFor="let location of locations" [value]="location.id">{{location.Title}}</mat-option>
         </mat-select>
       </mat-form-field>
-
-      <!-- <div class="form-group">
-        <label class="text-muted">
-          Add a file
-        </label>
-        <div class="drop-zone">
-        </div>
-        <br>
-        <a (click)="selectFiles()" style="cursor: pointer; color: #007bff;"><small>+ Add File</small></a>
-      </div>
-
-
-
-      <br>
-      <div class="form-group">
-        <label class="text-muted">
-          Add an image
-        </label>
-        <div class="drop-zone">
-          <input type="file" formControlName="Images">
-        </div>
-      </div> -->
       <div class="form-group">
         <label class="text-muted">
           Add a file
         </label>
         <ngx-file-drop dropZoneClassName="drop-zone" (onFileDrop)="fileDropped($event)" (onFileOver)="fileOver($event)"
           (onFileLeave)="fileLeave($event)" (click)="fileSelect.click()">
-          <input type="file" #fileSelect/>
+          <input type="file" #fileSelect (change)="addFile($event)"/>
         </ngx-file-drop>
         <br>
         <a (click)="selectFiles()" style="cursor: pointer; color: #007bff;"><small>+ Add File</small></a>
       </div>
-      <div class="upload-table">
+      <div class="upload-table" >
         <table class="table">
           <tbody class="upload-name-style">
+            <tr *ngFor="let item of existingFiles; let i=index">
+              <td>{{ item }}</td>
+              <td>
+                <a (click)="removeExistingFile(i)" style="cursor: pointer;"><small class="text-danger">Remove1</small></a>
+              </td>
+            </tr>
             <tr *ngFor="let item of files; let i=index">
-              <td>{{ item.relativePath }}</td>
+              <td>{{ item.name }}</td>
+              <td>
+                <a (click)="removeFile(i)" style="cursor: pointer;"><small class="text-danger">Remove2</small></a>
+              </td>
             </tr>
           </tbody>
         </table>
