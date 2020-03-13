@@ -14,25 +14,30 @@ export class DeletePartDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<DeletePartDialogComponent>,
     private apiService: ApiService,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    ) { }
+  ) { }
 
   ngOnInit() {
-  console.log(this.data);
-  
+    console.log(this.data);
+
   }
 
-  deletePart(){
+  deletePart() {
     this.apiService.deletePart(this.data).subscribe(res => {
       console.log(res);
+      this.apiService.removeAllPartFile(this.data).subscribe(res => {
+        console.log(res);
+      }, (err) => {
+        console.log(err);
+      })
       window.location.reload();
 
     }, (error: HttpErrorResponse) => {
       console.log(error)
     })
-    
+
     this.closeDialog();
   }
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close();
   }
 

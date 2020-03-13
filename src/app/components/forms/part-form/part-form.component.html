@@ -169,8 +169,8 @@
         <label class="text-muted">
           Add an image
         </label>
-        <ngx-file-drop dropZoneClassName="drop-zone" (onFileDrop)="imageDropped($event)" (click)="imageSelect.click()">
-          <input type="file" #imageSelect (change)="addImageFile($event)" />
+        <ngx-file-drop dropZoneClassName="drop-zone" (onFileDrop)="imageDropped($event)" (click)="imageSelect.click()" accept="image/x-png,image/gif,image/jpeg">
+          <input type="file" #imageSelect (change)="addImageFile($event)" accept="image/*" />
         </ngx-file-drop>
       </div>
       <div class="upload-table">

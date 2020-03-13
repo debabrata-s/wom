@@ -165,16 +165,16 @@
       <div class="upload-table" >
         <table class="table">
           <tbody class="upload-name-style">
-            <tr *ngFor="let item of existingFiles; let i=index">
+            <tr *ngFor="let item of existingFiles.names; let i=index">
               <td>{{ item }}</td>
               <td>
-                <a (click)="removeExistingFile(i)" style="cursor: pointer;"><small class="text-danger">Remove1</small></a>
+                <a (click)="removeExistingFile(i)" style="cursor: pointer;"><small class="text-danger">Remove</small></a>
               </td>
             </tr>
             <tr *ngFor="let item of files; let i=index">
               <td>{{ item.name }}</td>
               <td>
-                <a (click)="removeFile(i)" style="cursor: pointer;"><small class="text-danger">Remove2</small></a>
+                <a (click)="removeFile(i)" style="cursor: pointer;"><small class="text-danger">Remove</small></a>
               </td>
             </tr>
           </tbody>
@@ -186,7 +186,7 @@
           Add an image
         </label>
         <ngx-file-drop dropZoneClassName="drop-zone" (onFileDrop)="imageDropped($event)" (click)="imageSelect.click()">
-          <input type="file" #imageSelect/>
+          <input type="file" #imageSelect accept="image/*"/>
         </ngx-file-drop>
       </div>
       <div class="upload-table">

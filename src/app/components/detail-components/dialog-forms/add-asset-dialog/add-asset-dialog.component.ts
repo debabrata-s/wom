@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
+import { ApiService } from 'src/app/services/api.service';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-asset-dialog',
@@ -7,12 +9,32 @@ import { MatDialogRef } from '@angular/material';
   styleUrls: ['./add-asset-dialog.component.scss']
 })
 export class AddAssetDialogComponent implements OnInit {
-
-  constructor(public dialogRef:MatDialogRef<AddAssetDialogComponent>) { }
+  assets = [];
+  constructor(
+    public dialogRef: MatDialogRef<AddAssetDialogComponent>,
+    private apiService: ApiService,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) { }
 
   ngOnInit() {
+    console.log(this.data);
+
+    this.updateAssets();
   }
-  closeDialog(){
+  updateAssets() {
+    this.apiService.getAllAsset().subscribe((data: any) => {
+      this.assets = data.message;
+    })
+  }
+  addAsset(id) {
+    this.apiService.addPartAsset(id, this.data).subscribe((res) => {
+      console.log(res);
+    }, (err) => {
+      console.log(err);
+
+    })
+  }
+  closeDialog() {
     this.dialogRef.close();
   }
 }

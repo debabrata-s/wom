@@ -4,10 +4,10 @@
         <mat-label>Search</mat-label>
         <input matInput>
     </mat-form-field>
-    <mat-card>
-        <a (click)="closeDialog()" style="cursor: pointer;">
-            Refrigerator<br>
-            <small class="text-muted">Model: 1002 | Barcode: 7874654 | Description: double door refrigerator.</small>
+    <mat-card *ngFor="let asset of assets" class="mb-2">
+        <a (click)="addAsset(asset.id)" style="cursor: pointer;">
+            {{asset.title}}<br>
+            <small class="text-muted">Model: {{asset.type}} | Barcode: {{asset.barcode}} | Description: {{asset.description}}</small>
         </a>
     </mat-card>
 </div>

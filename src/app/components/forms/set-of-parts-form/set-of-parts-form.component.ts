@@ -71,13 +71,18 @@ export class SetOfPartsFormComponent implements OnInit {
     this.drawerService.toggleStatus();
   }
   onSubmit() {
-    this.apiService.addSetOfParts(this.setOfPartForm.value).subscribe(res => {
-      console.log("set of part is successfully added", res);
-      window.location.reload();
-    }, (err)=>{
-      console.log(err);
-      alert('Duplicate set of part!')
-      
-    });
+    if (this.partIds.length > 0) {
+      this.apiService.addSetOfParts(this.setOfPartForm.value).subscribe(res => {
+        console.log("set of part is successfully added", res);
+        window.location.reload();
+      }, (err) => {
+        console.log(err);
+        alert('Duplicate set of part!')
+      });
+    }
+    else{
+      alert("Please add a part.")
+    }
+
   }
 }

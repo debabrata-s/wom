@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 })
 export class PartEditFormComponent implements OnInit {
   id;
-  removePartIds = [];
+  removeFileIds = [];
   customDataIds = [];
   removeCustomDataIds = [];
   workers = [];
@@ -26,9 +26,9 @@ export class PartEditFormComponent implements OnInit {
   customers = [];
   locations = [];
 
-  existingFiles = [];
-  public files: NgxFileDropEntry[] = [];
-  public images: NgxFileDropEntry[] = [];
+  existingFiles = { ids: [], names: [] };
+  public files = [];
+  public images = [];
 
   partsInventoryForm: FormGroup;
   customPartForm: FormGroup;
@@ -130,15 +130,17 @@ export class PartEditFormComponent implements OnInit {
   addExistingPartFiles(id) {
     this.apiService.getPartFiles(id).subscribe((x: any) => {
       if (x.message != ["Cannot find record!"]) {
-        this.existingFiles = x.message.File
+        this.existingFiles.ids = Object.keys(x.message.Filedetails);
+        this.existingFiles.names = Object.values(x.message.Filedetails);
       }
-
       console.log(this.existingFiles);
-
     });
   }
-  removeExistingFile(file) {
-    this.removePartIds.push(file);
+  removeExistingFile(i) {
+    // this.removeFileIds.push(i);
+    this.existingFiles.names.splice(i, 1);
+    this.removeFileIds.push(this.existingFiles.ids.splice(i, 1)[0]);
+    console.log(this.removeFileIds);
   }
   addFile(event) {
     console.log(event.path[0].files[0]);
@@ -201,7 +203,7 @@ export class PartEditFormComponent implements OnInit {
     this.drawerService.toggleStatus();
   }
   fileDropped(files: NgxFileDropEntry[]) {
-    this.files = files;
+    // this.files = files;
     for (const droppedFile of files) {
 
       // Is it a file?
@@ -210,6 +212,7 @@ export class PartEditFormComponent implements OnInit {
         fileEntry.file((file: File) => {
           // Here you can access the real file
           console.log(droppedFile.relativePath, file);
+          this.files.push(file)
         });
       } else {
         // It was a directory (empty directories are added, otherwise only files)
@@ -273,6 +276,11 @@ export class PartEditFormComponent implements OnInit {
       }, (err) => {
         console.log(err);
       })
+      for(let i = 0; i < this.removeFileIds.length; i++){
+        this.apiService.removePartFile(this.removeFileIds[i]).subscribe(res => {
+          console.log('delete file', res);
+        })
+      }
       window.location.reload();
     }, (error: HttpErrorResponse) => {
       console.log(error)

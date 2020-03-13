@@ -231,7 +231,7 @@ export class ApiService {
         catchError(this.errorMgmt)
       )
   }
-  deleteCustomPartData(id){
+  deleteCustomPartData(id) {
     let url = `${this.baseUri}/partcustomdata/${id}/delete`;
     return this.http.get(url).pipe(
       catchError(this.errorMgmt)
@@ -247,13 +247,13 @@ export class ApiService {
     )
   }
 
-  addPartFile(id, data): Observable<any>{
+  addPartFile(id, data): Observable<any> {
     let url = `${this.baseUri}/addpartfile`;
     const formData = new FormData();
     formData.append("PartId", id)
-    
-    for(let i = 0; i < data.length; i++ ){
-      formData.append(`file[${i}]`,data[i]);
+
+    for (let i = 0; i < data.length; i++) {
+      formData.append(`file[${i}]`, data[i]);
       console.log('data: ', data[i]);
     }
     return this.http.post(url, formData)
@@ -261,8 +261,7 @@ export class ApiService {
         catchError(this.errorMgmt)
       )
   }
-  getPartFiles(id){
-    // https://mobwom.net/webapi/user/api/v1/addpartfile/{partid}/getpartwisefile
+  getPartFiles(id) {
     let url = `${this.baseUri}/addpartfile/${id}/getpartwisefile`;
     return this.http.get(url, { headers: this.headers }).pipe(
       map((res: Response) => {
@@ -271,7 +270,39 @@ export class ApiService {
       catchError(this.errorMgmt)
     )
   }
- 
+  removePartFile(id): Observable<any> {
+    let url = `${this.baseUri}/addpartfile/${id}/partfiledelete`;
+    console.log(url);
+    return this.http.get(url).pipe(
+      catchError(this.errorMgmt)
+    )
+  }
+  removeAllPartFile(id): Observable<any> {
+    let url = `${this.baseUri}/addpartfile/${id}/partwisefiledelete`;
+    console.log(url);
+    return this.http.get(url).pipe(
+      catchError(this.errorMgmt)
+    )
+  }
+  getPartAssets(id) {
+    let url = `${this.baseUri}/getpartwiseasset/${id}`;
+    return this.http.get(url, { headers: this.headers }).pipe(
+      map((res: Response) => {
+        return res || {}
+      }),
+      catchError(this.errorMgmt)
+    )
+  }
+  addPartAsset(assetId, partId){
+    let url = `${this.baseUri}/addpart`;
+    const formData = new FormData();
+    formData.append("AssetId", assetId)
+    formData.append("Parts[0]", partId)
+    return this.http.post(url, formData)
+      .pipe(
+        catchError(this.errorMgmt)
+      )
+  }
   //----------------------------------------------------------------------------------------------------
 
   //--------------------------------------        SET OF PARTS       ---------------------------------------

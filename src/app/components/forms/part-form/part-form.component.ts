@@ -18,9 +18,9 @@ export class PartFormComponent implements OnInit {
   vendors = [];
   customers = [];
   locations = [];
-  
-  public files: NgxFileDropEntry[] = [];
-  public images: NgxFileDropEntry[] = [];
+
+  public files = [];
+  public images = [];
 
   partsInventoryForm: FormGroup;
   customPartForm: FormGroup;
@@ -111,7 +111,7 @@ export class PartFormComponent implements OnInit {
     this.drawerService.toggleStatus();
   }
   fileDropped(files: NgxFileDropEntry[]) {
-    this.files = files;
+    // this.files = files;
     for (const droppedFile of files) {
 
       // Is it a file?
@@ -120,23 +120,7 @@ export class PartFormComponent implements OnInit {
         fileEntry.file((file: File) => {
           // Here you can access the real file
           console.log(droppedFile.relativePath, file);
-
-          /**
-          // You could upload it like this:
-          const formData = new FormData()
-          formData.append('logo', file, relativePath)
- 
-          // Headers
-          const headers = new HttpHeaders({
-            'security-token': 'mytoken'
-          })
- 
-          this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
-          .subscribe(data => {
-            // Sanitized logo returned from backend
-          })
-          **/
-
+          this.files.push(file)
         });
       } else {
         // It was a directory (empty directories are added, otherwise only files)
@@ -146,7 +130,7 @@ export class PartFormComponent implements OnInit {
     }
   }
   imageDropped(files: NgxFileDropEntry[]) {
-    this.images = files;
+    // this.images = files;
     for (const droppedFile of files) {
 
       // Is it a file?
@@ -155,7 +139,7 @@ export class PartFormComponent implements OnInit {
         fileEntry.file((file: File) => {
 
           console.log(droppedFile.relativePath, file);
-
+          this.images.push(file)
 
         });
       } else {
@@ -180,9 +164,9 @@ export class PartFormComponent implements OnInit {
   public fileLeave(event) {
     console.log(event);
   }
-  removeFile(i){
-   this.files.splice(i,1);
-    
+  removeFile(i) {
+    this.files.splice(i, 1);
+
   }
 
   onSubmit() {

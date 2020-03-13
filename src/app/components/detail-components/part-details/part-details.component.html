@@ -60,7 +60,7 @@
                                 <td>{{data.CustomDataUnit}}</td>
                             </tr>
                         </table>
-                        
+
                     </div>
                     <div class="text-muted">
                         Area
@@ -118,14 +118,45 @@
     </mat-tab>
     <mat-tab label="Files">
         <div class="card mt-4">
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label>
                     Add a File:
                 </label>
                 <div class="drop-zone">
                 </div>
+            </div> -->
+            <div class="form-group">
+                <label class="text-muted">
+                    Add a file
+                </label>
+                <ngx-file-drop dropZoneClassName="drop-zone" (onFileDrop)="fileDropped($event)"
+                    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" (click)="fileSelect.click()">
+                    <input type="file" #fileSelect (change)="addFile($event)" />
+                </ngx-file-drop>
+                <br>
+                <a (click)="selectFiles()" style="cursor: pointer; color: #007bff;"><small>+ Add File</small></a>
             </div>
             <a (click)="openFileDialog()">Add Uploaded File</a>
+        </div>
+        <div class="upload-table mt-4">
+            <table class="table">
+                <tbody class="upload-name-style">
+                    <tr *ngFor="let item of existingFiles.names; let i=index">
+                        <td>{{ item }}</td>
+                        <td>
+                            <a (click)="removeExistingFile(i)" style="cursor: pointer;"><small
+                                    class="text-danger">Remove</small></a>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let item of files; let i=index">
+                        <td>{{ item.name }}</td>
+                        <td>
+                            <a (click)="removeFile(i)" style="cursor: pointer;"><small
+                                    class="text-danger">Remove</small></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </mat-tab>
     <mat-tab label="Work Orders">
@@ -150,21 +181,20 @@
     <mat-tab label="Assets">
         <div class="container mt-4">
             <div class="row">
-                <div class="col-1">
+                <div *ngIf="assets.length > 0" class="col-1">
                     <i class="icon-notebook icon-md"></i>
                 </div>
                 <div class="col">
                     <div class="d-inline">
                         <div class="card mt-4">
-                            <mat-card>
+                            <mat-card *ngFor="let asset of assets" class="mb-2">
                                 <div class="row">
                                     <div class="col">
-                                        <h5>Asset1</h5>
-                                        <small class="text-muted">Model: 5029 series</small>
-                                        <small class="text-muted ml-2">Barcode: 78954523</small>
-                                        <small class="text-muted ml-2">Category: Refridgrator</small>
-                                        <small class="text-muted ml-2">Description: this is some part of the
-                                            jaor</small>
+                                        <h5>{{asset.title}}</h5>
+                                        <small class="text-muted">Model: {{asset.type}}</small>
+                                        <small class="text-muted ml-2">Barcode: {{asset.barcode}}</small>
+                                        <small class="text-muted ml-2">Category: {{asset.category}}</small>
+                                        <small class="text-muted ml-2">Description:{{asset.description}}</small>
                                     </div>
                                     <div class="col-2">
                                         <h5 style="color: red;"><i class="icon-lock-open"></i> Open</h5>
@@ -174,6 +204,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div *ngIf="assets.length <= 0">
+                <h3 class="text-muted text-center">No Assets are associated to this Part</h3>
             </div>
         </div>
         <button type="button" class="btn btn-danger btn-rounded btn-sm float-right mt-2" (click)="addAsset();">+
