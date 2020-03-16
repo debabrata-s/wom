@@ -131,7 +131,13 @@ export class ApiService {
     formData.append("Category", data.Category)
     formData.append("Cost", data.Cost.toString())
     formData.append("Quantity", data.Quantity.toString())
-    formData.append("MinimumQuantity", data.MinimumQuantity.toString())
+    if (data.MinimumQuantity) {
+      formData.append("MinimumQuantity", data.MinimumQuantity.toString())
+      console.log('tretr');
+    } else {
+      formData.append("MinimumQuantity", "0")
+      console.log('fahds');
+    }
     formData.append("Barcode", data.Barcode)
     formData.append("Area", data.Area)
     formData.append("AdditionalPartDetails", data.AdditionalPartDetails)
@@ -141,7 +147,7 @@ export class ApiService {
     formData.append("CustomerId", data.CustomerId.toString())
     formData.append("LocationId", data.LocationId.toString())
     formData.append("Nonstock", data.Nonstock)
-
+   
     return this.http.post(url, formData)
       .pipe(
         catchError(this.errorMgmt)
@@ -153,7 +159,7 @@ export class ApiService {
     return this.http.get(`${this.baseUri}/getallpart`);
   }
 
-  // Get person
+  // Get part
   getPart(id): Observable<any> {
     let url = `${this.baseUri}/part/${id}`;
     return this.http.get(url, { headers: this.headers }).pipe(
@@ -293,7 +299,7 @@ export class ApiService {
       catchError(this.errorMgmt)
     )
   }
-  addPartAsset(assetId, partId){
+  addPartAsset(assetId, partId) {
     let url = `${this.baseUri}/addpart`;
     const formData = new FormData();
     formData.append("AssetId", assetId)

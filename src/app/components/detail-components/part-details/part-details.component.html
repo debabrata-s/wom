@@ -134,9 +134,9 @@
                     <input type="file" #fileSelect (change)="addFile($event)" />
                 </ngx-file-drop>
                 <br>
-                <a (click)="selectFiles()" style="cursor: pointer; color: #007bff;"><small>+ Add File</small></a>
+                <a (click)="selectFiles()" style="cursor: pointer; color: #007bff;"><small>+ Add Uploaded File</small></a>
             </div>
-            <a (click)="openFileDialog()">Add Uploaded File</a>
+           
         </div>
         <div class="upload-table mt-4">
             <table class="table">
@@ -157,6 +157,9 @@
                     </tr>
                 </tbody>
             </table>
+            <div *ngIf="files.length > 0">
+                <button class="btn btn-primary btn-sm m-auto" (click)="uploadFiles()">Start Upload</button>
+            </div>
         </div>
     </mat-tab>
     <mat-tab label="Work Orders">

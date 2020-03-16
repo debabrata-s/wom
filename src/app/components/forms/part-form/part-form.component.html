@@ -48,7 +48,7 @@
         <input type="number" matInput formControlName="MinimumQuantity" autocomplete="off" required>
         <mat-error>Minimum quantity is requrired</mat-error>
       </mat-form-field>
-      <mat-checkbox formControlName="Nonstock"><span class="text-muted" style="font-size: 0.87em;">Non-Stock</span><i
+      <mat-checkbox formControlName="Nonstock" (change)="toggleNonstock($event)"><span class="text-muted" style="font-size: 0.87em;">Non-Stock</span><i
           class="input-helper"></i>
       </mat-checkbox>
       <mat-form-field>

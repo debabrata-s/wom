@@ -68,8 +68,16 @@ export class PartDetailsComponent implements OnInit {
         this.existingFiles.ids = Object.keys(x.message.Filedetails);
         this.existingFiles.names = Object.values(x.message.Filedetails);
       }
-      console.log(this.existingFiles);
     });
+  }
+  uploadFiles() {
+    console.log(this.partData);
+    this.apiService.addPartFile(this.partData.id, this.files).subscribe((res) => {
+      console.log(res);
+      window.location.reload()
+    }, (err) => {
+      console.log(err);
+    })
   }
   removeExistingFile(i) {
     this.existingFiles.names.splice(i, 1);

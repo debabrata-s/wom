@@ -18,7 +18,7 @@ export class PartFormComponent implements OnInit {
   vendors = [];
   customers = [];
   locations = [];
-
+  nonStock
   public files = [];
   public images = [];
 
@@ -80,7 +80,14 @@ export class PartFormComponent implements OnInit {
     //file: [''],
     // customDataArray: this.fb.array(this.dataArray),
   }
-
+  toggleNonstock(val) {
+    if (val.checked) {
+      this.partsInventoryForm.get('MinimumQuantity').disable();
+    }
+    else {
+      this.partsInventoryForm.get('MinimumQuantity').enable();
+    }
+  }
 
   createCustomData() {
     return this.fb.group({
