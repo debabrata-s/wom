@@ -48,8 +48,8 @@
         <input type="number" matInput formControlName="MinimumQuantity" autocomplete="off" required>
         <mat-error>Minimum quantity is requrired</mat-error>
       </mat-form-field>
-      <mat-checkbox formControlName="Nonstock" (change)="toggleNonstock($event)"><span class="text-muted" style="font-size: 0.87em;">Non-Stock</span><i
-          class="input-helper"></i>
+      <mat-checkbox formControlName="Nonstock" (change)="toggleNonstock($event)"><span class="text-muted"
+          style="font-size: 0.87em;">Non-Stock</span><i class="input-helper"></i>
       </mat-checkbox>
       <mat-form-field>
         <mat-label>
@@ -150,45 +150,58 @@
         <br>
         <a (click)="selectFiles()" style="cursor: pointer; color: #007bff;"><small>+ Add File</small></a>
       </div>
-      <div class="upload-table">
+      <!-- <div class="upload-table">
         <table class="table">
           <tbody class="upload-name-style">
             <tr *ngFor="let item of files; let i=index">
               <td>
                 {{ item.name }}
               </td>
-             <td>
-               <a (click)="removeFile(i)" style="cursor: pointer;"><small class="text-danger">Remove</small></a>
-             </td>
+              <td>
+                <a (click)="removeFile(i)" style="cursor: pointer;"><small class="text-danger">Remove</small></a>
+              </td>
             </tr>
           </tbody>
         </table>
+      </div> -->
+
+      <div *ngFor="let item of files; let i=index" class="upload-table">
+        <a (click)="removeFile(i)"><span class="close">&times;</span></a>
+        <div class="d-inline mr-2">
+          <i class="icon-doc text-success"></i>
+        </div>
+        <div class="d-inline">
+          <span class="text-muted text-sm">{{item.name}}</span><br>
+          <small class="text-muted">{{formatBytes(item?.size, 2)}}</small>
+        </div>
+
       </div>
+
       <br>
       <div class="form-group">
         <label class="text-muted">
           Add an image
         </label>
-        <ngx-file-drop dropZoneClassName="drop-zone" (onFileDrop)="imageDropped($event)" (click)="imageSelect.click()" accept="image/x-png,image/gif,image/jpeg">
+        <ngx-file-drop dropZoneClassName="drop-zone" (onFileDrop)="imageDropped($event)" (click)="imageSelect.click()"
+          accept="image/x-png,image/gif,image/jpeg">
           <input type="file" #imageSelect (change)="addImageFile($event)" accept="image/*" />
         </ngx-file-drop>
       </div>
       <div *ngIf="image !== undefined" class="upload-table">
-        <table class="table">
+        <!-- <table class="table">
           <tbody class="upload-name-style">
             <tr>
-              <!-- <td *ngIf="item.relativePath; else name">
-                {{ item.relativePath }}
-              </td>
-              <ng-template #name> -->
-                <td>{{getImageName()}}</td>
-              <!-- </ng-template> -->
+              <td>{{getImageName()}}</td>
               <td><a class="text-danger text-small" (click)="removeImage()" style="cursor: pointer;">Remove</a></td>
             </tr>
-            
           </tbody>
-        </table>
-        <img [src]="imagePath" height="100px" alt="">
+        </table> -->
+        <a (click)="removeImage()"><span class="close">&times;</span></a>
+        <div class="d-inline mr-2">
+          <img [src]="imagePath" width="50px" alt="">
+        </div>
+        <small class="text-muted">{{getImageName()}}</small><br>
+
       </div>
 
     </div>
