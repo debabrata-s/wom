@@ -27,8 +27,9 @@ export class PartEditFormComponent implements OnInit {
   locations = [];
 
   existingFiles = { ids: [], names: [] };
-  public files = [];
-  public images = [];
+  files = [];
+  image: File;
+  oldImage;
 
   partsInventoryForm: FormGroup;
   customPartForm: FormGroup;
@@ -117,6 +118,7 @@ export class PartEditFormComponent implements OnInit {
         Nonstock: this.getNonstock(data.Nonstock),
         Images: data.Images
       });
+      this.oldImage = data.Images.replace(/^.*[\\\/]/, '');
       console.log('populate form data: ', this.partsInventoryForm.value)
       this.apiService.getCustomPartData(this.id).subscribe((data: any) => {
         console.log('custom data:', data.message)
@@ -222,7 +224,7 @@ export class PartEditFormComponent implements OnInit {
     }
   }
   imageDropped(files: NgxFileDropEntry[]) {
-    this.images = files;
+
     for (const droppedFile of files) {
 
       // Is it a file?
@@ -231,14 +233,34 @@ export class PartEditFormComponent implements OnInit {
         fileEntry.file((file: File) => {
 
           console.log(droppedFile.relativePath, file);
-
-
+          this.image = file
+          this.partsInventoryForm.patchValue({ Images: this.image })
         });
-      } else {
-        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-        console.log(droppedFile.relativePath, fileEntry);
       }
+      // else {
+      //   const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+      //   console.log(droppedFile.relativePath, fileEntry);
+      // }
     }
+  }
+  addImageFile(event) {
+    console.log(event.path[0].files[0]);
+    this.image = event.path[0].files[0];
+    this.partsInventoryForm.patchValue({ Images: this.image })
+  }
+  getImageName() {
+    if (this.image) {
+      return this.image.name
+    }
+    else {
+      return this.oldImage
+    }
+  }
+  removeImage() {
+    console.log(this.image)
+    this.oldImage = undefined;
+    this.image = undefined;
+    this.partsInventoryForm.patchValue({ Images: undefined })
   }
 
   public fileOver(event) {
@@ -276,12 +298,12 @@ export class PartEditFormComponent implements OnInit {
       }, (err) => {
         console.log(err);
       })
-      for(let i = 0; i < this.removeFileIds.length; i++){
+      for (let i = 0; i < this.removeFileIds.length; i++) {
         this.apiService.removePartFile(this.removeFileIds[i]).subscribe(res => {
           console.log('delete file', res);
         })
       }
-      window.location.reload();
+      // window.location.reload();
     }, (error: HttpErrorResponse) => {
       console.log(error)
     })

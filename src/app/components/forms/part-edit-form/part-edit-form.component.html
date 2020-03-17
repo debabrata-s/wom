@@ -157,18 +157,19 @@
         </label>
         <ngx-file-drop dropZoneClassName="drop-zone" (onFileDrop)="fileDropped($event)" (onFileOver)="fileOver($event)"
           (onFileLeave)="fileLeave($event)" (click)="fileSelect.click()">
-          <input type="file" #fileSelect (change)="addFile($event)"/>
+          <input type="file" #fileSelect (change)="addFile($event)" />
         </ngx-file-drop>
         <br>
         <a (click)="selectFiles()" style="cursor: pointer; color: #007bff;"><small>+ Add File</small></a>
       </div>
-      <div class="upload-table" >
+      <div class="upload-table">
         <table class="table">
           <tbody class="upload-name-style">
             <tr *ngFor="let item of existingFiles.names; let i=index">
               <td>{{ item }}</td>
               <td>
-                <a (click)="removeExistingFile(i)" style="cursor: pointer;"><small class="text-danger">Remove</small></a>
+                <a (click)="removeExistingFile(i)" style="cursor: pointer;"><small
+                    class="text-danger">Remove</small></a>
               </td>
             </tr>
             <tr *ngFor="let item of files; let i=index">
@@ -186,19 +187,19 @@
           Add an image
         </label>
         <ngx-file-drop dropZoneClassName="drop-zone" (onFileDrop)="imageDropped($event)" (click)="imageSelect.click()">
-          <input type="file" #imageSelect accept="image/*"/>
+          <input type="file" #imageSelect (change)="addImageFile($event)" accept="image/*" />
         </ngx-file-drop>
       </div>
-      <div class="upload-table">
+      <div *ngIf="oldImage || image" class="upload-table">
         <table class="table">
           <tbody class="upload-name-style">
-            <tr *ngFor="let item of images; let i=index">
-              <td>{{ item.relativePath }}</td>
+            <tr>
+              <td>{{getImageName()}}</td>
+              <td><a class="text-danger text-small" (click)="removeImage()" style="cursor: pointer;">Remove</a></td>
             </tr>
           </tbody>
         </table>
       </div>
-
     </div>
     <div class="card-footer d-flex justify-content-end">
       <button mat-button (click)="closeDrawer()">Cancel</button>

@@ -19,9 +19,9 @@ export class PartFormComponent implements OnInit {
   customers = [];
   locations = [];
   nonStock
-  public files = [];
-  public images = [];
-
+  files = [];
+  image: File;
+  imagePath;
   partsInventoryForm: FormGroup;
   customPartForm: FormGroup;
   customDataArray: FormArray;
@@ -104,7 +104,13 @@ export class PartFormComponent implements OnInit {
   }
   addImage(event) {
     console.log(event);
-
+  }
+  getImageName() {
+    if (this.image) {
+      return this.image.name;
+    } else {
+      return '';
+    }
   }
   selectFiles() {
     const dialogRef = this.dialog.open(SelectFileDialogComponent)
@@ -144,20 +150,30 @@ export class PartFormComponent implements OnInit {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-
           console.log(droppedFile.relativePath, file);
-          this.images.push(file)
-
+          this.image = file
+          this.partsInventoryForm.patchValue({Images: this.image})
         });
-      } else {
-        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-        console.log(droppedFile.relativePath, fileEntry);
       }
+      // else {
+      //   const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+      //   console.log(droppedFile.relativePath, fileEntry);
+      // }
     }
   }
   addImageFile(event) {
-    console.log(event.path[0].files[0]);
-    this.images.push(event.path[0].files[0]);
+    // this.imagePath = 
+    var reader = new FileReader();
+    reader.onload = (event: ProgressEvent) => {
+      this.imagePath = (<FileReader>event.target).result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+    console.log(this.imagePath);
+    this.image = event.path[0].files[0];
+    this.partsInventoryForm.patchValue({Images: this.image})
+  }
+  removeImage(){
+    this.image = undefined;
   }
   addFile(event) {
     console.log(event.path[0].files[0]);

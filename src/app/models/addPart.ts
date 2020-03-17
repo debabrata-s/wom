@@ -14,4 +14,5 @@ export interface AddPart{
     CustomerId:number;
     LocationId:number;
     Nonstock:string;
+    Images:File
 }

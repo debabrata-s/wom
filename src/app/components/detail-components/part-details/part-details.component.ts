@@ -74,10 +74,18 @@ export class PartDetailsComponent implements OnInit {
     console.log(this.partData);
     this.apiService.addPartFile(this.partData.id, this.files).subscribe((res) => {
       console.log(res);
-      window.location.reload()
+      console.log(this.removeFileIds);
+           // window.location.reload()
     }, (err) => {
       console.log(err);
-    })
+    });
+    for (let i = 0; i < this.removeFileIds.length; i++) {
+      this.apiService.removePartFile(this.removeFileIds[i]).subscribe((res) => {
+        console.log(res);
+      }, (err) => {
+        console.log(err);
+      });
+    }
   }
   removeExistingFile(i) {
     this.existingFiles.names.splice(i, 1);

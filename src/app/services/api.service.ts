@@ -133,10 +133,8 @@ export class ApiService {
     formData.append("Quantity", data.Quantity.toString())
     if (data.MinimumQuantity) {
       formData.append("MinimumQuantity", data.MinimumQuantity.toString())
-      console.log('tretr');
     } else {
       formData.append("MinimumQuantity", "0")
-      console.log('fahds');
     }
     formData.append("Barcode", data.Barcode)
     formData.append("Area", data.Area)
@@ -147,7 +145,7 @@ export class ApiService {
     formData.append("CustomerId", data.CustomerId.toString())
     formData.append("LocationId", data.LocationId.toString())
     formData.append("Nonstock", data.Nonstock)
-   
+    formData.append("Images", data.Images)
     return this.http.post(url, formData)
       .pipe(
         catchError(this.errorMgmt)
@@ -190,6 +188,12 @@ export class ApiService {
     formData.append("CustomerId", data.CustomerId.toString())
     formData.append("LocationId", data.LocationId.toString())
     formData.append("Nonstock", this.getNonStock(data.Nonstock).toString())
+    if(data.Images){
+      formData.append("Images", data.Images)
+    }
+    else{
+      // formData.append("Images", undefined)
+    }
 
     return this.http.post(url, formData).pipe(
       catchError(this.errorMgmt)

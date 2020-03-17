@@ -173,20 +173,22 @@
           <input type="file" #imageSelect (change)="addImageFile($event)" accept="image/*" />
         </ngx-file-drop>
       </div>
-      <div class="upload-table">
+      <div *ngIf="image !== undefined" class="upload-table">
         <table class="table">
           <tbody class="upload-name-style">
-            <tr *ngFor="let item of images; let i=index">
+            <tr>
               <!-- <td *ngIf="item.relativePath; else name">
                 {{ item.relativePath }}
               </td>
               <ng-template #name> -->
-                <td>{{item.name}}</td>
+                <td>{{getImageName()}}</td>
               <!-- </ng-template> -->
+              <td><a class="text-danger text-small" (click)="removeImage()" style="cursor: pointer;">Remove</a></td>
             </tr>
             
           </tbody>
         </table>
+        <img [src]="imagePath" height="100px" alt="">
       </div>
 
     </div>
