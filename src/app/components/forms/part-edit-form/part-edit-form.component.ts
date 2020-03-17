@@ -303,7 +303,7 @@ export class PartEditFormComponent implements OnInit {
           console.log('delete file', res);
         })
       }
-      // window.location.reload();
+      window.location.reload();
     }, (error: HttpErrorResponse) => {
       console.log(error)
     })
