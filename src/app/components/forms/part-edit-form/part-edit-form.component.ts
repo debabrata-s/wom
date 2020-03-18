@@ -31,6 +31,7 @@ export class PartEditFormComponent implements OnInit {
   existingFiles = { ids: [], names: [] };
   files = [];
   image: File;
+  imagePath = "";
   oldImage;
 
   partsInventoryForm: FormGroup;
