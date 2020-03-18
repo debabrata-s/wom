@@ -31,7 +31,6 @@ export class PartEditFormComponent implements OnInit {
   existingFiles = { ids: [], names: [] };
   files = [];
   image: File;
-  imagePath = "";
   oldImage;
 
   partsInventoryForm: FormGroup;
@@ -154,48 +153,72 @@ export class PartEditFormComponent implements OnInit {
         Area: data.Area,
         AdditionalPartDetails: data.AdditionalPartDetails,
         Nonstock: this.getNonstock(data.Nonstock),
-        Images: data.Images
+        Images: data.Images,
+        TeamId: data.TeamId,
+        WorkerId: data.WorkerId,
+        VendorId: data.VendorId,
+        CustomerId: data.CustomerId,
+        LocationId: data.LocationId
       });
-      if (this.isValidTeamId(data.TeamId)) {
-        this.partsInventoryForm.patchValue({
-          TeamId: data.TeamId,
-        })
+      if(data.Nonstock){
+        this.partsInventoryForm.get('MinimumQuantity').disable()
       }
-      else {
-        this.toastr.error("Selected team no longer exists")
-      }
-      if (this.isValidWorkerId(data.WorkerId)) {
-        this.partsInventoryForm.patchValue({
-          WorkerId: data.WorkerId,
-        })
-      }
-      else {
-        this.toastr.error("Selected worker no longer exists")
-      }
-      if (this.isValidWorkerId(data.VendorId)) {
-        this.partsInventoryForm.patchValue({
-          VendorId: data.VendorId,
-        })
-      }
-      else {
-        this.toastr.error("Selected vendor no longer exists")
-      }
-      if (this.isValidCustomerId(data.CustomerId)) {
-        this.partsInventoryForm.patchValue({
-          CustomerId: data.CustomerId,
-        })
-      }
-      else {
-        this.toastr.error("Selected customer no longer exists")
-      }
-      if (this.isValidLocationId(data.LocationId)) {
-        this.partsInventoryForm.patchValue({
-          LocationId: data.LocationId,
-        })
-      }
-      else {
-        this.toastr.error("Selected location no longer exists")
-      }
+      
+      // if (this.isValidTeamId(data.TeamId)) {
+      //   this.partsInventoryForm.patchValue({
+      //     TeamId: data.TeamId,
+      //   })
+      // }
+      // else {
+      //   this.toastr.error("Selected team no longer exists")
+      //   this.partsInventoryForm.patchValue({
+      //     TeamId: [''],
+      //   })
+      // }
+      // if (this.isValidWorkerId(data.WorkerId)) {
+      //   this.partsInventoryForm.patchValue({
+      //     WorkerId: data.WorkerId,
+      //   })
+      // }
+      // else {
+      //   this.toastr.error("Selected worker no longer exists")
+      //   this.partsInventoryForm.patchValue({
+      //     WorkerId: [''],
+      //   })
+      // }
+      // if (this.isValidWorkerId(data.VendorId)) {
+      //   this.partsInventoryForm.patchValue({
+      //     VendorId: data.VendorId,
+      //   })
+      // }
+      // else {
+      //   this.toastr.error("Selected vendor no longer exists")
+      //   this.partsInventoryForm.patchValue({
+      //     VendorId: [''],
+      //   })
+      // }
+      // if (this.isValidCustomerId(data.CustomerId)) {
+      //   this.partsInventoryForm.patchValue({
+      //     CustomerId: data.CustomerId,
+      //   })
+      // }
+      // else {
+      //   this.toastr.error("Selected customer no longer exists")
+      //   this.partsInventoryForm.patchValue({
+      //     CustomerId: [''],
+      //   })
+      // }
+      // if (this.isValidLocationId(data.LocationId)) {
+      //   this.partsInventoryForm.patchValue({
+      //     LocationId: data.LocationId,
+      //   })
+      // }
+      // else {
+      //   this.toastr.error("Selected location no longer exists")
+      //   this.partsInventoryForm.patchValue({
+      //     LocationId: [''],
+      //   })
+      // }
 
       this.oldImage = data.Images.replace(/^.*[\\\/]/, '');
       console.log('populate form data: ', this.partsInventoryForm.value)
@@ -209,6 +232,14 @@ export class PartEditFormComponent implements OnInit {
 
     })
     this.addExistingPartFiles(this.id);
+  }
+  toggleNonstock(val) {
+    if (val.checked) {
+      this.partsInventoryForm.get('MinimumQuantity').disable();
+    }
+    else {
+      this.partsInventoryForm.get('MinimumQuantity').enable();
+    }
   }
   addExistingPartFiles(id) {
     this.apiService.getPartFiles(id).subscribe((x: any) => {
