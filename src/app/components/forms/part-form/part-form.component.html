@@ -174,7 +174,6 @@
           <span class="text-muted text-sm">{{item.name}}</span><br>
           <small class="text-muted">{{formatBytes(item?.size, 2)}}</small>
         </div>
-
       </div>
 
       <br>
@@ -187,7 +186,7 @@
           <input type="file" #imageSelect (change)="addImageFile($event)" accept="image/*" />
         </ngx-file-drop>
       </div>
-      <div *ngIf="image !== undefined" class="upload-table">
+      <div *ngIf="image" class="upload-table">
         <!-- <table class="table">
           <tbody class="upload-name-style">
             <tr>
@@ -198,7 +197,7 @@
         </table> -->
         <a (click)="removeImage()"><span class="close">&times;</span></a>
         <div class="d-inline mr-2">
-          <img [src]="imagePath" width="50px" alt="">
+          <img [src]="imagePath" width="50px" alt="part-image">
         </div>
         <small class="text-muted">{{getImageName()}}</small><br>
 

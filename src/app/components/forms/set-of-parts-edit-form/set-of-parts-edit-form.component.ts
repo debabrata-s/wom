@@ -6,6 +6,8 @@ import { AddPartsService } from 'src/app/services/add-parts.service';
 import { ApiService } from 'src/app/services/api.service';
 import { PartDialogFormComponent } from '../../detail-components/dialog-forms/part-dialog-form/part-dialog-form.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-set-of-parts-edit-form',
@@ -22,7 +24,9 @@ export class SetOfPartsEditFormComponent implements OnInit {
     public drawerService: DrawerService,
     private addPartService: AddPartsService,
     private apiService: ApiService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
+    public toastr: ToastrService
   ) {
     this.editSetOfPartForm = this.fb.group({
       setName: [''],
@@ -90,11 +94,11 @@ export class SetOfPartsEditFormComponent implements OnInit {
   onSubmit() {
     this.apiService.updateSetOfParts(this.setOfPartId, this.editSetOfPartForm.value).subscribe(res => {
       console.log(res);
-      window.location.reload();
-
+      this.toastr.success("Set of Parts updated successfully!")
+      this.router.navigate(['inventory/set-of-parts']);
     }, (error: HttpErrorResponse) => {
       console.log(error)
-      
+
     })
 
 

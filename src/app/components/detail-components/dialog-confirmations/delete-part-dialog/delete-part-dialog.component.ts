@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ApiService } from 'src/app/services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-delete-part-dialog',
@@ -13,6 +15,8 @@ export class DeletePartDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<DeletePartDialogComponent>,
     private apiService: ApiService,
+    private router: Router,
+    public toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
@@ -29,8 +33,8 @@ export class DeletePartDialogComponent implements OnInit {
       }, (err) => {
         console.log(err);
       })
-      window.location.reload();
-
+      this.toastr.success("Part deleted successfully!")
+      this.router.navigate(['inventory/parts']);
     }, (error: HttpErrorResponse) => {
       console.log(error)
     })

@@ -147,6 +147,7 @@ import { ChangeTimerCategoryDialogComponent } from './components/detail-componen
 import { RechartsHalfDoughnutComponent } from './components/test/recharts-half-doughnut/recharts-half-doughnut.component';
 import { DashboardStatsPageComponent } from './components/pages/reports-page/dashboard-page/dashboard-stats-page/dashboard-stats-page.component';
 import { PartEditFormComponent } from './components/forms/part-edit-form/part-edit-form.component';
+import { ToastrModule } from 'ngx-toastr';
 import { DeleteSetOfPartDialogComponent } from './components/detail-components/dialog-confirmations/delete-set-of-part-dialog/delete-set-of-part-dialog.component';
 import { SetOfPartsEditFormComponent } from './components/forms/set-of-parts-edit-form/set-of-parts-edit-form.component';
 
@@ -291,6 +292,7 @@ import { SetOfPartsEditFormComponent } from './components/forms/set-of-parts-edi
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,

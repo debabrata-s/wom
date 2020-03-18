@@ -8,6 +8,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { PopulateEditFormsService } from 'src/app/services/populate-edit-forms.service';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { callbackify } from 'util';
 
 
 @Component({
@@ -46,7 +48,8 @@ export class PartEditFormComponent implements OnInit {
     private drawerService: DrawerService,
     private apiService: ApiService,
     private populateFormService: PopulateEditFormsService,
-    private router: Router
+    private router: Router,
+    public toastr: ToastrService
   ) {
     this.apiService.getAllUsers().subscribe((data: any) => {
       this.workers = data.message;
@@ -95,9 +98,48 @@ export class PartEditFormComponent implements OnInit {
     this.populateFields();
 
   }
-  populateFields() {
-    console.log("populate form from part form; ", this.populateFormService.getFormData());
 
+  isValidTeamId(teamId) {
+    if (this.teams.map(x => x.id).includes(teamId)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  isValidWorkerId(workerId) {
+    if (this.workers.map(x => x.id).includes(workerId)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  isValidVendorId(vendorId) {
+    if (this.vendors.map(x => x.id).includes(vendorId)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  isValidCustomerId(customerId) {
+    if (this.customers.map(x => x.id).includes(customerId)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  isValidLocationId(locationId) {
+    if (this.locations.map(x => x.id).includes(locationId)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  populateFields() {
     this.populateFormService.getFormData().subscribe((data: any) => {
       this.id = data.id;
       this.partsInventoryForm.patchValue({
@@ -110,14 +152,50 @@ export class PartEditFormComponent implements OnInit {
         Barcode: data.Barcode,
         Area: data.Area,
         AdditionalPartDetails: data.AdditionalPartDetails,
-        WorkerId: data.WorkerId,
-        TeamId: data.TeamId,
-        VendorId: data.VendorId,
-        CustomerId: data.CustomerId,
-        LocationId: data.LocationId,
         Nonstock: this.getNonstock(data.Nonstock),
         Images: data.Images
       });
+      if (this.isValidTeamId(data.TeamId)) {
+        this.partsInventoryForm.patchValue({
+          TeamId: data.TeamId,
+        })
+      }
+      else {
+        this.toastr.error("Selected team no longer exists")
+      }
+      if (this.isValidWorkerId(data.WorkerId)) {
+        this.partsInventoryForm.patchValue({
+          WorkerId: data.WorkerId,
+        })
+      }
+      else {
+        this.toastr.error("Selected worker no longer exists")
+      }
+      if (this.isValidWorkerId(data.VendorId)) {
+        this.partsInventoryForm.patchValue({
+          VendorId: data.VendorId,
+        })
+      }
+      else {
+        this.toastr.error("Selected vendor no longer exists")
+      }
+      if (this.isValidCustomerId(data.CustomerId)) {
+        this.partsInventoryForm.patchValue({
+          CustomerId: data.CustomerId,
+        })
+      }
+      else {
+        this.toastr.error("Selected customer no longer exists")
+      }
+      if (this.isValidLocationId(data.LocationId)) {
+        this.partsInventoryForm.patchValue({
+          LocationId: data.LocationId,
+        })
+      }
+      else {
+        this.toastr.error("Selected location no longer exists")
+      }
+
       this.oldImage = data.Images.replace(/^.*[\\\/]/, '');
       console.log('populate form data: ', this.partsInventoryForm.value)
       this.apiService.getCustomPartData(this.id).subscribe((data: any) => {
@@ -126,6 +204,8 @@ export class PartEditFormComponent implements OnInit {
         this.customPartForm.setControl('customDataArray', this.getCustomDataArray(data.message))
         console.log(this.customPartForm.value);
       })
+      console.log(this.partsInventoryForm.value);
+
     })
     this.addExistingPartFiles(this.id);
   }
@@ -147,6 +227,8 @@ export class PartEditFormComponent implements OnInit {
   addFile(event) {
     console.log(event.path[0].files[0]);
     this.files.push(event.path[0].files[0]);
+    console.log(this.existingFiles);
+
   }
   removeFile(i) {
     this.files.splice(i, 1);
@@ -205,19 +287,14 @@ export class PartEditFormComponent implements OnInit {
     this.drawerService.toggleStatus();
   }
   fileDropped(files: NgxFileDropEntry[]) {
-    // this.files = files;
     for (const droppedFile of files) {
-
-      // Is it a file?
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-          // Here you can access the real file
           console.log(droppedFile.relativePath, file);
           this.files.push(file)
         });
       } else {
-        // It was a directory (empty directories are added, otherwise only files)
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
         console.log(droppedFile.relativePath, fileEntry);
       }
@@ -226,8 +303,6 @@ export class PartEditFormComponent implements OnInit {
   imageDropped(files: NgxFileDropEntry[]) {
 
     for (const droppedFile of files) {
-
-      // Is it a file?
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
@@ -237,10 +312,7 @@ export class PartEditFormComponent implements OnInit {
           this.partsInventoryForm.patchValue({ Images: this.image })
         });
       }
-      // else {
-      //   const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-      //   console.log(droppedFile.relativePath, fileEntry);
-      // }
+
     }
   }
   addImageFile(event) {
@@ -269,6 +341,21 @@ export class PartEditFormComponent implements OnInit {
 
   public fileLeave(event) {
     console.log(event);
+  }
+  /**
+ * format bytes
+ * @param bytes (File size in bytes)
+ * @param decimals (Decimals point)
+ */
+  formatBytes(bytes, decimals) {
+    if (bytes === 0) {
+      return '0 Bytes';
+    }
+    const k = 1024;
+    const dm = decimals <= 0 ? 0 : decimals || 2;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
   onSubmit() {
     console.log(this.partsInventoryForm);
@@ -303,7 +390,10 @@ export class PartEditFormComponent implements OnInit {
           console.log('delete file', res);
         })
       }
-      window.location.reload();
+      // window.location.reload();
+      this.toastr.success("Part updated successfully!")
+      this.router.navigate(['inventory/parts']);
+
     }, (error: HttpErrorResponse) => {
       console.log(error)
     })

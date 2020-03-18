@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ApiService } from 'src/app/services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-delete-set-of-part-dialog',
@@ -13,6 +15,8 @@ export class DeleteSetOfPartDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<DeleteSetOfPartDialogComponent>,
     private apiService: ApiService,
+    private router: Router,
+    public toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
@@ -23,7 +27,8 @@ export class DeleteSetOfPartDialogComponent implements OnInit {
     
     this.apiService.deleteSetOfPart(this.data).subscribe(res => {
       console.log(res);
-      window.location.reload();
+      this.toastr.success("Set of Parts deleted successfully!")
+      this.router.navigate(['inventory/set-of-parts']);
     }, (error: HttpErrorResponse) => {
       console.log(error)
     })

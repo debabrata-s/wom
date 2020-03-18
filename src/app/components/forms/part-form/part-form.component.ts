@@ -6,6 +6,8 @@ import { DrawerService } from 'src/app/services/drawer.service';
 import { ApiService } from 'src/app/services/api.service';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-part-form',
@@ -30,6 +32,8 @@ export class PartFormComponent implements OnInit {
     public dialog: MatDialog,
     private drawerService: DrawerService,
     private apiService: ApiService,
+    private router: Router,
+    public toastr: ToastrService
   ) {
     this.apiService.getAllUsers().subscribe((data: any) => {
       console.log(data);
@@ -152,7 +156,7 @@ export class PartFormComponent implements OnInit {
         fileEntry.file((file: File) => {
           console.log(droppedFile.relativePath, file);
           this.image = file
-          this.partsInventoryForm.patchValue({Images: this.image})
+          this.partsInventoryForm.patchValue({ Images: this.image })
         });
       }
       // else {
@@ -170,9 +174,9 @@ export class PartFormComponent implements OnInit {
     reader.readAsDataURL(event.target.files[0]);
     console.log(this.imagePath);
     this.image = event.path[0].files[0];
-    this.partsInventoryForm.patchValue({Images: this.image})
+    this.partsInventoryForm.patchValue({ Images: this.image })
   }
-  removeImage(){
+  removeImage() {
     this.image = undefined;
   }
   addFile(event) {
@@ -206,7 +210,7 @@ export class PartFormComponent implements OnInit {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
-  
+
   onSubmit() {
     console.log(this.partsInventoryForm);
     let customData = this.customPartForm.value.customDataArray
@@ -224,11 +228,12 @@ export class PartFormComponent implements OnInit {
       }, (err) => {
         console.log(err);
       })
-      window.location.reload();
-
+      // window.location.reload();
+      this.toastr.success("Part added successfully!")
+      this.router.navigate(['inventory/parts']);
     }, (err) => {
       console.log(err)
-      alert("Duplicate part name.");
+      this.toastr.error("Duplicate part name.")
     })
   }
 

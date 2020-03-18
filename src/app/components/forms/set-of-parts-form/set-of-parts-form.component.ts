@@ -7,6 +7,8 @@ import { ApiService } from 'src/app/services/api.service';
 import { distinct } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ThemeService } from 'ng2-charts';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-set-of-parts-form',
@@ -22,7 +24,9 @@ export class SetOfPartsFormComponent implements OnInit {
     public drawerService: DrawerService,
     private addPartService: AddPartsService,
     private apiService: ApiService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
+    public toastr: ToastrService
   ) {
     this.setOfPartForm = this.fb.group({
       setName: [''],
@@ -74,14 +78,15 @@ export class SetOfPartsFormComponent implements OnInit {
     if (this.partIds.length > 0) {
       this.apiService.addSetOfParts(this.setOfPartForm.value).subscribe(res => {
         console.log("set of part is successfully added", res);
-        window.location.reload();
+        this.toastr.success("Set of Parts added successfully!")
+        this.router.navigate(['inventory/set-of-parts']);
       }, (err) => {
         console.log(err);
-        alert('Duplicate set of part!')
+        this.toastr.error('Duplicate set of part!')
       });
     }
     else{
-      alert("Please add a part.")
+      this.toastr.error("Please add a part.")
     }
 
   }

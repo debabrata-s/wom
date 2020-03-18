@@ -162,7 +162,7 @@
         <br>
         <a (click)="selectFiles()" style="cursor: pointer; color: #007bff;"><small>+ Add File</small></a>
       </div>
-      <div class="upload-table">
+      <!-- <div class="upload-table">
         <table class="table">
           <tbody class="upload-name-style">
             <tr *ngFor="let item of existingFiles.names; let i=index">
@@ -180,6 +180,26 @@
             </tr>
           </tbody>
         </table>
+      </div> -->
+      <div *ngFor="let item of existingFiles.names; let i=index" class="upload-table">
+        <a (click)="removeExistingFile(i)"><span class="close">&times;</span></a>
+        <div class="d-inline mr-2">
+          <i class="icon-doc text-success"></i>
+        </div>
+        <div class="d-inline">
+          <span class="text-muted text-sm">{{item}}</span><br>
+          <!-- <small class="text-muted">{{formatBytes(item?.size, 2)}}</small> -->
+        </div>
+      </div>
+      <div *ngFor="let item of files; let i=index" class="upload-table">
+        <a (click)="removeFile(i)"><span class="close">&times;</span></a>
+        <div class="d-inline mr-2">
+          <i class="icon-doc text-success"></i>
+        </div>
+        <div class="d-inline">
+          <span class="text-muted text-sm">{{item.name}}</span><br>
+          <small class="text-muted">{{formatBytes(item?.size, 2)}}</small>
+        </div>
       </div>
       <br>
       <div class="form-group">
@@ -191,14 +211,19 @@
         </ngx-file-drop>
       </div>
       <div *ngIf="oldImage || image" class="upload-table">
-        <table class="table">
+        <!-- <table class="table">
           <tbody class="upload-name-style">
             <tr>
               <td>{{getImageName()}}</td>
               <td><a class="text-danger text-small" (click)="removeImage()" style="cursor: pointer;">Remove</a></td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
+        <a (click)="removeImage()"><span class="close">&times;</span></a>
+        <div class="d-inline mr-2">
+          <img [src]="imagePath" width="50px" alt="part-image">
+        </div>
+        <small class="text-muted">{{getImageName()}}</small><br>
       </div>
     </div>
     <div class="card-footer d-flex justify-content-end">
