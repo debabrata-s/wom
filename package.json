@@ -27,7 +27,7 @@
     "chartjs-plugin-annotation": "^0.5.7",
     "express": "^4.17.1",
     "jquery": "^3.4.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ng2-charts": "^2.3.0",
     "ngx-daterangepicker-material": "^2.1.11",
     "ngx-file-drop": "^8.0.8",
